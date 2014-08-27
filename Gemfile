@@ -19,9 +19,13 @@ gem 'coffee-rails', '~> 4.0.0'
 
 gem "haml-rails"
 
+
 gem 'pg'
 gem 'heroku'
 gem 'rails_12factor', group: :production
+
+gem 'devise'
+gem "html2haml"
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
