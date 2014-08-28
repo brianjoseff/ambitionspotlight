@@ -23,9 +23,14 @@ gem "haml-rails"
 gem 'pg'
 gem 'heroku'
 gem 'rails_12factor', group: :production
+gem "figaro","~> 0.7.0"
 
 gem 'devise'
 gem "html2haml"
+
+gem 'aws-sdk'
+gem "paperclip", "~> 4.1"
+
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

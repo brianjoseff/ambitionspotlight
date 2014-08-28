@@ -1,4 +1,7 @@
-%h1 Spotlight
+.row
 
--@users.each do |user|
-  %h1=user.name
+  %h1 Spotlight
+
+  -@users.each do |user|
+    %h3=user.name
+    =link_to image_tag(user.assets.empty?  ? '/assets/small.png': user.assets.first.image.url(:medium), :alt => user.name, class: ""), user_path(user)

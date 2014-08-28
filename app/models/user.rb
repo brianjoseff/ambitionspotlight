@@ -5,8 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
          
          
-         
-  
+  has_many :assets, as: :imageable, :dependent => :destroy
+  accepts_nested_attributes_for :assets
   
   def self.spotlit_users
     first(5)
