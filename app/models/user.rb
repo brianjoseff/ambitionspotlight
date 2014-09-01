@@ -2,7 +2,13 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   extend FriendlyId
-  friendly_id :name
+  friendly_id :slug_candidates, use: [:slugged, :history]
+  def slug_candidates
+      [
+        :name,
+        [:name, :id],
+      ]
+    end
   
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable

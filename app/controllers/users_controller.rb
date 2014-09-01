@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def show
-    @user = User.find(params[:id])
+    @user = User.friendly.find(params[:id])
     if @user.leader?
       @followers = @user.followers
       @task = @user.tasks.last
