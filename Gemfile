@@ -25,6 +25,8 @@ gem 'heroku'
 gem 'rails_12factor', group: :production
 gem "figaro","~> 0.7.0"
 
+gem 'friendly_id'
+
 gem 'devise'
 gem "html2haml"
 

@@ -11,7 +11,8 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :users
-
+  # match 'user/:name' => 'user#profile'
+  
   match '/about', to: "pages#about", via: :get
   match '/leader_dashboard', to: "users#leader_dashboard", via: :get
   resources :users, :only => [:show, :edit, :update]

@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  extend FriendlyId
+  friendly_id :name
+  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
          
@@ -17,6 +20,9 @@ class User < ActiveRecord::Base
   has_many :tasks
   
   accepts_nested_attributes_for :assets
+  
+  
+  validates_presence_of :name
   
   def self.spotlit_users
     first(5)
