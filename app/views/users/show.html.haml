@@ -17,7 +17,8 @@
             
           - else
             /= render 'follow'
-            =link_to "Join the Following", new_task_submission_path(task_id: @task.id), class: "btn btn-large btn-primary make-button"
+            -unless @task.nil?
+              =link_to "Join the Following", new_task_submission_path(task_id: @task.id), class: "btn btn-large btn-primary make-button"
           
     %p.occupation=@user.occupation    
     /SOCIAL MEDIA BUTTONS
