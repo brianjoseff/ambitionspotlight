@@ -1,0 +1,23 @@
+%h1 Listing task_submissions
+
+%table
+  %tr
+    %th User
+    %th Task
+    %th Status
+    %th
+    %th
+    %th
+
+  - @task_submissions.each do |task_submission|
+    %tr
+      %td= task_submission.user_id
+      %td= task_submission.task_id
+      %td= task_submission.status
+      %td= link_to 'Show', task_submission
+      %td= link_to 'Edit', edit_task_submission_path(task_submission)
+      %td= link_to 'Destroy', task_submission, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Task submission', new_task_submission_path

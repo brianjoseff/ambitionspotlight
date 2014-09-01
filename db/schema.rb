@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140829052459) do
+ActiveRecord::Schema.define(version: 20140901035542) do
 
   create_table "assets", force: true do |t|
     t.integer  "imageable_id"
@@ -35,6 +35,22 @@ ActiveRecord::Schema.define(version: 20140829052459) do
   add_index "followships", ["follower_id", "followed_id"], name: "index_followships_on_follower_id_and_followed_id", unique: true
   add_index "followships", ["follower_id"], name: "index_followships_on_follower_id"
 
+  create_table "task_submissions", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "task_id"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "description"
+  end
+
+  create_table "tasks", force: true do |t|
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -51,6 +67,7 @@ ActiveRecord::Schema.define(version: 20140829052459) do
     t.string   "name"
     t.text     "bio"
     t.string   "occupation"
+    t.boolean  "leader"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

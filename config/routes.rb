@@ -1,8 +1,19 @@
 Rails.application.routes.draw do
+  resources :task_submissions do
+    member do
+      get :reject
+      get :accept
+      get :pending
+    end
+  end
+
+  resources :tasks
+
   devise_for :users
-  
+  resources :users
 
   match '/about', to: "pages#about", via: :get
+  match '/leader_dashboard', to: "users#leader_dashboard", via: :get
   resources :users, :only => [:show, :edit, :update]
   resources :followships, only: [:create, :destroy]
   

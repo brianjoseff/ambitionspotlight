@@ -1,0 +1,21 @@
+= form_for @task_submission do |f|
+  - if @task_submission.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@task_submission.errors.count, "error")} prohibited this task_submission from being saved:"
+      %ul
+        - @task_submission.errors.full_messages.each do |msg|
+          %li= msg
+
+          
+  
+  =f.hidden_field :task_id, value: params[:task_id]
+  .form-group
+    = f.label :description, class: 'control-label'
+    .controls
+      = f.text_area :description, autofocus: true, class: "form-control", :placeholder => "What did you achieve?", rows: "5"
+  %p Pictures that show it:
+  = f.fields_for :assets do |images_form|
+    = images_form.file_field :image, type:"file"
+  %br/
+  .actions
+    = f.submit 'Save'

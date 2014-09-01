@@ -13,10 +13,17 @@ class User < ActiveRecord::Base
                                    dependent:   :destroy
   has_many :followers, through: :reverse_followships, source: :follower
   
+  has_many :task_submissions
+  has_many :tasks
+  
   accepts_nested_attributes_for :assets
   
   def self.spotlit_users
     first(5)
+  end
+  
+  def leader?
+    return self.leader
   end
   
   def following?(other_user)

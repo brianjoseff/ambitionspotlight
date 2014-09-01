@@ -18,11 +18,11 @@
     .form-group
       = f.label :occupation, class: 'control-label'
       .controls
-        = f.text_field :occupation, autofocus: true, class: "form-control", :placeholder => "MMA Coach"
+        = f.text_field :occupation, type: "text", autofocus: true, class: "form-control", :placeholder => "MMA Coach"
     .form-group
       = f.label :bio, class: 'control-label'
       .controls
-        = f.text_area :bio, autofocus: true, class: "form-control", :placeholder => "Tell us about what you do..."
+        = f.text_area :bio, type:"text", autofocus: true, class: "form-control", :rows => "7", :placeholder => "Tell us about what you do..."
 
       
     - if devise_mapping.confirmable? && resource.pending_reconfirmation?

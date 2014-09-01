@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @task_submission.user_id
+%p
+  %b Task:
+  = @task_submission.task_id
+%p
+  %b Status:
+  = @task_submission.status
+
+= link_to 'Edit', edit_task_submission_path(@task_submission)
+\|
+= link_to 'Back', task_submissions_path

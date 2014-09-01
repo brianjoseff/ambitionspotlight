@@ -1,26 +1,37 @@
 .row
-  .col-lg-2
-    =link_to image_tag(@user.assets.empty?  ? '/assets/small.png': @user.assets.first.image.url(:medium), :alt => @user.name, class: ""), user_path(@user)
-  .col-lg-10
+  .col-lg-3
+    =link_to image_tag(@user.assets.empty?  ? '/assets/user-placeholder.png': @user.assets.first.image.url(:medium), :alt => @user.name, class: ""), user_path(@user)
+  .col-lg-9
     %h2
       =@user.name
-      -if current_user
+      -if current_user && current_user == @user
         =link_to "Edit Details", edit_user_registration_path(current_user), style:"font-size:50%"
+        -if @user.leader?
+          =link_to "Manage your Profile", leader_dashboard_path
       - unless current_user == @user
         #follow_form
           - if current_user.following?(@user)
             = render 'unfollow'
+            
           - else
-            = render 'follow'
+            /= render 'follow'
+            =link_to "Join the Following", new_task_submission_path(task_id: @task.id), class: "btn btn-large btn-primary make-button"
+          
     %p.occupation=@user.occupation    
     /SOCIAL MEDIA BUTTONS
     .row
       .col-lg-5
         %p=@user.bio
     
+    
+
     /FOLLOWER OF THE WEEK
     
     /YOUR FOLLOWING
+    -if @followers
+      %h3 Leader's Followers:
+      -@followers.each do |f|
+        %p=f.name
     
     /BADGES?
     

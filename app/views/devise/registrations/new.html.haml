@@ -1,46 +1,58 @@
 / %p or #{link_to "Sign In", new_user_session_path}
-.container
-  .col-lg-6
-    %div.row.sign-up
+.row
+  .col-lg-5
+    %h1 Sign up
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {multipart: true, class: ""}) do |f|
+      = devise_error_messages!
+      -resource.assets.build unless resource.assets.first
+      .form-group
+        =f.label :name, :class => 'control-label'
+        .controls
+          =f.text_field :name, type: "text", :class => "form-control", :placeholder => "Eugene Jackson"        
+      .form-group
+        =f.label :email, :class => 'control-label'
+        .controls
+          =f.text_field :email, type: "text", :class => "form-control", :placeholder => "hello@mom.com"
+      
+      = f.fields_for :assets do |images_form|
+        = images_form.file_field :image, type:"file"
+      %br/
+      .form-group
+        = f.label :occupation, class: 'control-label'
+        .controls
+          = f.text_field :occupation, autofocus: true, class: "form-control", :placeholder => "MMA Coach"
+      .form-group
+        = f.label :bio, class: 'control-label'
+        .controls
+          = f.text_area :bio, type:"text", autofocus: true, class: "form-control", :placeholder => "Tell us about what you do...", :rows => "5"  
+      .form-group
+        =f.label :password, :class => 'control-label'
+        .controls
+          =f.password_field :password, type: "password", :class => "form-control", :placeholder => "Password"  
+    
+
+
+
       .user-auth-offset
-        %h1 Sign up
-        = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {cmultipart: true, class: "form"}) do |f|
-          = devise_error_messages!
-          
-          %div#name_field.form-group
-            =f.label :name, :class => 'col-lg-3 control-label'
-            .col-lg-8
-              =f.text_field :name, type: "text", :class => "form-control", :placeholder => "Thomas More"        
-          %div.form-group
-            =f.label :email, :class => 'col-lg-3 control-label'
-            .col-lg-8
-              =f.text_field :email, type: "text", :class => "form-control", :placeholder => "hello@mom.com"  
-          %div.form-group
-            =f.label :password, :class => 'col-lg-3 control-label'
-            .col-lg-8
-              =f.password_field :password, type: "password", :class => "form-control", :placeholder => "Password"  
-        
-          .user-auth-offset
-            =f.submit "Sign up", class: "btn btn-primary submit-button"
+        =f.submit "Sign up", class: "btn btn-primary submit-button"
           
         
 
+  .col-lg-1
+  .col-lg-5
 
-  .col-lg-6
-    %div.row.sign-in
+    %h1 Sign in
+    /%span.facebook-signin #{link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)} 
+    =form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form", id: "session"}) do |f|
+      /=render "shared/error_messages", :target => @user
+      .form-group
+        =f.label :email, :class => 'control-label'
+        .controls
+          =f.text_field :email, type: "text", :class => "form-control", :placeholder => "Email", :validate => { :presence => true } 
+      .form-group
+        =f.label :password, :class => 'control-label'
+        .controls
+          =f.password_field :password, type: "password", :class => "form-control", :placeholder => "Password"
+
       .user-auth-offset
-        %h1 Sign in
-      /%span.facebook-signin #{link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)} 
-      =form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form-horizontal form", id: "session"}) do |f|
-        /=render "shared/error_messages", :target => @user
-        %div.form-group
-          =f.label :email, :class => 'col-lg-3 control-label'
-          .col-lg-8
-            =f.text_field :email, type: "text", :class => "form-control", :placeholder => "Email", :validate => { :presence => true } 
-        %div.form-group
-          =f.label :password, :class => 'col-lg-3 control-label'
-          .col-lg-8
-            =f.password_field :password, type: "password", :class => "form-control", :placeholder => "Password"
-
-        .user-auth-offset
-          =f.submit "Sign in", class: "btn btn-primary submit-button"
+        =f.submit "Sign in", class: "btn btn-primary submit-button"

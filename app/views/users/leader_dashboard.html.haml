@@ -1,0 +1,19 @@
+%h1 Tasks
+=link_to "Create a Task", new_task_path
+
+-@tasks.each do |task|
+  %p=task.description
+  %ul
+    -task.task_submissions.each do |ts|
+      %li
+        =ts.user.name
+        =ts.description
+        -if ts.status == 'pending'
+          = link_to 'Reject', reject_task_submission_path(ts), :class => 'btn btn-mini btn-danger'
+          = link_to 'Accept', accept_task_submission_path(ts), :class => 'btn btn-mini btn-success'
+        -elsif ts.status == 'rejected'
+          = link_to 'Undo Rejection', pending_task_submission_path(ts), :class => 'btn btn-mini btn-primary'
+          = link_to 'Accept', accept_task_submission_path(ts), :class => 'btn btn-mini btn-success'
+        -else
+          = link_to 'reject', reject_task_submission_path(ts), :class => 'btn btn-mini btn-danger'
+          = link_to 'Undo Accepting', pending_task_submission_path(ts), :class => 'btn btn-mini btn-primary'
