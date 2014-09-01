@@ -26,9 +26,9 @@ class TaskSubmissionsController < ApplicationController
   # POST /task_submissions.json
   def create
     @user = current_user
-    task_id = params[:task_id]
+    @task = Task.find(params[:task_submission][:task_id])
     @task_submission = @user.task_submissions.new(task_submission_params)
-    @task_submission.task_id = task_id
+    @task_submission.task_id = @task.id
     
 
     respond_to do |format|

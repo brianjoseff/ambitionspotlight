@@ -6,8 +6,10 @@
   %ul
     -task.task_submissions.each do |ts|
       %li
-        =ts.user.name
-        =ts.description
+        -unless ts.user.nil?
+          =ts.user.name
+        -unless ts.description.nil?
+          =ts.description
         -if ts.status == 'pending'
           = link_to 'Reject', reject_task_submission_path(ts), :class => 'btn btn-mini btn-danger'
           = link_to 'Accept', accept_task_submission_path(ts), :class => 'btn btn-mini btn-success'

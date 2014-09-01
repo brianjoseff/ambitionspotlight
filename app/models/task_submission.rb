@@ -1,6 +1,8 @@
 class TaskSubmission < ActiveRecord::Base
   after_initialize :set_to_pending
   after_update :status_change
+  validates :user_id, presence: true
+  validates :task_id, presence: true
   
   belongs_to :user
   belongs_to :task

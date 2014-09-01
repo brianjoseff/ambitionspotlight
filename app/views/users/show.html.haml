@@ -4,10 +4,12 @@
   .col-lg-9
     %h2
       =@user.name
+      
       -if current_user && current_user == @user
         =link_to "Edit Details", edit_user_registration_path(current_user), style:"font-size:50%"
         -if @user.leader?
-          =link_to "Manage your Profile", leader_dashboard_path
+          
+          =link_to "Your Dashboard", leader_dashboard_path, style:"font-size:50%"
       - unless current_user == @user
         #follow_form
           - if current_user.following?(@user)
