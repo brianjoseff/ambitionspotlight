@@ -15,3 +15,21 @@
  */
 
 
+h1, h2, h3, p, label, input{
+	color: #ebebeb;
+	font-weight: 300;
+	letter-spacing: 1px;
+}
+
+p{
+	font-size: 105%;
+}
+
+body{
+background-color: rgb(34,34,34);	
+}
+
+
+a:visited{
+	
+}

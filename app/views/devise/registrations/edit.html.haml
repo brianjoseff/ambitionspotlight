@@ -12,6 +12,7 @@
       = f.label :email, class: 'control-label'
       .controls
         = f.email_field :email, autofocus: true, class: "form-control", :placeholder => "big@dog.com"
+    /there are 8 fields because there are 8 assets associated with this record...make it so there is only ever one profile picture    
     = f.fields_for :assets do |images_form|
       = images_form.file_field :image, type:"file"
    
@@ -24,7 +25,20 @@
       .controls
         = f.text_area :bio, type:"text", autofocus: true, class: "form-control", :rows => "7", :placeholder => "Tell us about what you do..."
 
-      
+    .form-group
+      =f.label :facebook_url, class: 'control-label'
+      .controls
+        =f.text_field :facebook_url, type: "text", class: "form-control", :placeholder => "http://www..."
+  
+    .form-group
+      =f.label :twitter_url, class: 'control-label'
+      .controls
+        =f.text_field :twitter_url, type: "text", class: "form-control", :placeholder => "http://www..."
+        
+    .form-group
+      = f.label :email, class: 'control-label'
+      .controls
+        = f.email_field :email, autofocus: true, class: "form-control", :placeholder => "big@dog.com"
     - if devise_mapping.confirmable? && resource.pending_reconfirmation?
       %div
         Currently waiting confirmation for: #{resource.unconfirmed_email}

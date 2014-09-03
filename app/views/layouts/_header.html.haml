@@ -1,4 +1,4 @@
-%nav.navbar.nav-area.navbar-default.navbar-fixed-top{role: "navigation"}
+%nav.navbar.nav-area.navbar-default.navbar-fixed-top#ambitionspotlight_nav{role: "navigation"}
   .container
     .row
       / Brand and toggle get grouped for better mobile display
@@ -9,9 +9,9 @@
           %span.icon-bar
           %span.icon-bar
         .header-logo
-          %h3.pull-left #{link_to "SuaveFx", root_path, :class => "header-title"}  
+          %h3.pull-left #{link_to "Ambition Spotlight", root_path, :class => "header-title"}  
       / Collect the nav links, forms, and other content for toggling
-      #readthis_nav.collapse.navbar-collapse
+      .collapse.navbar-collapse
         %ul.nav.navbar-nav 
           / %ul#nav_pill_section.nav.nav-pills.navbar-right.colored-pills 
           /%li{:class => "#{'active' if current_page?(root_path)} smoothScroll"}=link_to "Home", root_path

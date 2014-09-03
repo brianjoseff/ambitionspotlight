@@ -1,0 +1,31 @@
+= form_for @album do |f|
+  - if @album.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@album.errors.count, "error")} prohibited this album from being saved:"
+      %ul
+        - @album.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  
+  .control-group
+    = f.label :assets, :class => 'control-label'
+    .controls
+      / The magic is coming ...look at my eyes....shazammmm
+      /
+        Use HTML5 multiple attribute to enable multiple selection
+        and pass back to controller all files as an array, ready
+        for paperclip!!
+        file_field_tag, since images is not a gallery attribute
+      = file_field_tag "images[]", type: :file, multiple: true
+
+  %script#template-upload{:type => "text/x-tmpl"}
+    :cdata
+      .upload
+        {%=o.name%}
+        .progress
+          .bar{:style => "width: 0%"}
+  .actions
+    = f.submit 'Save'

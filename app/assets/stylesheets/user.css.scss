@@ -1,4 +1,68 @@
 .occupation{
 	font-style: italic;
-	color: #696969;
+}
+.bio{
+	margin-top: 10px;
+}
+
+/*.profile-pic{
+	min-height:
+}*/
+.social-media-box{
+	background-color: #5e7944;
+	padding: 10px;
+}
+.social-media-box i{
+	font-size: 5em;
+}
+.facebook-blue{
+	color: #293e6a;
+}
+.twitter-blue{
+	color: #4099ff;
+}
+.social-media-icon{
+	display:block;
+	width: 60px;
+	height: 60px;
+}
+
+.round img {
+    display: block;
+/* Stretch 
+      height: 100%;
+      width: 100%; */
+min-width: 100%;
+min-height: 100%;
+}
+
+.round {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 150px;
+    height: 150px;
+}
+.round-center{
+	margin: auto;
+	position: absolute;
+	top: 0; left: 0; bottom: 0; right: 0;
+}
+.round-thumbnail{
+	border-radius: 50%;
+  overflow: hidden;
+  width: 60px;
+  height: 60px;
+}
+
+.round-border{
+	margin-top: 20px;
+	border: solid 5px #b6b6b6;
+	border-radius: 50%;
+  overflow: hidden;
+  width: 170px;
+  height: 170px;
+	margin: auto;
+	position: relative;
+	top: 0; left: 0; bottom: 0; right: 0;
+	box-shadow: 0 1px 10px rgba(0,0,0,0.35);
 }

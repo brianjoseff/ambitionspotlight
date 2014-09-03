@@ -1,15 +1,29 @@
 .row
   .col-lg-3
-    =link_to image_tag(@user.assets.empty?  ? '/assets/user-placeholder.png': @user.assets.first.image.url(:medium), :alt => @user.name, class: ""), user_path(@user)
-  .col-lg-9
-    %h2
-      =@user.name
-      
-      -if current_user && current_user == @user
-        =link_to "Edit Details", edit_user_registration_path(current_user), style:"font-size:50%"
-        -if @user.leader?
+    .profile-pic
+      .round-border
+        .round.round-center
+          =link_to image_tag(@user.assets.empty?  ? '/assets/user-placeholder.png': @user.assets.first.image.url(:medium), :alt => @user.name, class: "circle-image"), user_path(@user)
+      .text-center
+        %h2
+          =@user.name
+        %h2
+          -if current_user && current_user == @user
+            =link_to "Edit Details", edit_user_registration_path(current_user), style:"font-size:50%"
+            -if @user.leader?
+              =link_to "Your Dashboard", leader_dashboard_path, style:"font-size:50%"
+        
           
-          =link_to "Your Dashboard", leader_dashboard_path, style:"font-size:50%"
+    / USERS SOCIAL MEDIA
+    
+    .social-media-box.text-center
+      = link_to '<i class="fa fa-facebook fa-2x facebook-blue"></i>'.html_safe, "#{@user.facebook_url}"
+      = link_to '<i class="fa fa-twitter fa-2x twitter-blue"></i>'.html_safe, "#{@user.twitter_url}"
+
+      
+  .col-lg-9
+
+    %h2
       - unless current_user == @user
         #follow_form
           - if current_user && current_user.following?(@user)
@@ -18,15 +32,22 @@
           - elsif current_user.nil?
             =link_to "Join the Following", new_user_registration_path, class: "btn btn-large btn-primary make-button"
           -else
-            /= render 'follow'
-            -unless @task.nil?
-              =link_to "Join the Following", new_task_submission_path(task_id: @task.id), class: "btn btn-large btn-primary make-button"
+            = render 'follow'
+            / -unless @task.nil?
+            /   =link_to "Join the Following", new_task_submission_path(task_id: @task.id), class: "btn btn-large btn-primary make-button"
           
-    %p.occupation=@user.occupation    
-    /SOCIAL MEDIA BUTTONS
+    %h3=@user.occupation    
+    
+    
+    
+    /BIO
     .row
       .col-lg-5
-        %p=@user.bio
+        .bio
+          %p=@user.bio
+        .photos
+          -@user.assets.each do |image|
+            =image_tag( image.image.url(:thumb), :alt => @user.name, class: "")
     
     
 
@@ -36,12 +57,14 @@
     -if @followers
       %h3 Leader's Followers:
       -@followers.each do |f|
+        .round-thumbnail
+          =link_to image_tag(f.assets.empty?  ? '/assets/user-placeholder-thumbnail.png': f.assets.first.image.url(:thumb), :alt => f.name, class: "circle-image"), user_path(@user)
         %p=f.name
     
     /BADGES?
     
     /PHOTO ALBUM
-    
+    =link_to "Add Photos", new_album_path
     
     
     /MORNING ROUTINE

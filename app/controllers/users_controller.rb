@@ -15,4 +15,9 @@ class UsersController < ApplicationController
     @tasks = @user.tasks
   end
   
+  def add_photos
+    @user = current_user
+    @assets = @user.assets.build
+  end
+  
 end

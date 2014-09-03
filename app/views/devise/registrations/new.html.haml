@@ -13,7 +13,7 @@
         =f.label :email, :class => 'control-label'
         .controls
           =f.text_field :email, type: "text", :class => "form-control", :placeholder => "hello@mom.com"
-      
+      =label_tag "Profile Picture"
       = f.fields_for :assets do |images_form|
         = images_form.file_field :image, type:"file"
       %br/

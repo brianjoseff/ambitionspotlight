@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :albums
+
   resources :task_submissions do
     member do
       get :reject

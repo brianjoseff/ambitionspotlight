@@ -32,7 +32,12 @@ gem "html2haml"
 
 gem 'aws-sdk'
 gem "paperclip", "~> 4.1"
+gem 'jquery-fileupload-rails'
 
+gem 'shareable'
+gem 'social-share-button'
+
+gem 'merit'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

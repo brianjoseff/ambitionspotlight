@@ -1,11 +1,11 @@
 .row
 
-  %h1 Spotlight
-
+  %h1.spotlight.text-center Spotlight
+  
   -@users.each do |user|
-
-    %h3=link_to user.name, user_path(user)
-    =link_to image_tag(user.assets.empty?  ? '/assets/user-placeholder.png': user.assets.first.image.url(:medium), :alt => user.name, class: ""), user_path(user)
+    .col-lg-3.text-center
+      %h3=link_to user.name, user_path(user)
+      =link_to image_tag(user.assets.empty?  ? '/assets/user-placeholder.png': user.assets.first.image.url(:medium), :alt => user.name, class: ""), user_path(user)
 
 
 
