@@ -15,6 +15,7 @@
  */
 
 
+
 h1, h2, h3, p, label, input{
 	color: #ebebeb;
 	font-weight: 300;
@@ -26,7 +27,8 @@ p{
 }
 
 body{
-background-color: rgb(34,34,34);	
+background-color: rgb(34,34,34);
+padding-bottom: 200px;
 }
 
 
