@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140903204054) do
+ActiveRecord::Schema.define(version: 20140904002007) do
 
   create_table "albums", force: true do |t|
     t.string   "name"
@@ -139,6 +139,8 @@ ActiveRecord::Schema.define(version: 20140903204054) do
     t.string   "slug"
     t.string   "facebook_url"
     t.string   "twitter_url"
+    t.text     "ambition"
+    t.text     "current_activities"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

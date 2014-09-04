@@ -10,14 +10,16 @@
   %body
     / #holder
     /   #body
-    .container
-      = render 'layouts/header'    
-    .container
-      .content
-        %p.notice= notice
-        %p.alert= alert
-        = yield
-
-        
-    %footer.footer.navbar.navbar-fixed-bottom
-      = render 'layouts/footer'
+    .wrapper
+      .container
+        = render 'layouts/header'    
+      .container
+        .content
+          %p.notice= notice
+          %p.alert= alert
+          = yield
+    .push
+    /     .footer.navbar.navbar-fixed-bottom
+    %footer
+      .footer
+        = render 'layouts/footer'
