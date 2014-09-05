@@ -2,17 +2,17 @@
 .row
   .col-lg-5
     %h1 Sign up
-    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {multipart: true, class: ""}) do |f|
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), :builder => Judge::FormBuilder, html: {multipart: true, class: ""}) do |f|
       = devise_error_messages!
       -resource.assets.build unless resource.assets.first
       .form-group
         =f.label :name, :class => 'control-label'
         .controls
-          =f.text_field :name, type: "text", :class => "form-control", :placeholder => "Eugene Jackson"        
+          =f.text_field :name, type: "text", :class => "form-control", :placeholder => "Eugene Jackson", :validate => true        
       .form-group
         =f.label :email, :class => 'control-label'
         .controls
-          =f.text_field :email, type: "text", :class => "form-control", :placeholder => "hello@mom.com"
+          =f.text_field :email, type: "text", :class => "form-control", :placeholder => "hello@mom.com", :validate => true
       =label_tag "Profile Picture"
       = f.fields_for :assets do |images_form|
         = images_form.file_field :image, type:"file"
@@ -20,7 +20,7 @@
       .form-group
         = f.label "What are you?", class: 'control-label'
         .controls
-          = f.text_field :occupation, autofocus: true, class: "form-control", :placeholder => "MMA Coach"
+          = f.text_field :occupation, autofocus: true, class: "form-control", :placeholder => "MMA Coach", :validate => true
       
       .form-group
         = f.label "Where do you want to be in 5 years?", class: 'control-label'
@@ -47,22 +47,22 @@
         =f.submit "Sign up", class: "btn btn-primary submit-button"
           
         
-
-  .col-lg-1
-  .col-lg-5
-
-    %h1 Sign in
-    /%span.facebook-signin #{link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)} 
-    =form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form", id: "session"}) do |f|
-      /=render "shared/error_messages", :target => @user
-      .form-group
-        =f.label :email, :class => 'control-label'
-        .controls
-          =f.text_field :email, type: "text", :class => "form-control", :placeholder => "Email", :validate => { :presence => true } 
-      .form-group
-        =f.label :password, :class => 'control-label'
-        .controls
-          =f.password_field :password, type: "password", :class => "form-control", :placeholder => "Password"
-
-      .user-auth-offset
-        =f.submit "Sign in", class: "btn btn-primary submit-button"
+  / 
+  / .col-lg-1
+  / .col-lg-5
+  / 
+  /   %h1 Sign in
+  /   /%span.facebook-signin #{link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)} 
+  /   =form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form", id: "session"}) do |f|
+  /     /=render "shared/error_messages", :target => @user
+  /     .form-group
+  /       =f.label :email, :class => 'control-label'
+  /       .controls
+  /         =f.text_field :email, type: "text", :class => "form-control", :placeholder => "Email", :validate => { :presence => true } 
+  /     .form-group
+  /       =f.label :password, :class => 'control-label'
+  /       .controls
+  /         =f.password_field :password, type: "password", :class => "form-control", :placeholder => "Password"
+  / 
+  /     .user-auth-offset
+  /       =f.submit "Sign in", class: "btn btn-primary submit-button"

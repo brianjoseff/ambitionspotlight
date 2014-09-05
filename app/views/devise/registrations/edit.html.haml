@@ -13,17 +13,28 @@
       .controls
         = f.email_field :email, autofocus: true, class: "form-control", :placeholder => "big@dog.com"
     /there are 8 fields because there are 8 assets associated with this record...make it so there is only ever one profile picture    
+    =label_tag "Profile Picture"
     = f.fields_for :assets do |images_form|
       = images_form.file_field :image, type:"file"
-   
+    %br/
     .form-group
-      = f.label :occupation, class: 'control-label'
+      = f.label "What are you?", class: 'control-label'
       .controls
-        = f.text_field :occupation, type: "text", autofocus: true, class: "form-control", :placeholder => "MMA Coach"
+        = f.text_field :occupation, autofocus: true, class: "form-control", :placeholder => "MMA Coach"
+    
     .form-group
-      = f.label :bio, class: 'control-label'
+      = f.label "Where do you want to be in 5 years?", class: 'control-label'
       .controls
-        = f.text_area :bio, type:"text", autofocus: true, class: "form-control", :rows => "7", :placeholder => "Tell us about what you do..."
+        = f.text_area :ambition, type:"text",autofocus: true, class: "form-control", :placeholder => "Proud coach of champion MMA fighters", :rows => "5"  
+    
+    .form-group
+      = f.label "What are you doing right now to achieve your ambitions?", class: 'control-label'
+      .controls
+        = f.text_area :current_activities, type:"text", autofocus: true, class: "form-control", :placeholder => "Training, building a world-class gym at my house, mentoring kids in EPA", :rows => "5"
+    .form-group
+      = f.label "What is your story", class: 'control-label'
+      .controls
+        = f.text_area :bio, type:"text", autofocus: true, class: "form-control", :placeholder => "Tell us who you are and where you come from...", :rows => "5"
 
     .form-group
       =f.label :facebook_url, class: 'control-label'
@@ -53,12 +64,12 @@
         = f.password_field :password_confirmation, autocomplete: "off", class: "form-control"
     .form-group
       = f.label :current_password, class: 'control-label'
-      %i (we need your current password to confirm your changes)
+      %i{style:"color:white"} (we need your current password to confirm your changes)
       .controls
         = f.password_field :current_password, autocomplete: "off", class: "form-control"
     .submit
-      =f.submit "Update"
+      =f.submit "Update", class: "btn btn-primary submit-button"
   %h3 Cancel my account
   %p
-    Unhappy? #{button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}
+    Unhappy? #{button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-primary submit-button"}
   = link_to "Back", :back

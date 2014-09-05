@@ -34,6 +34,8 @@ gem 'aws-sdk'
 gem "paperclip", "~> 4.1"
 gem 'jquery-fileupload-rails'
 
+gem 'judge'
+
 gem 'shareable'
 gem 'social-share-button'
 

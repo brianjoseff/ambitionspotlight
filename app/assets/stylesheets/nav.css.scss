@@ -25,15 +25,27 @@
 	color: #b6b6b6;
 	font-weight: bold;
 }
+.caret{
+	font-size: 200%;
+}
 
 #ambitionspotlight_nav{
 	
 	background-color: #38502d;
 }
+.navbar-default .navbar-nav>.active{
+
+}
 
 .navbar-default .navbar-nav>.active>a{
 	height: 50px;
+	background-color: #5e7944;
 }
+.navbar-default .navbar-nav>.active>a:hover{
+
+	background-color: #5e7944;
+}
+
 
 .navbar-default .navbar-nav>li>a{
 	color: #ebebeb;

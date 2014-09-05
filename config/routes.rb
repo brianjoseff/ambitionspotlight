@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount Judge::Engine => '/judge'
+  
   resources :albums
 
   resources :task_submissions do

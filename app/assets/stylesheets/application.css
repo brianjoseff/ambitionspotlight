@@ -44,6 +44,20 @@ html, body {
     height: 100px; /* .push must be the same height as .footer */
 }
 
-a:visited{
-	
+.content{
+	padding-top:50px;
 }
+
+
+
+.alert{
+	color: red;
+	margin-bottom:0px;
+	padding: 0px;
+}
+.notice{
+	color: #27ae60;
+	padding-top: 5px;
+}
+
+

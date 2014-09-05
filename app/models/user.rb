@@ -30,11 +30,11 @@ class User < ActiveRecord::Base
   
   accepts_nested_attributes_for :assets
   
-  
-  validates_presence_of :name, :email
+  validates :occupation, :presence => true
+  validates_presence_of :name, :email, :bio, :ambition, :current_activities
   
   def self.spotlit_users
-    first(5)
+    all.select{|x| x.leader?}
   end
   
   def leader?

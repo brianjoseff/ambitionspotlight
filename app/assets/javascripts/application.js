@@ -15,4 +15,8 @@
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
 //= require turbolinks
+//= require underscore
+//= require json2
+//= require judge
+//= require validations.js
 //= require_tree .

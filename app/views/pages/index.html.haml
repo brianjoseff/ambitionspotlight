@@ -4,8 +4,9 @@
   
   -@users.each do |user|
     .col-lg-3.text-center
-      %h3=link_to user.name, user_path(user)
+      
       =link_to image_tag(user.assets.empty?  ? '/assets/user-placeholder.png': user.assets.first.image.url(:medium), :alt => user.name, class: ""), user_path(user)
+      %h3=link_to user.name, user_path(user)
 
 
 

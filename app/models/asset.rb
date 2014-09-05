@@ -1,7 +1,7 @@
 class Asset < ActiveRecord::Base
   belongs_to :imageable, polymorphic: true
   
-  has_attached_file :image, :styles => { :normal => "100%",:small => "100 x100>",:medium => "200x200>", :thumb => "50x50>", :mini => "25x25>" },
+  has_attached_file :image, :styles => { spotlight: "126x200#", :normal => "100%",:small => "100 x100>",:medium => "200x200>", :thumb => "50x50>" },
                             :storage => :s3,
                             :s3_credentials => Proc.new{|a| Rails.env.production? ? a.instance.prod_s3_credentials :  a.instance.s3_credentials},                     
                             :path => "/:attachment/:id/:style/:filename"
