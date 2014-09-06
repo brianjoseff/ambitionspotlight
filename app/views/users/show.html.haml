@@ -61,8 +61,8 @@
         .bio
           %p=@user.bio
         .photos
-          -@user.assets.each do |image|
-            =image_tag( image.image.url(:thumb), :alt => @user.name, class: "")
+          / -@user.assets.each do |image|
+          /   =image_tag( image.image.url(:thumb), :alt => @user.name, class: "")
           -@user.albums.each do |album|
             -album.assets.each do |a|
               =image_tag(a.image.url(:medium), :alt => @user.name, class: "circle-image")
@@ -87,7 +87,7 @@
       %h3 Leader's Followers:
       -@followers.each do |f|
         .round-thumbnail
-          =link_to image_tag(f.assets.empty?  ? '/assets/user-placeholder-thumbnail.png': f.assets.first.image.url(:small), :alt => f.name, class: "circle-image"), user_path(@user)
+          =link_to image_tag(f.assets.empty?  ? '/assets/user-placeholder-thumbnail.png': f.assets.first.image.url(:small), :alt => f.name, class: "circle-image"), user_path(f)
         %p=f.name
     
     /BADGES?
