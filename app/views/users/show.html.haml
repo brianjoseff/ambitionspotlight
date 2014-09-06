@@ -22,13 +22,13 @@
       
 
         
-      -if @user.facebook_url.empty?
+      -if @user.facebook_url.nil?
         -if current_user && current_user == @user
           %i.fa.fa-facebook.fa-2x.facebook-blue
           %p You haven't added your fb profile yet. #{link_to 'Add it', edit_user_registration_path(current_user), class: "btn btn-mini btn-primary make-button"}
       -else
         = link_to '<i class="fa fa-facebook fa-2x facebook-blue"></i>'.html_safe, "#{@user.facebook_url}"
-      -if @user.twitter_url.empty?
+      -if @user.twitter_url.nil?
         -if current_user && current_user == @user
           %i.fa.fa-twitter.fa-2x.twitter-blue
           %p You haven't added your twitter profile yet. #{link_to 'Add it', edit_user_registration_path(current_user), class: "btn btn-mini btn-primary make-button"}
