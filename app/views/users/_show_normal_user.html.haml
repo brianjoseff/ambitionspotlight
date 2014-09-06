@@ -1,0 +1,101 @@
+.row
+  .col-lg-3
+    .profile-pic
+      .round-border
+        .round.round-center          
+          =link_to image_tag(@user.assets.empty?  ? '/assets/user-placeholder.png': @user.assets.first.image.url(:medium), :alt => @user.name, class: "circle-image"), user_path(@user)
+      .text-center
+        %h2
+          =@user.name
+        %h2
+          -if current_user && current_user == @user
+            =link_to "Edit Details", edit_user_registration_path(current_user), style:"font-size:50%"
+            -if @user.leader?
+              =link_to "Your Dashboard", leader_dashboard_path, style:"font-size:50%"
+        
+          
+    / USERS SOCIAL MEDIA
+    
+    .social-media-box.text-center
+      
+      
+      
+
+        
+      -if @user.facebook_url.nil?
+        -if current_user && current_user == @user
+          %i.fa.fa-facebook.fa-2x.facebook-blue
+          %p You haven't added your fb profile yet. #{link_to 'Add it', edit_user_registration_path(current_user), class: "btn btn-mini btn-primary make-button"}
+      -else
+        = link_to '<i class="fa fa-facebook fa-2x facebook-blue"></i>'.html_safe, "#{@user.facebook_url}"
+      -if @user.twitter_url.nil?
+        -if current_user && current_user == @user
+          %i.fa.fa-twitter.fa-2x.twitter-blue
+          %p You haven't added your twitter profile yet. #{link_to 'Add it', edit_user_registration_path(current_user), class: "btn btn-mini btn-primary make-button"}
+      -else
+        = link_to '<i class="fa fa-twitter fa-2x twitter-blue"></i>'.html_safe, "#{@user.twitter_url}"
+
+  
+  .col-lg-9
+
+    %h2
+      - unless current_user == @user
+        #follow_form
+          - if current_user && current_user.following?(@user)
+            = render 'unfollow'
+            
+          - elsif current_user.nil?
+            =link_to "Join the Following", new_user_registration_path, class: "btn btn-large btn-primary make-button"
+          -else
+            = render 'follow'
+            / -unless @task.nil?
+            /   =link_to "Join the Following", new_task_submission_path(task_id: @task.id), class: "btn btn-large btn-primary make-button"
+          
+    %h3=@user.occupation    
+    
+    
+    
+    /BIO
+    .row
+      .col-lg-7
+        .bio
+          %p=@user.bio
+        .photos
+          / -@user.assets.each do |image|
+          /   =image_tag( image.image.url(:thumb), :alt => @user.name, class: "")
+          -@user.albums.each do |album|
+            -album.assets.each do |a|
+              =image_tag(a.image.url(:medium), :alt => @user.name, class: "circle-image")
+    
+    
+        /AMBITION
+        %h3 Ambition
+        %p=@user.ambition
+        %br/
+        
+        /CURRENT ACTIVITIES
+        %h3 What I'm doing right now
+        %p=@user.current_activities
+        
+        /PHOTO ALBUM
+        =link_to "Add Photos", new_album_path
+        
+    /FOLLOWER OF THE WEEK
+    
+    /YOUR FOLLOWING
+    -if @followers
+      %h3 Leader's Followers:
+      -@followers.each do |f|
+        .round-thumbnail
+          =link_to image_tag(f.assets.empty?  ? '/assets/user-placeholder-thumbnail.png': f.assets.first.image.url(:small), :alt => f.name, class: "circle-image"), user_path(f)
+        %p=f.name
+    
+    /BADGES?
+    
+
+    
+    
+    /MORNING ROUTINE
+    
+    
+    /SPONSORS? - maybe some companies want to sponsor these community leaders because kids will be looking up to them
