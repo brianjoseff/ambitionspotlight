@@ -87,7 +87,7 @@
       %h3 Leader's Followers:
       -@followers.each do |f|
         .round-thumbnail
-          =link_to image_tag(f.assets.empty?  ? '/assets/user-placeholder-thumbnail.png': f.assets.first.image.url(:thumb), :alt => f.name, class: "circle-image"), user_path(@user)
+          =link_to image_tag(f.assets.empty?  ? '/assets/user-placeholder-thumbnail.png': f.assets.first.image.url(:small), :alt => f.name, class: "circle-image"), user_path(@user)
         %p=f.name
     
     /BADGES?
