@@ -20,4 +20,8 @@ class UsersController < ApplicationController
     @assets = @user.assets.build
   end
   
+  def index
+    @users = User.all
+  end
+  
 end
