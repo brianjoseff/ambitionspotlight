@@ -19,6 +19,17 @@ Rails.application.routes.draw do
   
   match '/about', to: "pages#about", via: :get
   match '/leader_dashboard', to: "users#leader_dashboard", via: :get
+  
+  authenticated :user do
+    root to: "pages#index", as: :authenticated_root
+  end
+
+  unauthenticated do
+    root to: "pages#landing"
+    match '/leaders', to: "pages#index", via: :get
+  end
+  
+  # match '/landing', to: 'pages#landing', via: :get
   resources :users, :only => [:show, :edit, :update]
   resources :followships, only: [:create, :destroy]
   
@@ -27,7 +38,8 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  root to: "pages#index"
+  
+  # root to: "pages#index"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
