@@ -12,12 +12,12 @@
 .container
   #myCarousel.carousel.slide{"data-ride" => "carousel"}
     / Wrapper for slides
-    .carousel-inner
-
-              
+    .carousel-inner              
       / FLopez
       .item.active.leaderimg
-        %img.leaderimg{:src => "http://i.imgur.com/xBpnpAs.jpg"}
+        /%img.leaderimg{:src => "http://i.imgur.com/xBpnpAs.jpg"}
+        %img.leaderimg{src: "#{@users.first.assets.empty?  ? '/assets/user-placeholder.png' : @users.first.assets.first.image.url(:medium)}", :alt => @users.first.name}
+          /=image_tag(, class: "leaderimg")
           .carousel-caption
             %h4
               =link_to @users.first.name, user_path(@users.first)
@@ -25,7 +25,7 @@
       
       -@users[1..-1].each do |user|
         .item.leaderimg
-          %img.leaderimg{:src => "http://i.imgur.com/xBpnpAs.jpg"}
+          %img.leaderimg{src: "#{user.assets.empty?  ? '/assets/user-placeholder.png' : user.assets.first.image.url(:medium)}", :alt => user.name}
             .carousel-caption
               %h4
                 =link_to user.name, user_path(user)

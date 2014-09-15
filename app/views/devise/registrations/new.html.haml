@@ -8,7 +8,7 @@
       .form-group
         =f.label :name, :class => 'control-label'
         .controls
-          =f.text_field :name, type: "text", :class => "form-control", :placeholder => "Eugene Jackson", :validate => true        
+          =f.text_field :name, type: "text", :class => "form-control", :placeholder => "Juan Smith", :validate => true        
       .form-group
         =f.label :email, :class => 'control-label'
         .controls
@@ -20,17 +20,17 @@
       .form-group
         = f.label "What are you?", class: 'control-label'
         .controls
-          = f.text_field :occupation, autofocus: true, class: "form-control", :placeholder => "MMA Coach", :validate => true
+          = f.text_field :occupation, autofocus: true, class: "form-control", :placeholder => "Example: MMA Coach", :validate => true
       
       .form-group
         = f.label "Where do you want to be in 5 years?", class: 'control-label'
         .controls
-          = f.text_area :ambition, type:"text",autofocus: true, class: "form-control", :placeholder => "Proud coach of champion MMA fighters", :rows => "5"  
+          = f.text_area :ambition, type:"text",autofocus: true, class: "form-control", :placeholder => "Example: Proud coach of champion MMA fighters", :rows => "5"  
       
       .form-group
         = f.label "What are you doing right now to achieve your ambitions?", class: 'control-label'
         .controls
-          = f.text_area :current_activities, type:"text", autofocus: true, class: "form-control", :placeholder => "Training, building a world-class gym at my house, mentoring kids in EPA", :rows => "5"
+          = f.text_area :current_activities, type:"text", autofocus: true, class: "form-control", :placeholder => "Example: Training, building a world-class gym at my house, mentoring kids in EPA", :rows => "5"
       .form-group
         = f.label "What is your story", class: 'control-label'
         .controls

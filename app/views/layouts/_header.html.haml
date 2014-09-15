@@ -48,8 +48,8 @@
 /           %li
 /             =link_to "SIGN IN", new_user_session_path
 / 
-%nav.navbar.navbar-default{:role => "navigation"}
-  .container-fluid
+%nav.navbar.nav-area.navbar-default.navbar-fixed-top{:role => "navigation"}
+  .container
     / Brand and toggle get grouped for better mobile display
     .navbar-header
       %button.navbar-toggle.collapsed{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
@@ -63,6 +63,7 @@
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       %ul.nav.navbar-nav
         %li{:class => "#{'active' if current_page?(about_path)}"}=link_to "ABOUT", about_path
+        %li{:class => "#{'active' if current_page?(about_path)}"}=link_to "USERS", users_path
         / %li
         /   %a{:href => "#"} Users
       %form.navbar-form.navbar-left{:role => "search"}
@@ -73,7 +74,7 @@
         -if user_signed_in?
 
           %li{:class => "#{'active' if current_page?(user_path(current_user))} dropdown"}
-            %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}        
+            %a.glyphicon.glyphicon-user.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}        
               /=image_tag "user_icon.png", class: "user-icon"
               .user-icon.pull-left
               %b.caret
