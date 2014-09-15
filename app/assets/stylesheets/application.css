@@ -17,7 +17,7 @@
 
 
 h1, h2, h3, p, label, input{
-	color: #ebebeb;
+/*	color: #ebebeb;*/
 	font-weight: 300;
 	letter-spacing: 1px;
 }
@@ -26,10 +26,10 @@ p{
 	font-size: 105%;
 }
 
-body{
+/*body{
 background-color: rgb(34,34,34);
 padding-bottom: 200px;
-}
+}*/
 
 html, body {
     height: 100%;
@@ -45,7 +45,7 @@ html, body {
 }
 
 .content{
-	padding-top:50px;
+/*	padding-top:50px;*/
 }
 
 
