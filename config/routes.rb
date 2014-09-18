@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   end
 
   resources :tasks
-
+  resources :documents
+  
   devise_for :users
   resources :users
   # match 'user/:name' => 'user#profile'

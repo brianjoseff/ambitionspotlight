@@ -3,13 +3,18 @@
 %table
   %tr
     %th Name
+    %th photos
     %th
     %th
     %th
 
   - @albums.each do |album|
     %tr
-      %td= album.name
+      %td= album.id
+      %td
+        -album.assets.each do |a|
+          .spacer-thumb
+            =link_to image_tag(a.image.nil?  ? '/assets/user-placeholder.png' : a.image.url(:thumb), :alt => @user.name ), user_path(@user)
       %td= link_to 'Show', album
       %td= link_to 'Edit', edit_album_path(album)
       %td= link_to 'Destroy', album, :method => :delete, :data => { :confirm => 'Are you sure?' }

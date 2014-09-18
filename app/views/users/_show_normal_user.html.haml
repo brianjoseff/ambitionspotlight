@@ -16,12 +16,7 @@
           
     / USERS SOCIAL MEDIA
     
-    .social-media-box.text-center
-      
-      
-      
-
-        
+    .social-media-box.text-center        
       -if @user.facebook_url.nil?
         -if current_user && current_user == @user
           %i.fa.fa-facebook.fa-2x.facebook-blue
@@ -60,17 +55,18 @@
       .col-lg-7
         .bio
           %p=@user.bio
-        .photos
-          / -@user.assets.each do |image|
-          /   =image_tag( image.image.url(:thumb), :alt => @user.name, class: "")
-          -@user.albums.each do |album|
-            -album.assets.each do |a|
-              =image_tag(a.image.url(:medium), :alt => @user.name, class: "circle-image")
+        / .photos
+        /   / -@user.assets.each do |image|
+        /   /   =image_tag( image.image.url(:thumb), :alt => @user.name, class: "")
+        /   -@user.albums.each do |album|
+        /     -album.assets.each do |a|
+        /       =image_tag(a.image.url(:medium), :alt => @user.name, class: "circle-image")
     
-    
+        .spacer
+        
         /AMBITION
         %h3 Ambition
-        %p=@user.ambition
+        %p.ambition=@user.ambition
         %br/
         
         /CURRENT ACTIVITIES

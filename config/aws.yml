@@ -1,0 +1,13 @@
+defaults: &defaults
+  access_key_id: <%= ENV['S3_KEY'] %>
+  secret_access_key: <%= ENV['S3_SECRET'] %>
+development:
+  <<: *defaults
+  bucket: "ambition-dev"
+test:
+  <<: *defaults
+  bucket: "ambition-test"
+production:
+  access_key_id: <%= ENV['S3_KEY'] %>
+  secret_access_key: <%= ENV['S3_SECRET'] %>
+  bucket: "ambition-prod"

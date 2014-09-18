@@ -32,7 +32,10 @@ gem "html2haml"
 
 gem 'aws-sdk'
 gem "paperclip", "~> 4.1"
+gem 's3_direct_upload'
 gem 'jquery-fileupload-rails'
+
+gem 'delayed_job_active_record'
 
 gem 'judge'
 
@@ -40,6 +43,15 @@ gem 'shareable'
 gem 'social-share-button'
 
 gem 'merit'
+
+
+# TASKS
+gem 'forgery'
+gem 'faker'
+
+
+
+
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

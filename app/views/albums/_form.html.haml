@@ -10,7 +10,8 @@
   .control-group
     = f.fields_for :assets do |asset|
       .controls
-        =asset.file_field "image[]", type: "file"
+        /=asset.file_field "image[]", type: "file"
+        =asset.file_field :image, multiple: true, type: "file"
 
   / The magic is coming ...look at my eyes....shazammmm
   /

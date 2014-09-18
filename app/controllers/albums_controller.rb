@@ -5,6 +5,7 @@ class AlbumsController < ApplicationController
   # GET /albums.json
   def index
     @albums = Album.all
+    @user = current_user
   end
 
   # GET /albums/1
@@ -31,12 +32,12 @@ class AlbumsController < ApplicationController
 
     respond_to do |format|
       if @album.save
-        if params[:images]
-             #===== The magic is here ;)
-             params[:images].each { |image|
-               @album.assets.create(image: image)
-             }
-           end
+        # if params[:images]
+        #      #===== The magic is here ;)
+        #      params[:images].each { |image|
+        #        @album.assets.create(image: image)
+        #      }
+        #    end
         format.html { redirect_to @album, notice: 'Album was successfully created.' }
         format.json { render :show, status: :created, location: @album }
       else
@@ -78,6 +79,6 @@ class AlbumsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def album_params
-      params.require(:album).permit(:name, assets_attributes: [:image])
+      params.require(:album).permit(:name,:image, assets_attributes: [:image])
     end
 end

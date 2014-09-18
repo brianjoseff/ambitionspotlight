@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
   has_many :task_submissions
   has_many :tasks
   has_many :albums
+  has_many :documents
   
   accepts_nested_attributes_for :assets
   
