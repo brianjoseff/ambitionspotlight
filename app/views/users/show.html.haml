@@ -118,8 +118,8 @@
         /CURRENT ACTIVITIES
         /List them
         /Highlight 1
-        .current-activity.text-center
-          %p.current-activity-header WHAT I'M DOING TO GET THERE...
+        .current-activity
+          %p.current-activity-header.text-center WHAT I'M DOING TO GET THERE...
           %p=@user.current_activities
           -if current_user && current_user == @user
             =link_to "Add Photos", new_album_path
