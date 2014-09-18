@@ -3,7 +3,8 @@
 / -else
 /   =render 'show_normal_user', :user => @user
 .row
-  .col-lg-3
+  .col-lg-1
+  .col-lg-3#profile_column1
     .profile-pic
       .round-border
         .round.round-center          
@@ -52,8 +53,111 @@
         = link_to '<i class="fa fa-twitter fa-2x twitter-blue"></i>'.html_safe, "#{@user.twitter_url}"
 
   
-  .col-lg-9
+  .col-lg-6#profile_column2
+    .bio
+      .bio-text
+        %p.bio-header.text-center WHO I AM...
+        %p=@user.bio
+    / .photos
+    /   / -@user.assets.each do |image|
+    /   /   =image_tag( image.image.url(:thumb), :alt => @user.name, class: "")
+    /   -@user.albums.each do |album|
+    /     -album.assets.each do |a|
+    /       =image_tag(a.image.url(:medium), :alt => @user.name, class: "circle-image")
 
+    .photos-spacer.text-center
+      / -@user.assets.each do |image|
+      /   =image_tag( image.image.url(:thumb), :alt => @user.name, class: "")
+      .spacer-thumb
+        =image_tag("2.jpg")
+      .spacer-thumb
+        =image_tag("4.jpg")
+      .spacer-thumb
+        =image_tag("6.jpg")
+      .spacer-thumb  
+        =image_tag("4.jpg")
+      .spacer-thumb  
+        =image_tag("5.jpg")
+      .spacer-thumb  
+        =image_tag("6.jpg")
+      .spacer-thumb  
+        =image_tag("7.jpg")
+      .spacer-thumb  
+        =image_tag("1.jpg")
+      .spacer-thumb  
+        =image_tag("2.jpg")
+      .spacer-thumb  
+        =image_tag("5.jpg")
+      -@user.documents.each do |d|
+        .spacer-thumb
+          %p x
+          =image_tag(d.direct_upload_url.nil?  ? '/assets/user-placeholder.png' : d.direct_upload_url, :alt => @user.name )
+      -@user.albums.each do |album|
+        -album.assets.each do |a|
+          .spacer-thumb
+            =link_to image_tag(a.image.nil?  ? '/assets/user-placeholder.png' : a.image.url(:thumb), :alt => @user.name ), user_path(@user)
+          /=image_tag(a.image.url(:thumbnail), :alt => @user.name, class: "circle-image")
+               
+    /AMBITION
+    /%h3 Ambition
+    .ambition.text-center
+      .ambition-text
+        %p.ambition-header WHERE I WANT TO BE IN 5 YEARS...
+        %p=@user.ambition
+    /%br/
+    
+    /CURRENT ACTIVITIES
+    /List them
+    /Highlight 1
+    .current-activity
+      %p.current-activity-header.text-center WHAT I'M DOING TO GET THERE...
+      %p=@user.current_activities
+      -if current_user && current_user == @user
+        =link_to "Add Photos", new_album_path
+        =link_to "Edit Photos", albums_path
+    
+    /PHOTO ALBUM
+    .photos-spacer.text-center
+      / -@user.assets.each do |image|
+      /   =image_tag( image.image.url(:thumb), :alt => @user.name, class: "")
+      .spacer-thumb
+        =image_tag("1.jpg")
+      .spacer-thumb
+        =image_tag("2.jpg")
+      .spacer-thumb
+        =image_tag("1.jpg")
+      .spacer-thumb  
+        =image_tag("5.jpg")
+      .spacer-thumb  
+        =image_tag("4.jpg")
+      .spacer-thumb  
+        =image_tag("6.jpg")
+      .spacer-thumb  
+        =image_tag("7.jpg")
+      .spacer-thumb  
+        =image_tag("1.jpg")
+      .spacer-thumb  
+        =image_tag("2.jpg")
+      .spacer-thumb  
+        =image_tag("4.jpg")
+
+    
+    /FOLLOWER OF THE WEEK
+
+    /YOUR FOLLOWING
+
+    .following
+      .following-header
+        %p.following-header-text.text-center WHO BELIEVES IN ME...
+      .followers
+        -if @followers
+          -@followers.each_with_index do |f, i|
+            %div{class: "#{ i % 3 == 0 || i == 0 ? 'row' : ''}" }
+            .col-sm-4
+              .follower-pic-name.text-center
+                .round-thumbnail
+                  =link_to image_tag(f.assets.empty?  ? '/assets/user-placeholder-thumbnail.png': f.assets.first.image.url(:small), :alt => f.name, class: "circle-image"), user_path(f)
+                %p=f.name
 
           
     
@@ -62,111 +166,8 @@
     
     /BIO
     .row
-      .col-lg-7#profile_column
-        .bio
-          .bio-text
-            %p.bio-header.text-center WHO I AM...
-            %p=@user.bio
-        / .photos
-        /   / -@user.assets.each do |image|
-        /   /   =image_tag( image.image.url(:thumb), :alt => @user.name, class: "")
-        /   -@user.albums.each do |album|
-        /     -album.assets.each do |a|
-        /       =image_tag(a.image.url(:medium), :alt => @user.name, class: "circle-image")
-    
-        .photos-spacer
-          / -@user.assets.each do |image|
-          /   =image_tag( image.image.url(:thumb), :alt => @user.name, class: "")
-          .spacer-thumb
-            =image_tag("2.jpg")
-          .spacer-thumb
-            =image_tag("4.jpg")
-          .spacer-thumb
-            =image_tag("6.jpg")
-          .spacer-thumb  
-            =image_tag("4.jpg")
-          .spacer-thumb  
-            =image_tag("5.jpg")
-          .spacer-thumb  
-            =image_tag("6.jpg")
-          .spacer-thumb  
-            =image_tag("7.jpg")
-          .spacer-thumb  
-            =image_tag("1.jpg")
-          .spacer-thumb  
-            =image_tag("2.jpg")
-          .spacer-thumb  
-            =image_tag("5.jpg")
-          -@user.documents.each do |d|
-            .spacer-thumb
-              %p x
-              =image_tag(d.direct_upload_url.nil?  ? '/assets/user-placeholder.png' : d.direct_upload_url, :alt => @user.name )
-          -@user.albums.each do |album|
-            -album.assets.each do |a|
-              .spacer-thumb
-                =link_to image_tag(a.image.nil?  ? '/assets/user-placeholder.png' : a.image.url(:thumb), :alt => @user.name ), user_path(@user)
-              /=image_tag(a.image.url(:thumbnail), :alt => @user.name, class: "circle-image")
-                   
-        /AMBITION
-        /%h3 Ambition
-        .ambition.text-center
-          .ambition-text
-            %p.ambition-header WHERE I WANT TO BE IN 5 YEARS...
-            %p=@user.ambition
-        /%br/
+      .col-lg-7#profile_column2
         
-        /CURRENT ACTIVITIES
-        /List them
-        /Highlight 1
-        .current-activity
-          %p.current-activity-header.text-center WHAT I'M DOING TO GET THERE...
-          %p=@user.current_activities
-          -if current_user && current_user == @user
-            =link_to "Add Photos", new_album_path
-            =link_to "Edit Photos", albums_path
-        
-        /PHOTO ALBUM
-        .photos-spacer
-          / -@user.assets.each do |image|
-          /   =image_tag( image.image.url(:thumb), :alt => @user.name, class: "")
-          .spacer-thumb
-            =image_tag("1.jpg")
-          .spacer-thumb
-            =image_tag("2.jpg")
-          .spacer-thumb
-            =image_tag("1.jpg")
-          .spacer-thumb  
-            =image_tag("5.jpg")
-          .spacer-thumb  
-            =image_tag("4.jpg")
-          .spacer-thumb  
-            =image_tag("6.jpg")
-          .spacer-thumb  
-            =image_tag("7.jpg")
-          .spacer-thumb  
-            =image_tag("1.jpg")
-          .spacer-thumb  
-            =image_tag("2.jpg")
-          .spacer-thumb  
-            =image_tag("4.jpg")
-
-        
-        /FOLLOWER OF THE WEEK
-    
-        /YOUR FOLLOWING
-    
-        .following
-          .following-header
-            %p.following-header-text.text-center WHO BELIEVES IN ME...
-          .followers
-            -if @followers
-              -@followers.each_with_index do |f, i|
-                %div{class: "#{ i % 3 == 0 || i == 0 ? 'row' : ''}" }
-                .col-sm-4
-                  .follower-pic-name.text-center
-                    .round-thumbnail
-                      =link_to image_tag(f.assets.empty?  ? '/assets/user-placeholder-thumbnail.png': f.assets.first.image.url(:small), :alt => f.name, class: "circle-image"), user_path(f)
-                    %p=f.name
     
     /BADGES?
     

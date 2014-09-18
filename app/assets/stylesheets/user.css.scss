@@ -65,8 +65,11 @@ min-height: 100%;
 
 
 /* PROFILE */
-#profile_column{
-	width: 59.5%;
+#profile_column1{
+/*	width:23.5%;*/
+}
+#profile_column2{
+/*	width: 59.5%;*/
 }
 .name{}
 .occupation-follow{
@@ -124,6 +127,8 @@ p.bio-header{
 	overflow: hidden;
 	margin-top: 10px;
 	margin-bottom: 10px;
+	margin-right: auto;
+	margin-left: auto;
 }
 .spacer-thumb{
 	height: 50px;
@@ -131,6 +136,7 @@ p.bio-header{
 	display:inline-block;
 	margin: 0;
 	margin-left: -4px;
+
 }
 .spacer-thumb img{
 	height: 50px;
@@ -186,7 +192,7 @@ p.current-activity-header{
 }
 
 .following{
-	max-width: 500px;
+	max-width: 550px;
 	margin:auto;
 
 	
