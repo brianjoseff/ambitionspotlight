@@ -15,55 +15,26 @@
     .carousel-inner              
       / FLopez
       .item.active.leaderimg
-        /%img.leaderimg{:src => "http://i.imgur.com/xBpnpAs.jpg"}
-        %img.leaderimg{src: "#{@users.first.assets.empty?  ? '/assets/user-placeholder.png' : @users.first.assets.first.image.url(:medium)}", :alt => @users.first.name}
-          /=image_tag(, class: "leaderimg")
-          .carousel-caption
-            %h4
-              =link_to @users.first.name, user_path(@users.first)
-            %p=@users.first.bio
+        .profile-pic
+          .round-border
+            .round.round-center          
+              =link_to image_tag(@users.first.assets.empty?  ? '/assets/user-placeholder.png': @users.first.assets.first.image.url(:medium), :alt => @users.first.name, class: "circle-image"), user_path(@users.first)
+        .carousel-caption
+          .carousel-details
+            =link_to @users.first.name, user_path(@users.first), class: 'carousel-name'
+            %p=truncate(@users.first.bio,20)
       
       -@users[1..-1].each do |user|
         .item.leaderimg
-          %img.leaderimg{src: "#{user.assets.empty?  ? '/assets/user-placeholder.png' : user.assets.first.image.url(:medium)}", :alt => user.name}
-            .carousel-caption
-              %h4
-                =link_to user.name, user_path(user)
+          .profile-pic
+            .round-border
+              .round.round-center
+                =link_to image_tag(user.assets.empty?  ? '/assets/user-placeholder.png': user.assets.first.image.url(:medium), :alt => user.name, class: "circle-image"), user_path(user)
+          .carousel-caption
+            .carousel-details
+              =link_to user.name, user_path(user), class: 'carousel-name'
               %p=truncate(user.bio,20)
-      / End Item
-      / / Lettle
-      /       .item.leaderimg
-      /         %img.leaderimg{:src => "http://i.imgur.com/KjrOEHy.jpg"}
-      /           .carousel-caption
-      /             %h4
-      /               %a{:href => "#"} Daniel "Lettle" Nava: Mega talent based out of East Palo Alto this young mans ambition is only limted to the hours in the day.
-      /             %p This is were the short bio goes but the only problem is you can only view this when your on a wide-screen
-      /       / End Item
-      /       / Sergio
-      /       .item.leaderimg
-      /         %img.leaderimg{:src => "http://i.imgur.com/usyqGFP.jpg"}
-      /           .carousel-caption
-      /             %h4
-      /               %a{:href => "#"} Sergio Florez: Short quote form leader Have link to leaders page
-      /             %p This is were the short bio goes but the only problem is you can only veiw this when your on a wide-screen
-      /       / End Item
-      /       / Tyrus
-      /       .item.leaderimg
-      /         %img.leaderimg{:src => "http://i.imgur.com/MXhImWQ.jpg"}
-      /           .carousel-caption
-      /             %h4
-      /               %a{:href => "#"} Tyrus Whitehead: Short quote from leader Have link to leaders page
-      /             %p This is were the short bio goes but the only problem is you can only veiw this when your on a widescreen
-      /       / End Item
-      /       / The King
-      /       .item.leaderimg
-      /         %img.leaderimg{:src => "http://i.imgur.com/k8LoFiE.jpg"}
-      /           .carousel-caption
-      /             %h4
-      /               %a{:href => "#"} Nikko "The King" Jackson: Short quote from Leader Have link to leaders page
-      /             %p This is were the short bio goes but the only problem is you can only veiw this when your on a wide-screen
-      /       / End Item
-      /     / End Carousel Inner
+ 
     
     %ul.list-group.col-sm-4
       %li.list-group-item.active{"data-slide-to" => "0", "data-target" => "#myCarousel"}
@@ -72,16 +43,7 @@
         %li.list-group-item{"data-slide-to" => index+1, "data-target" => "#myCarousel"}
           %h4=user.name
  
-      / %li.list-group-item.active{"data-slide-to" => "0", "data-target" => "#myCarousel"}
-      /        %h4 Freddy "Flopez" Lopez breaking barries with his unique lyrics and delivery on the mic.
-      /      %li.list-group-item{"data-slide-to" => "1", "data-target" => "#myCarousel"}
-      /        %h4 Daniel "Lettle" Nava yet to find his breaking point as he strives to take his talents to new heights.
-      /      %li.list-group-item{"data-slide-to" => "2", "data-target" => "#myCarousel"}
-      /        %h4 Sergio Florez yet to be held back by his age he has showed the hunger and ambition for success.
-      /      %li.list-group-item{"data-slide-to" => "3", "data-target" => "#myCarousel"}
-      /        %h4 Tyrus Whitehead from East Palo Alto to Ohio what he had to overcome to get to where he is, is truely insperational.
-      /      %li.list-group-item{"data-slide-to" => "4", "data-target" => "#myCarousel"}
-      /        %h4 Nikko "The King" Jackson looking to take his talents to new heights as he prepares to fight in London.
+
     / Controls
     .carousel-controls
       %a.left.carousel-control{"data-slide" => "prev", :href => "#myCarousel"}
@@ -89,3 +51,5 @@
       %a.right.carousel-control{"data-slide" => "next", :href => "#myCarousel"}
         %span.glyphicon.glyphicon-chevron-right
   / End Carousel
+  %br/
+  %br/

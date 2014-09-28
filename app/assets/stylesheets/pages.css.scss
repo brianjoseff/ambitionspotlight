@@ -8,8 +8,47 @@
 /*	text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff00de, 0 0 70px #ff00de, 0 0 80px #ff00de, 0 0 100px #ff00de, 0 0 150px #ff00de;*/
 }
 
+.carousel-caption{
+	
+}
+.carousel-details{
+	text-align: center;
+	
+	a{
+		font-size: 35px;
+		color: #fff;
+		text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+	}
+	a:hover{
+			text-decoration:none;
+			color: #e6e6e6;
+			text-shadow: rgb(255, 255, 255) 0px 0px 9px;
+	}
+	
+}
+.list-group-item{
+	display: table;
+	h4{
+		display:table-cell;
+		vertical-align:middle;
+/*		position:relative;
+		top: 30px;
+		margin-top: auto;
+		margin-bottom: auto;
+		height:100%;*/
+	}
+	@media (min-width: 900px){
+		width: 350px;
+	}
+	text-align: center;
+}
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus{
+	background-color: #e6e6e6 !important;
+	border-color: #e6e6e6 !important;
+	color: #333;
 
-
+}
+/*.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus*/
 
 body { 
   font-family: 'Raleway', sans-serif;
@@ -65,7 +104,8 @@ body {
 
 .leaderimg{
   /*max-width:760px;*/
-  height: 400px;  
+  height: 400px; 
+ padding-top: 10px;
 }
 
 /*CSS FOR FOOTER*/
