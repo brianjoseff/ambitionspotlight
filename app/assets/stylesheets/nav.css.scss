@@ -1,4 +1,36 @@
 
+
+@media (min-width: 768px){
+    .navbar-navx{
+      margin: 0 auto;
+      display: table;
+      table-layout: fixed;
+      float:none;
+    }
+}
+
+.navbar-default{
+	background-color: rgba(0,0,0,0.5)
+}
+
+
+.masthead{
+	color: #fff;
+	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+	font-size: 24px;
+	letter-spacing: 1px;
+}
+
+a.masthead:hover{
+	text-decoration:none;
+	color: #e6e6e6;
+
+/*	-webkit-box-shadow: 0px 37px 54px -36px rgba(255,255,255,1);
+	-moz-box-shadow: 0px 37px 54px -36px rgba(255,255,255,1);
+	box-shadow: 0px 37px 54px -36px rgba(255,255,255,1);*/	
+	text-shadow: rgb(255, 255, 255) 0px 0px 9px;
+}
+
 .dropdown-toggle{
 /*	padding-top: 10px !important;*/
 }
@@ -13,6 +45,33 @@
 .caret{
 	font-size: 200%;
 }
+.navbar-default .navbar-nav>li>a{
+	color: #fff;
+}
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus{
+	text-shadow: rgb(255, 255, 255) 1px 2px 20px;
+	text-shadow: rgb(255, 255, 255) 2px 1px 20px;
+	color: #e6e6e6;
+	border-bottom: solid white 1px;
+	padding-bottom: 5px;
+
+}
+
+.navbar-default .navbar-nav>.active>a{
+	text-shadow: rgb(255, 255, 255) 1px 2px 20px;
+	text-shadow: rgb(255, 255, 255) 2px 1px 20px;
+	color: #e6e6e6;
+	border-bottom: solid white 1px;
+	padding-bottom: 5px;
+	background-color: transparent;
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus{
+	background-color: transparent;
+	color: white;
+}
+
+
+
 /*.header-logo h3{
 	margin-top:10px !important;
 	margin-right: 25px;

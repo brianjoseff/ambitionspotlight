@@ -2,6 +2,14 @@
 $round-img-border: 220px;
 $round-img: $round-img-border - 20px;
 
+.user-card{
+	margin: 10px;
+	padding-top: 15px;
+	border-radius: 4px;
+	box-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
+	margin-bottom: 60px;
+}
+
 /*.profile-pic{
 	min-height:
 }*/
@@ -80,6 +88,12 @@ min-height: 100%;
 .follow-button{
 	background-color: #333;
 	border: solid 1px black;
+
+}
+.follow-button a{
+	font-weight: 300 !important;
+	letter-spacing: 1px;
+	font-size: 120%;
 }
 .follow-button a:hover{
 	background-color: #696969;
@@ -97,11 +111,30 @@ input.follow-button:hover{
 }
 
 
+
+.photos-spacer{
+	padding: 0;
+	/*height: 100px;*/
+	overflow: hidden;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-right: auto;
+	margin-left: auto;
+}
+.story-photo{
+	height: 100%;
+	width: 49%;
+	display:inline-block;
+	margin: 0;
+	
+
+}
+
 .occupation{
 	margin-top: 20px;
 	/*color: #bdbdbd;*/
-	font-size: 150%;
-	font-style: italic;
+/*	font-size: 150%;
+	font-style: italic;*/
 }
 .bio{
 	margin-top: 10px;
@@ -121,62 +154,60 @@ p.bio-header{
 	margin: auto;
 }
 
-.photos-spacer{
-	padding: 0;
-	height: 50px;
-	overflow: hidden;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	margin-right: auto;
-	margin-left: auto;
-}
-.spacer-thumb{
-	height: 50px;
-	width: 50px;
-	display:inline-block;
-	margin: 0;
-	margin-left: -4px;
 
-}
-.spacer-thumb img{
-	height: 50px;
-	width: 50px;
-}
 
-.ambition{
+/*.ambition{
 	background: rgba(0,0,0,0.4);
 	padding: 15px;
 	
-	/*background: rgba(0,3,42,1);
+	background: rgba(0,3,42,1);
 		background: -moz-linear-gradient(left, rgba(0,3,42,1) 0%, rgba(18,22,66,0.9) 51%, rgba(18,22,66,0.98) 88%, rgba(0,3,46,1) 100%);
 		background: -webkit-gradient(left top, right top, color-stop(0%, rgba(0,3,42,1)), color-stop(51%, rgba(18,22,66,0.9)), color-stop(88%, rgba(18,22,66,0.98)), color-stop(100%, rgba(0,3,46,1)));
 		background: -webkit-linear-gradient(left, rgba(0,3,42,1) 0%, rgba(18,22,66,0.9) 51%, rgba(18,22,66,0.98) 88%, rgba(0,3,46,1) 100%);
 		background: -o-linear-gradient(left, rgba(0,3,42,1) 0%, rgba(18,22,66,0.9) 51%, rgba(18,22,66,0.98) 88%, rgba(0,3,46,1) 100%);
 		background: -ms-linear-gradient(left, rgba(0,3,42,1) 0%, rgba(18,22,66,0.9) 51%, rgba(18,22,66,0.98) 88%, rgba(0,3,46,1) 100%);
 		background: linear-gradient(to right, rgba(0,3,42,1) 0%, rgba(18,22,66,0.9) 51%, rgba(18,22,66,0.98) 88%, rgba(0,3,46,1) 100%);
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00032a', endColorstr='#00032e', GradientType=1 );*/
-	
-	
-}
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00032a', endColorstr='#00032e', GradientType=1 );
+}*/
+/*
 .ambition p{
 	font-size: 200%;
 	font-weight: 700;
 	font-style: italic;
-	/*color: #ededed;*/
+	color: #ededed;
 	color: #f5f5f5;
 	letter-spacing: 2px;
+}*/
+
+.story{
+	margin-bottom: 40px;
 }
 
-p.ambition-header{
+.story-header{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding-top:	10px;
+	padding-bottom: 0px;
+	border-bottom: solid 2px #e6e6e6;
+	border-top: solid 2px #e6e6e6;
+}
+
+/*p.ambition-header{
 	font-weight: 500;
 	font-style: normal;
 	font-size: 100%;
 	padding-bottom: 15px;
 	border-bottom: solid 1px #ededed;
-}
-.ambition-text{
+}*/
+.story-text p{
 	margin: auto;
 	max-width: 600px;
+	font-size: 200%;
+	font-weight: 700;
+	/*font-style: italic;*/
+	/*color: #ededed;*/
+	/*color: #f5f5f5;*/
+	letter-spacing: 2px;
 }
 .current-activity{
 /*	margin-top: 10px;*/

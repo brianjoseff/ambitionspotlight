@@ -20,12 +20,20 @@
 
 h1, h2, h3, p, label, input{
 /*	color: #ebebeb;*/
-	font-weight: 500;
+	font-weight: 300;
 	letter-spacing: 1px;
 }
 
+h1{
+	font-size: 250%;
+}
 p{
-	font-size: 105%;
+	font-size: 120%;
+}
+
+a{
+	font-weight: 300;
+	letter-spacing: 1px;
 }
 
 /*body{

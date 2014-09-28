@@ -1,4 +1,11 @@
-%p
-  =user.id
-  =user.name
-  
+.user-list-card
+  .row
+    .col-lg-12
+      .Xcol-lg-3
+      .user-list-card-image
+        =link_to image_tag(user.assets.empty?  ? '/assets/user-placeholder.png': user.assets.first.image.url(:medium), :alt => user.name, class: "circle-image"), user_path(user)
+      .Xcol-lg-9
+      .user-card-details
+    
+        =link_to user.name, user_path(user), class: 'user-list-card-name'
+        %p=truncate(user.bio,20)

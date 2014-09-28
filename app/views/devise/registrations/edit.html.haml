@@ -67,6 +67,7 @@
       %i{style:"color:white"} (we need your current password to confirm your changes)
       .controls
         = f.password_field :current_password, autocomplete: "off", class: "form-control"
+        = link_to "Forgot your password?", new_password_path(resource_name)
     .submit
       =f.submit "Update", class: "btn btn-primary submit-button"
   %h3 Cancel my account
