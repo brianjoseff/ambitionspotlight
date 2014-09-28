@@ -8,5 +8,15 @@
 
 
 .footer p{
-	color: #e6e6e6;
+	color: #999;
+}
+
+.footer-social{
+	a{
+		color: #f8f8f8;
+		text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+	}
+	a:hover{
+		text-decoration: underline;
+	}
 }

@@ -106,23 +106,24 @@ body {
   /*max-width:760px;*/
   height: 400px; 
  padding-top: 10px;
+	background-color: #e6e6e6;
 }
 
 /*CSS FOR FOOTER*/
 #social:hover {
-          -webkit-transform:scale(1.1); 
+-webkit-transform:scale(1.1); 
 -moz-transform:scale(1.1); 
 -o-transform:scale(1.1); 
-      }
-      #social {
-        -webkit-transform:scale(0.8);
-                /* Browser Variations: */
+}
+#social {
+-webkit-transform:scale(0.8);
+/* Browser Variations: */
 -moz-transform:scale(0.8);
 -o-transform:scale(0.8); 
 -webkit-transition-duration: 0.5s; 
 -moz-transition-duration: 0.5s;
 -o-transition-duration: 0.5s;
-      }           
+}           
 /* 
     Only Needed in Multi-Coloured Variation 
                                                */

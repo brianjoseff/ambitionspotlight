@@ -1,6 +1,7 @@
 .row
-  .col-lg-4
-    %h1 Sign in
+  .col-lg-3
+  .col-lg-5.sign-up
+    /%h1 Sign in
     /%span.facebook-signin #{link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)} 
     =form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form", id: "session"}, :builder => Judge::FormBuilder) do |f|
       /=render "shared/error_messages", :target => @user
@@ -14,7 +15,7 @@
           =f.password_field :password, type: "password", :class => "form-control", :placeholder => "Password"
 
       .user-auth-offset
-        =f.submit "Sign in", class: "btn btn-primary submit-button"
+        =f.submit "Sign in", class: "btn btn-primary submit-button follow-button"
     
-    
-    = render "devise/shared/links"
+    .shared-links
+      = render "devise/shared/links"

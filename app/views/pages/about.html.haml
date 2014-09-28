@@ -1,5 +1,5 @@
 .col-lg-3
-.col-lg-6
+.col-lg-6.about
   %h1.text-center Diamonds in the Rough
 
   %p In this world there exists an exclusive, rich, and powerful class of people.
@@ -20,8 +20,24 @@
 
   %p AmbitionSpotlight creates opportunities for you and gives you the tools necessary to firmly plant yourself among the ambitious, talented, capable legions of people marching on the path of success.
   
+  %h3.text-center Founded in East Palo Alto
   
+  //lines?
+  .text-center
+    %h1 Team
+    .row
+      .col-lg-6
+        .profile-pic
+          .round-border
+            .round.round-center          
+              =link_to image_tag(@david.assets.empty?  ? '/assets/user-placeholder.png': @david.assets.first.image.url(:medium), :alt => @david.name, class: "circle-image"), user_path(@david)
+        %h3 David Chatman
+        %p Founder
+      .col-lg-6
+        .profile-pic
+          .round-border
+            .round.round-center          
+              =link_to image_tag(@brian.assets.empty?  ? '/assets/user-placeholder.png': @brian.assets.first.image.url(:medium), :alt => @brian.name, class: "circle-image"), user_path(@brian)
+        %h3 Brian Joseff
+        %p Founder
   
-  
-  
-  %h3 Founded in East Palo Alto

@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   resources :tasks
   resources :documents
   
-  devise_for :users
+  # devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations'}
   resources :users
   # match 'user/:name' => 'user#profile'
   

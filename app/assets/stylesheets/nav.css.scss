@@ -21,6 +21,13 @@
 	letter-spacing: 1px;
 }
 
+@media (max-width: 400px){
+	.masthead{
+		font-size: 18px;
+		margin-left: -10px;
+	}
+}
+
 a.masthead:hover{
 	text-decoration:none;
 	color: #e6e6e6;

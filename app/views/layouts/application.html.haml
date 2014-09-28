@@ -6,8 +6,6 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
     %link{:href => "http://fonts.googleapis.com/css?family=Lato:300,400,700", :rel => "stylesheet", :type => "text/css"}
-    %link{:href => "//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css", :rel => "stylesheet"}/
-    %link{:href => "http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css", :rel => "stylesheet"}/
     %meta{content: "width=device-width, initial-scale=1", name: "viewport"}
     :javascript
       var _gaq = _gaq || [];
@@ -19,7 +17,7 @@
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
-  %body{class: "#{!current_user && current_page?(root_url)  ? 'intro-header' : ''}"}
+  %body{class: "#{!current_user && current_page?(root_url) || current_page?(new_user_registration_path) || current_page?(new_user_session_path) || current_page?(about_path) ? 'intro-header' : ''}"}
     / #holder
     /   #body
     .wrapper
@@ -27,7 +25,7 @@
         = render 'layouts/header'    
       .container
         .content
-          %p.notice= notice
+          %p.notice.text-center= notice
           %p.alert= alert
           = yield
     .push
