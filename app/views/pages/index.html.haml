@@ -29,7 +29,7 @@
             .carousel-caption
               %h4
                 =link_to user.name, user_path(user)
-              %p=user.bio
+              %p=truncate(user.bio,20)
       / End Item
       / / Lettle
       /       .item.leaderimg

@@ -21,8 +21,8 @@
         -if current_user && current_user == @user
           %h2
             =link_to "Edit Details", edit_user_registration_path(current_user), style:"font-size:50%"
-            -if @user.leader?
-              =link_to "Your Dashboard", leader_dashboard_path, style:"font-size:50%"
+            / -if @user.leader?
+            /   =link_to "Your Dashboard", leader_dashboard_path, style:"font-size:50%"
         %h2.follow
           - unless current_user == @user
             #follow_form
@@ -69,7 +69,9 @@
           /have a "share profile" link or something to post on facebook
         
         .following
-
+          -if current_user && current_user == @user
+            //invite people
+            
           .storyx
             -if @followers
               -@followers.each_with_index do |f, i|
