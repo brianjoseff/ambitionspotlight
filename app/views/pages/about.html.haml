@@ -27,17 +27,19 @@
     %h1 Team
     .row
       .col-lg-6
-        .profile-pic
-          .round-border
-            .round.round-center          
-              =link_to image_tag(@david.assets.empty?  ? '/assets/user-placeholder.png': @david.assets.first.image.url(:medium), :alt => @david.name, class: "circle-image"), user_path(@david)
-        %h3 David Chatman
-        %p Founder
+        -if @david
+          .profile-pic
+            .round-border
+              .round.round-center          
+                =link_to image_tag(@david.assets.empty?  ? '/assets/user-placeholder.png': @david.assets.first.image.url(:medium), :alt => @david.name, class: "circle-image"), user_path(@david)
+          %h3 David Chatman
+          %p Founder
       .col-lg-6
-        .profile-pic
-          .round-border
-            .round.round-center          
-              =link_to image_tag(@brian.assets.empty?  ? '/assets/user-placeholder.png': @brian.assets.first.image.url(:medium), :alt => @brian.name, class: "circle-image"), user_path(@brian)
-        %h3 Brian Joseff
-        %p Founder
+        -if @brian
+          .profile-pic
+            .round-border
+              .round.round-center          
+                =link_to image_tag(@brian.assets.empty?  ? '/assets/user-placeholder.png': @brian.assets.first.image.url(:medium), :alt => @brian.name, class: "circle-image"), user_path(@brian)
+          %h3 Brian Joseff
+          %p Founder
   

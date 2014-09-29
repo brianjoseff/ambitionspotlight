@@ -7,7 +7,7 @@ class PagesController < ApplicationController
   end
   
   def about
-    @david = User.findby_email("mrchatman1152@gmail.com")
+    @david = User.find_by_email("mrchatman1152@gmail.com")
     @brian = User.find(1)
   end
 end
