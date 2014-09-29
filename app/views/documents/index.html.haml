@@ -1,10 +1,11 @@
 = s3_uploader_form callback_url: documents_url,
-  id: "s3_uploader",                            
+  id: "s3_uploader",
+  acl: "private",                       
   callback_param: "document[direct_upload_url]",
   expiration: 24.hours.from_now.utc.iso8601,    
-  max_file_size: 100.megabytes do               
+  max_file_size: 100.megabytes do              
   = file_field_tag :file, multiple: true
-  /=hidden_field_tag 'user_id', current_user ? current_user.id : nil 
+  
 #uploads_container
 
 %script#template-upload{:type => "text/x-tmpl"}
@@ -29,3 +30,12 @@
   = f.hidden_field :user_id
   = f.submit "Upload"
   %br/
+
+
+-if @documents
+  -@documents.each do |d|
+    =link_to image_tag(d.upload.url(:medium), :alt => @user.name, class: "circle-image")
+
+/ -if @documents
+/   -@documents.each do |d|
+/     =link_to image_tag(d.direct_upload_url, :alt => @user.name, class: "circle-image")  

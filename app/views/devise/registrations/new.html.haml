@@ -16,8 +16,10 @@
           =f.text_field :email, type: "text", :class => "form-control", :placeholder => "hello@mom.com", :validate => true
       =label_tag "Profile Picture"
       .image-field
-        = f.fields_for :assets do |images_form|
-          = images_form.file_field :image, type:"file"
+        =f.file_field :profile_photo
+        
+        / = f.fields_for :assets do |images_form|
+        /   = images_form.file_field :image, type:"file"
       %br/
       / .form-group
       /   = f.label "What are you?", class: 'control-label'

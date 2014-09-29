@@ -1,17 +1,21 @@
 class DocumentsController < ApplicationController
   # @http_method XHR POST
   # @url /documents
-  
+
+
+  #little blimp method--mostly for uploading
+  #http://blog.littleblimp.com/post/53942611764/direct-uploads-to-s3-with-rails-paperclip-and
   # def create
   #   @document = current_user.documents.create(document_params)
   # end
+  
   
   def create
     # if(params[:url])
     #   @document = current_user.documents.build
     #   render "new" and return
     # end
-
+  
     if(params[:document][:upload_file_path])
       @document = current_user.documents.create(document_params)
       
@@ -20,7 +24,7 @@ class DocumentsController < ApplicationController
           #we want a destination(paperclip_file_path) and a source(raw_source)
           paperclip_file_path = "documents/uploads/#{@document.id}/original/#{params[:document][:upload_file_name]}"
           raw_source = params[:document][:upload_file_path]
-
+  
           Document.copy_and_delete paperclip_file_path, raw_source #this is where we call a method to copy from temp location to where paperclip expects it to be.
           format.html { redirect_to root_url, notice: 'document was successfully created.' }
           format.json { render action: 'show', status: :created, location: @document }
@@ -31,7 +35,7 @@ class DocumentsController < ApplicationController
       end
       
     else
-      @document = document.new
+      @document = Document.new
       render action: 'new', notice: "No file"
     end
   end
@@ -40,6 +44,10 @@ class DocumentsController < ApplicationController
   
   def index
     @document = current_user.documents.build
+    @user = current_user
+    if @user
+      @documents = @user.documents.order('created_at desc')
+    end
   end
   
   private

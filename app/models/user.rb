@@ -15,7 +15,20 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
          
-         
+  has_attached_file :profile_photo, styles: { :normal => "100%",:small => "100 x100>",:medium => "200x200>", :thumb => "50x50>", spacer: "x50" },
+                                    storage: :s3,
+                                    :s3_credentials => Proc.new{|a| Rails.env.production? ? a.instance.prod_s3_credentials :  a.instance.s3_credentials},
+                                    :path => "/:attachment/:id/:style/:filename"
+
+
+  validates_attachment_content_type :profile_photo, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+  def prod_s3_credentials
+     {:bucket => "ambition-prod", :access_key_id => ENV['S3_KEY'], :secret_access_key => ENV['S3_SECRET']}
+  end
+  def s3_credentials
+      {:bucket => "ambition-dev", :access_key_id => ENV['S3_KEY'], :secret_access_key => ENV['S3_SECRET']}
+  end
+  
   has_many :assets, as: :imageable, :dependent => :destroy
   has_many :followships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed

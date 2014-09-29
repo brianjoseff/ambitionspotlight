@@ -1,13 +1,17 @@
 class Document < ActiveRecord::Base
   
   # Environment-specific direct upload url verifier screens for malicious posted upload locations.
-  # DIRECT_UPLOAD_URL_FORMAT = %r{\Ahttps:\/\/s3\.amazonaws\.com\/myapp#{!Rails.env.production? ? "\\-#{Rails.env}" : ''}\/(?<path>uploads\/.+\/(?<filename>.+))\z}.freeze
+  DIRECT_UPLOAD_URL_FORMAT = %r{\Ahttps:\/\/s3\.amazonaws\.com\/myapp#{!Rails.env.production? ? "\\-#{Rails.env}" : ''}\/(?<path>uploads\/.+\/(?<filename>.+))\z}.freeze
   
   belongs_to :user
-  has_attached_file :upload
+  has_attached_file :upload, s3_permissions: :private
   
-  # validates :direct_upload_url, presence: true, format: { with: DIRECT_UPLOAD_URL_FORMAT }
   
+  
+  
+  #little blimp method--mostly for uploading
+  #http://blog.littleblimp.com/post/53942611764/direct-uploads-to-s3-with-rails-paperclip-and
+  #validates :direct_upload_url, presence: true, format: { with: DIRECT_UPLOAD_URL_FORMAT }
   # before_create :set_upload_attributes
   #  after_create :queue_processing
   
@@ -50,18 +54,9 @@ class Document < ActiveRecord::Base
     destination = s3.buckets['ambition-dev'].objects[paperclip_file_path]
     sub_source = CGI.unescape(raw_source)
     sub_source.slice!(0) # the attached_file_file_path ends up adding an extra "/" in the beginning. We've removed this.
-    source = s3.buckets['ambition-dev'].objects["#{sub_source}"]
-    source.copy_to(destination) #copy_to is a method originating from the aws-sdk gem.
-    
-  rescue AWS::S3::Errors::NoSuchKey => e
-    tries ||= 5
-    tries -= 1
-    if tries > 0
-      sleep(3)
-      retry
-    else
-      false
-    end 
+    puts "$%$%$%$%$ " + sub_source + "!!!!!"
+    source = s3.buckets['ambition-dev'].objects[sub_source]
+    source.copy_to(destination) #copy_to is a method originating from the aws-sdk gem.  
     source.delete #delete temp file.
   end
   
@@ -95,7 +90,7 @@ class Document < ActiveRecord::Base
   
   # Queue file processing
   def queue_processing
-    Document.transfer_and_cleanup(id)
+    Document.delay.transfer_and_cleanup(id)
   end
 end
 

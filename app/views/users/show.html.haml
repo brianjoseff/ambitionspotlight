@@ -4,12 +4,16 @@
   .col-lg-2
   .col-lg-8.user-card
     .text-center
+      =link_to image_tag(@user.profile_photo.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium), :alt => @user.name, class: "circle-image"), user_path(@user)
       %h1
         =@user.name
     .profile-pic
       .round-border
-        .round.round-center          
-          =link_to image_tag(@user.assets.empty?  ? '/assets/user-placeholder.png': @user.assets.first.image.url(:medium), :alt => @user.name, class: "circle-image"), user_path(@user)
+        .round.round-center
+          -if !@user.profile_photo.nil?
+            =link_to image_tag(@user.profile_photo.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium), :alt => @user.name, class: "circle-image"), user_path(@user)
+          -else
+            =link_to image_tag(@user.assets.empty?  ? '/assets/user-placeholder.png': @user.assets.first.image.url(:medium), :alt => @user.name, class: "circle-image"), user_path(@user)
     / .occupation-follow
     /   %p.occupation=@user.occupation    
     .text-center 

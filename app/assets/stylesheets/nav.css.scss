@@ -42,6 +42,11 @@ a.masthead:hover{
 /*	padding-top: 10px !important;*/
 }
 
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus{
+	background-color: #e6e6e6;
+	color: #333;
+}
+
 .nav-you{
 	margin-left: 20px;
 	padding-top: 10px;
