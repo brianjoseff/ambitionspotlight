@@ -26,5 +26,6 @@ $(function() {
     $('#document_upload_file_path').val(content.filepath);
     $('#document_upload_file_size').val(content.filesize);
     $('#document_upload_content_type').val(content.filetype);
+    // $('#document_user_id').val(content.user_id);
   });
 });

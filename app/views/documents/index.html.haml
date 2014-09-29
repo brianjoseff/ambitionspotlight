@@ -4,6 +4,7 @@
   expiration: 24.hours.from_now.utc.iso8601,    
   max_file_size: 100.megabytes do               
   = file_field_tag :file, multiple: true
+  /=hidden_field_tag 'user_id', current_user ? current_user.id : nil 
 #uploads_container
 
 %script#template-upload{:type => "text/x-tmpl"}
@@ -13,6 +14,7 @@
     .progress.progress-striped.active
       .bar{style:"width: 0%"}
     #upload-image
+
 
 = form_for(@document) do |f|
   - if @document.errors.any?
@@ -24,5 +26,6 @@
   = f.hidden_field :upload_file_size
   = f.hidden_field :upload_content_type
   = f.hidden_field :upload_file_path
+  = f.hidden_field :user_id
   = f.submit "Upload"
   %br/
