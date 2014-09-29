@@ -3,13 +3,16 @@ $round-img-border: 220px;
 $round-img: $round-img-border - 20px;
 
 .user-card{
-	margin: 10px;
+/*	margin: 10px;*/
 	padding-top: 15px;
 	border-radius: 4px;
 	box-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
 	margin-bottom: 60px;
 }
-
+.user-card-container{
+	padding-right: 10px;
+	padding-left: 10px;
+}
 /*.profile-pic{
 	min-height:
 }*/

@@ -15,10 +15,13 @@
     .carousel-inner              
       / FLopez
       .item.active.leaderimg
-        .profile-pic
-          .round-border
-            .round.round-center          
-              =link_to image_tag(@users.first.assets.empty?  ? '/assets/user-placeholder.png': @users.first.assets.first.image.url(:medium), :alt => @users.first.name, class: "circle-image"), user_path(@users.first)
+        -if @users.first.spotlight
+          =link_to image_tag(@users.first.spotlight.image.url(:original), :alt => @users.first.name, class: "circle-image"), user_path(@users.first)
+        -else
+          .profile-pic
+            .round-border
+              .round.round-center          
+                =link_to image_tag(@users.first.assets.empty?  ? '/assets/user-placeholder.png': @users.first.assets.first.image.url(:medium), :alt => @users.first.name, class: "circle-image"), user_path(@users.first)
         .carousel-caption
           .carousel-details
             =link_to @users.first.name, user_path(@users.first), class: 'carousel-name'

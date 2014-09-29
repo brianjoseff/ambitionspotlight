@@ -1,0 +1,7 @@
+-@leaders.each do |leader|
+  =leader.name
+  =form_for leader.build_spotlight do |f|
+    =hidden_field_tag 'user_id', leader.id
+    =f.file_field :image, type: "file"
+    
+    =f.submit

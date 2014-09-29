@@ -21,6 +21,10 @@ class DocumentsController < ApplicationController
       
       respond_to do |format|
         if @document.save
+          
+          # @s3_direct_post = S3_BUCKET.presigned_post(key: "documents/uploads/#{@document.id}/original/#{params[:document][:upload_file_name]}", success_action_status: 201, acl: :public_read)
+          
+          
           #we want a destination(paperclip_file_path) and a source(raw_source)
           paperclip_file_path = "documents/uploads/#{@document.id}/original/#{params[:document][:upload_file_name]}"
           raw_source = params[:document][:upload_file_path]

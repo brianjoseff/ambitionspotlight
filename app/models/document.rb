@@ -4,7 +4,8 @@ class Document < ActiveRecord::Base
   DIRECT_UPLOAD_URL_FORMAT = %r{\Ahttps:\/\/s3\.amazonaws\.com\/myapp#{!Rails.env.production? ? "\\-#{Rails.env}" : ''}\/(?<path>uploads\/.+\/(?<filename>.+))\z}.freeze
   
   belongs_to :user
-  has_attached_file :upload, s3_permissions: :private
+  has_attached_file :upload, s3_permissions: :private,
+  styles: { :normal => "100%",:small => "100 x100>",:medium => "200x200>", :thumb => "50x50>", spacer: "x50" }
   
   
   

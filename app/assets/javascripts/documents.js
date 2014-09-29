@@ -11,7 +11,7 @@
 // });
 
 
-function() {
+$(function() {
 
   $('#s3_uploader').S3Uploader(
     { 

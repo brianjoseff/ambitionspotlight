@@ -2,87 +2,88 @@
 
 .row
   .col-lg-2
-  .col-lg-8.user-card
-    .text-center
-      =link_to image_tag(@user.profile_photo.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium), :alt => @user.name, class: "circle-image"), user_path(@user)
-      %h1
-        =@user.name
-    .profile-pic
-      .round-border
-        .round.round-center
-          -if !@user.profile_photo.nil?
-            =link_to image_tag(@user.profile_photo.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium), :alt => @user.name, class: "circle-image"), user_path(@user)
-          -else
-            =link_to image_tag(@user.assets.empty?  ? '/assets/user-placeholder.png': @user.assets.first.image.url(:medium), :alt => @user.name, class: "circle-image"), user_path(@user)
-    / .occupation-follow
-    /   %p.occupation=@user.occupation    
-    .text-center 
-      .story
-        .story-header
-          %p WHERE I WANT TO BE IN 5 YEARS...
-        .story-text
-          %p=@user.ambition
-        -if current_user && current_user == @user
-          %h2
-            =link_to "Edit Details", edit_user_registration_path(current_user), style:"font-size:50%"
-            / -if @user.leader?
-            /   =link_to "Your Dashboard", leader_dashboard_path, style:"font-size:50%"
-        %h2.follow
-          - unless current_user == @user
-            #follow_form
-              - if current_user && current_user.following?(@user)
-                = render 'unfollow'
-
-              - elsif current_user.nil?
-                =link_to "BELIEVE IN ME", new_user_registration_path, class: "btn btn-large btn-primary make-button follow-button"
-              -else
-                = render 'follow'
-                / -unless @task.nil?
-                /   =link_to "Join the Following", new_task_submission_path(task_id: @task.id), class: "btn btn-large btn-primary make-button"
-      /CURRENT ACTIVITIES
-      /List them
-      /Highlight 1
-      .story
-        .story-header
-          %p WHAT I'M DOING TO GET THERE...
+  .user-card-container
+    .col-lg-8.user-card
+      .text-center
+      
+        %h1
+          =@user.name
+      .profile-pic
+        .round-border
+          .round.round-center
+            -if !@user.profile_photo.nil?
+              =link_to image_tag(@user.profile_photo.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium), :alt => @user.name, class: "circle-image"), user_path(@user)
+            -else
+              =link_to image_tag(@user.assets.empty?  ? '/assets/user-placeholder.png': @user.assets.first.image.url(:medium), :alt => @user.name, class: "circle-image"), user_path(@user)
+      / .occupation-follow
+      /   %p.occupation=@user.occupation    
+      .text-center 
         .story
-          %p=@user.current_activities
+          .story-header
+            %p WHERE I WANT TO BE IN 5 YEARS...
+          .story-text
+            %p=@user.ambition
           -if current_user && current_user == @user
-            =link_to "Add Photos", new_album_path
-            =link_to "Edit Photos", albums_path
-      
-      
-      /PHOTOS
-      / .photos-spacer
-      /   =image_tag '1.jpg', class: "story-photo"
-      /   =image_tag '2.jpg', class: "story-photo"
-      
-      .story
-        .story-header
-          %p WHO I AM...
+            %h2
+              =link_to "Edit Details", edit_user_registration_path(current_user), style:"font-size:50%"
+              / -if @user.leader?
+              /   =link_to "Your Dashboard", leader_dashboard_path, style:"font-size:50%"
+          %h2.follow
+            - unless current_user == @user
+              #follow_form
+                - if current_user && current_user.following?(@user)
+                  = render 'unfollow'
+
+                - elsif current_user.nil?
+                  =link_to "BELIEVE IN ME", new_user_registration_path, class: "btn btn-large btn-primary make-button follow-button"
+                -else
+                  = render 'follow'
+                  / -unless @task.nil?
+                  /   =link_to "Join the Following", new_task_submission_path(task_id: @task.id), class: "btn btn-large btn-primary make-button"
+        /CURRENT ACTIVITIES
+        /List them
+        /Highlight 1
         .story
-          %p=@user.bio 
+          .story-header
+            %p WHAT I'M DOING TO GET THERE...
+          .story
+            %p=@user.current_activities
+            -if current_user && current_user == @user
+              =link_to "Add Photos", new_album_path
+              =link_to "Edit Photos", albums_path
+      
+      
+        /PHOTOS
+        / .photos-spacer
+        /   =image_tag '1.jpg', class: "story-photo"
+        /   =image_tag '2.jpg', class: "story-photo"
+      
+        .story
+          .story-header
+            %p WHO I AM...
+          .story
+            %p=@user.bio 
     
       
 
-      /YOUR FOLLOWING
-      .story
-        .story-header
-          %p WHO BELIEVES IN ME...
+        /YOUR FOLLOWING
+        .story
+          .story-header
+            %p WHO BELIEVES IN ME...
         
-          /have a "share profile" link or something to post on facebook
+            /have a "share profile" link or something to post on facebook
         
-        .following
-          -if current_user && current_user == @user
-            //invite people
+          .following
+            -if current_user && current_user == @user
+              //invite people
             
-          .storyx
-            -if @followers
-              -@followers.each_with_index do |f, i|
-                %div{class: "#{ i % 3 == 0 || i == 0 ? 'row' : ''}" }
-                .col-sm-4
-                  .follower-pic-name.text-center
-                    .round-thumbnail
-                      =link_to image_tag(f.assets.empty?  ? '/assets/user-placeholder-thumbnail.png': f.assets.first.image.url(:small), :alt => f.name, class: "circle-image"), user_path(f)
-                    %p=f.name
+            .storyx
+              -if @followers
+                -@followers.each_with_index do |f, i|
+                  %div{class: "#{ i % 3 == 0 || i == 0 ? 'row' : ''}" }
+                  .col-sm-4
+                    .follower-pic-name.text-center
+                      .round-thumbnail
+                        =link_to image_tag(f.assets.empty?  ? '/assets/user-placeholder-thumbnail.png': f.assets.first.image.url(:small), :alt => f.name, class: "circle-image"), user_path(f)
+                      %p=f.name
       

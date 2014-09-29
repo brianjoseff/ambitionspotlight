@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   resources :tasks
   resources :documents
-  
+  resources :spotlights
   # devise_for :users
   devise_for :users, controllers: { registrations: 'users/registrations'}
   resources :users
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   
   match '/about', to: "pages#about", via: :get
   match '/leader_dashboard', to: "users#leader_dashboard", via: :get
-  
+  match '/admin', to: "pages#admin", via: :get
   authenticated :user do
     root to: "pages#index", as: :authenticated_root
   end
