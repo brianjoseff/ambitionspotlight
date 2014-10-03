@@ -1,6 +1,8 @@
 
 $round-img-border: 220px;
 $round-img: $round-img-border - 20px;
+$round-thumb-border: 220px;
+$round-thumb: 100px;
 
 .user-card{
 /*	margin: 10px;*/
@@ -262,8 +264,8 @@ p.following-header-text{
 .round-thumbnail{
 	border-radius: 50%;
   overflow: hidden;
-  width: 60px;
-  height: 60px;
+  width: $round-thumb;
+  height: $round-thumb;
 margin: auto;
 }
 

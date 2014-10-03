@@ -4,7 +4,7 @@ class Document < ActiveRecord::Base
   DIRECT_UPLOAD_URL_FORMAT = %r{\Ahttps:\/\/s3\.amazonaws\.com\/myapp#{!Rails.env.production? ? "\\-#{Rails.env}" : ''}\/(?<path>uploads\/.+\/(?<filename>.+))\z}.freeze
   
   belongs_to :user
-  has_attached_file :upload, s3_permissions: :private,
+  has_attached_file :upload, s3_permissions: :public_read,
   styles: { :normal => "100%",:small => "100 x100>",:medium => "200x200>", :thumb => "50x50>", spacer: "x50" }
   
   
@@ -13,30 +13,34 @@ class Document < ActiveRecord::Base
   #little blimp method--mostly for uploading
   #http://blog.littleblimp.com/post/53942611764/direct-uploads-to-s3-with-rails-paperclip-and
   #validates :direct_upload_url, presence: true, format: { with: DIRECT_UPLOAD_URL_FORMAT }
-  # before_create :set_upload_attributes
-  #  after_create :queue_processing
+  before_create :set_upload_attributes
+  after_create :queue_processing
   
   # Store an unescaped version of the escaped URL that Amazon returns from direct upload.
   def direct_upload_url=(escaped_url)
-    write_attribute(:direct_upload_url, ( CGI.unescape(escaped_url) rescue nil))
+    write_attribute(:direct_upload_url, (CGI.unescape(escaped_url) rescue nil))
+    
   end
   
   # Determines if file requires post-processing (image resizing, etc)
   def post_processing_required?
+    puts "2.52.52.52.52.52.5 post_processing_required 2.52.52.52.52.52.5"
     %r{^(image|(x-)?application)/(bmp|gif|jpeg|jpg|pjpeg|png|x-png)$}.match(upload_content_type).present?
   end
   
   # Final upload processing step
   def self.transfer_and_cleanup(id)
+    puts "222222 transfer_and_cleanup 222222"
     document = Document.find(id)
-    direct_upload_url_data = DIRECT_UPLOAD_URL_FORMAT.match(document.direct_upload_url)
+    #direct_upload_url_data = DIRECT_UPLOAD_URL_FORMAT.match(document.direct_upload_url)
     s3 = AWS::S3.new
     
     if document.post_processing_required?
       document.upload = URI.parse(URI.escape(document.direct_upload_url))
     else
+      puts "333333333 COPY AND DELETE"
       paperclip_file_path = "documents/uploads/#{id}/original/#{direct_upload_data[:filename]}"
-      s3.buckets[Rails.configuration.aws[:bucket]].objects[paperclip_file_path].copy_from(direct_upload_url_data[:filepath])
+      s3.buckets[Rails.configuration.aws[:bucket]].objects[paperclip_file_path].copy_from(direct_upload_url[:filepath])
     end
     
     document.processed = true
@@ -70,10 +74,12 @@ class Document < ActiveRecord::Base
   # @note Retry logic handles S3 "eventual consistency" lag.
   
   def set_upload_attributes
-    tries ||= 5
-    direct_upload_data = DIRECT_UPLOAD_URL_FORMAT.match(direct_upload_url)
+    Rails.logger.info "I am rad"
+    puts "111111111 set_upload_attributes 11111111"
+    tries ||= 3
+    #direct_upload_url_data = DIRECT_UPLOAD_URL_FORMAT.match(direct_upload_url)
     s3 = AWS::S3.new
-    direct_upload_head = s3.buckets[Rails.configuration.aws[:bucket]].objects[direct_upload_url_data[:filepath]].head
+    direct_upload_head = s3.buckets[Rails.configuration.aws[:bucket]].objects[direct_upload_url].head
     
     self.file_name          = direct_upload_data[:filename]
     self.file_type          = direct_upload_head.content_type

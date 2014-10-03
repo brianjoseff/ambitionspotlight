@@ -1,5 +1,7 @@
-$(document).ready(function(){
-    
+
+var ready;
+
+ready = function() {
   var clickEvent = false;
   $('#myCarousel').carousel({
     interval:   4000  
@@ -19,11 +21,22 @@ $(document).ready(function(){
     }
     clickEvent = false;
   });
-})
 
-$(window).load(function() {
+};
+
+
+$(document).ready(ready);
+$(document).on('page:load', ready);
+    
+    
+var window_func;
+window = function() {
     var boxheight = $('#myCarousel .carousel-inner').innerHeight();
     var itemlength = $('#myCarousel .item').length;
     var triggerheight = Math.round(boxheight/itemlength+1);
   $('#myCarousel .list-group-item').outerHeight(triggerheight);
-});
+};    
+    
+$(window).load(window_func);
+$(window).on('page:load', window_func);
+

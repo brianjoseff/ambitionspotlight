@@ -1,11 +1,11 @@
 = s3_uploader_form callback_url: documents_url,
-  id: "s3_uploader",
-  acl: "private",                       
+  id: "s3_uploader",                       
   callback_param: "document[direct_upload_url]",
   expiration: 24.hours.from_now.utc.iso8601,    
   max_file_size: 100.megabytes do              
   = file_field_tag :file, multiple: true
-  
+
+/acl: "public-read",  
 #uploads_container
 
 %script#template-upload{:type => "text/x-tmpl"}
@@ -16,25 +16,25 @@
       .bar{style:"width: 0%"}
     #upload-image
 
-
-= form_for(@document) do |f|
-  - if @document.errors.any?
-    %ul
-      - @document.errors.full_messages.each do |msg|
-        %li= msg
-  = f.hidden_field :direct_upload_url
-  = f.hidden_field :upload_file_name
-  = f.hidden_field :upload_file_size
-  = f.hidden_field :upload_content_type
-  = f.hidden_field :upload_file_path
-  = f.hidden_field :user_id
-  = f.submit "Upload"
-  %br/
-
-
--if @documents
-  -@documents.each do |d|
-    =link_to image_tag(d.upload.url(:medium), :alt => @user.name, class: "circle-image")
+/ 
+/ = form_for(@document) do |f|
+/   - if @document.errors.any?
+/     %ul
+/       - @document.errors.full_messages.each do |msg|
+/         %li= msg
+/   = f.hidden_field :direct_upload_url
+/   = f.hidden_field :upload_file_name
+/   = f.hidden_field :upload_file_size
+/   = f.hidden_field :upload_content_type
+/   = f.hidden_field :upload_file_path
+/   = f.hidden_field :user_id
+/   = f.submit "Upload"
+/   %br/
+/ 
+/ 
+/ -if @documents
+/   -@documents.each do |d|
+/     =link_to image_tag(d.upload.url(:medium), :alt => @user.name, class: "circle-image")
 
 / -if @documents
 /   -@documents.each do |d|

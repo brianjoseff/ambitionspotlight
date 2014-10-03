@@ -17,7 +17,14 @@
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
-  %body{class: "#{!current_user && current_page?(root_url) || current_page?(new_user_registration_path) || current_page?(new_user_session_path) || current_page?(about_path) || current_page?(edit_user_registration_path(current_user)) ? 'intro-header' : ''}"}
+      
+      function carousel(){
+            var boxheight = $('#myCarousel .carousel-inner').innerHeight();
+            var itemlength = $('#myCarousel .item').length;
+            var triggerheight = Math.round(boxheight/itemlength+1);
+          $('#myCarousel .list-group-item').outerHeight(triggerheight);
+      };
+  %body{class: "#{!current_user && current_page?(root_url) || current_page?(new_user_registration_path) || current_page?(new_user_session_path) || current_page?(about_path) || current_page?(edit_user_registration_path(current_user)) ? 'intro-header' : ''}", onload:"carousel()"}
     / #holder
     /   #body
     .wrapper
