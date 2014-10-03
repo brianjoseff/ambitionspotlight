@@ -6,8 +6,10 @@ class SpotlightsController < ApplicationController
   def create
     @user = User.find(params[:user_id])
     @spotlight = @user.create_spotlight(spotlight_params)
+    @spotlight.active = true
+    
     respond_to do |format|
-      if @spotlight
+      if @spotlight.save
         format.html { redirect_to admin_path, notice: 'Spotlight created.' }
         # format.json { render :show, status: :created, location: @spotlight }
       else

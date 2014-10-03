@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140929081646) do
+ActiveRecord::Schema.define(version: 20141003175405) do
 
   create_table "albums", force: true do |t|
     t.string   "name"
@@ -143,6 +143,7 @@ ActiveRecord::Schema.define(version: 20140929081646) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.boolean  "active"
   end
 
   create_table "task_submissions", force: true do |t|

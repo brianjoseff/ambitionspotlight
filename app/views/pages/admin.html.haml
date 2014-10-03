@@ -1,7 +1,8 @@
 -@leaders.each do |leader|
-  =leader.name
+  %h2=leader.name
+ 
   -if leader.spotlight
-  
+    %p=leader.spotlight.active
     =form_for leader.spotlight, url: spotlight_path(leader.spotlight) do |f|
       =hidden_field_tag 'user_id', leader.id
       =f.file_field :image, type: "file"

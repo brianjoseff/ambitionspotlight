@@ -49,6 +49,14 @@ class User < ActiveRecord::Base
   validates_presence_of :name, :email, :ambition
   
   def self.spotlit_users
+    all.select do |u|
+      if u.leader? && u.spotlight && u.spotlight.active?
+        u
+      end
+    end
+  end
+  
+  def self.leaders
     all.select{|x| x.leader?}
   end
   
