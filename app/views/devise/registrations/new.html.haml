@@ -1,56 +1,61 @@
 / %p or #{link_to "Sign In", new_user_session_path}
 .row
-  .col-lg-3
-  .col-lg-5.sign-up
+  .col-lg-2
+  .col-lg-8.sign-up
     /%h1 Sign up
     = form_for(resource, as: resource_name, url: registration_path(resource_name), :builder => Judge::FormBuilder, html: {multipart: true, class: ""}) do |f|
       = devise_error_messages!
       -resource.assets.build unless resource.assets.first
-      .form-group
+      /NAME
+      .user-fields-container
         =f.label :name, :class => 'control-label'
-        .controls
-          =f.text_field :name, type: "text", :class => "form-control", :placeholder => "Juan Smith", :validate => true        
-      .form-group
-        =f.label :email, :class => 'control-label'
-        .controls
-          =f.text_field :email, type: "text", :class => "form-control", :placeholder => "hello@mom.com", :validate => true
-      =label_tag "Profile Picture"
-      .image-field
-        =f.file_field :profile_photo
+        .story-name-edit
+          .controls
+            =f.text_field :name, type: "text", class: "form-control text-center", :placeholder => "Juan Smith", :validate => true
+      
+        .form-group
+          =f.label :email, :class => 'control-label'
+          .controls
+            =f.text_field :email, type: "text", :class => "form-control text-center", :placeholder => "hello@mom.com", :validate => true
+        .form-group
+          =f.label :password, :class => 'control-label'
+          .controls
+            =f.password_field :password, type: "password", :class => "form-control text-center", :placeholder => "Password"
+        =label_tag "Profile Picture"
+        .image-field
+          =f.file_field :profile_photo
         
-        / = f.fields_for :assets do |images_form|
-        /   = images_form.file_field :image, type:"file"
-      %br/
-      / .form-group
-      /   = f.label "What are you?", class: 'control-label'
-      /   .controls
-      /     = f.text_field :occupation, autofocus: true, class: "form-control", :placeholder => "Example: MMA Coach", :validate => true
+          / = f.fields_for :assets do |images_form|
+          /   = images_form.file_field :image, type:"file"
+        %br/
+        / .form-group
+        /   = f.label "What are you?", class: 'control-label'
+        /   .controls
+        /     = f.text_field :occupation, autofocus: true, class: "form-control", :placeholder => "Example: MMA Coach", :validate => true
+        .form-group
+          = f.label "Where do you want to be in 5 years?", class: 'control-label'
+          .story-text
+            .controls
+              = f.text_area :ambition, type:"text",autofocus: true, class: "form-control text-center", :placeholder => "Running my own technology company and giving back to East Palo Alto through mentorship, philanthropy, and the multiplier effect", :rows => "5"
       
-      .form-group
-        = f.label "Where do you want to be in 5 years?", class: 'control-label'
-        .controls
-          = f.text_area :ambition, type:"text",autofocus: true, class: "form-control", :placeholder => "Example: Proud coach of champion MMA fighters", :rows => "5"  
       
-      .form-group
-        = f.label "What are you doing right now to achieve your ambitions?", class: 'control-label'
-        .controls
-          = f.text_area :current_activities, type:"text", autofocus: true, class: "form-control", :placeholder => "Example: Training, building a world-class gym at my house, mentoring kids in EPA", :rows => "5"
-      / .form-group
-      /   = f.label "What is your story", class: 'control-label'
-      /   .controls
-      /     = f.text_area :bio, type:"text", autofocus: true, class: "form-control", :placeholder => "Tell us who you are and where you come from...", :rows => "5"
-      .form-group
-        =f.label :password, :class => 'control-label'
-        .controls
-          =f.password_field :password, type: "password", :class => "form-control", :placeholder => "Password"  
+        / .form-group
+        /         = f.label "What are you doing right now to achieve your ambitions?", class: 'control-label'
+        /         .controls
+        /           = f.text_area :current_activities, type:"text", autofocus: true, class: "form-control", :placeholder => "Example: Training, building a world-class gym at my house, mentoring kids in EPA", :rows => "5"
+        / .form-group
+        /   = f.label "What is your story", class: 'control-label'
+        /   .controls
+        /     = f.text_area :bio, type:"text", autofocus: true, class: "form-control", :placeholder => "Tell us who you are and where you come from...", :rows => "5"
+        
     
 
 
 
-      .user-auth-offset
-        =f.submit "Sign up", class: "btn btn-primary submit-button follow-button"
-        %br/
-        %br/
+        .user-auth-offset
+          =f.submit "Sign up", class: "btn btn-primary submit-button follow-button"
+          %br/
+          %br/
 
         
   / 

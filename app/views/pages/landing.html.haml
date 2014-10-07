@@ -12,14 +12,19 @@
         /       =link_to "Get Your Page Now", new_user_registration_path, class: "btn btn-large btn-primary make-button landing-button"
         /       =link_to "View Leaders", leaders_path, class: "btn btn-large btn-primary make-button landing-button"
         
-        %hr.intro-divider
-          %ul.list-inline
-            %li.landing-buttons.landing-first
-              =link_to "Get Your Page Now", new_user_registration_path, class: "btn btn-large btn-primary make-button landing-button"
-        
-            %li.landing-buttons.landing-second
-              /=link_to "View Leaders", leaders_path, class: "btn btn-large btn-primary make-button landing-button"
-              %a{href:"leaders", class: "btn btn-large btn-primary make-button landing-button"}
-                
-                %i.glyphicon.glyphicon-user
-                View Leaders
+        /%hr.intro-divider
+        %ul.list-inline.cta
+          %li.landing-buttons.landing-first
+            =link_to "Get Your Page Now", new_user_registration_path, class: "btn btn-large btn-primary make-button landing-button"
+      
+          %li.landing-buttons.landing-second
+            /=link_to "View Leaders", leaders_path, class: "btn btn-large btn-primary make-button landing-button"
+            %a{href:"leaders", class: "btn btn-large btn-primary make-button landing-button"}
+              
+              %i.glyphicon.glyphicon-user
+              View Leaders
+
+
+  
+  .text-center.footer-social
+    %p Follow us on #{link_to 'Facebook', "https://www.facebook.com/SuaveFx"} and #{link_to 'Twitter', "https://twitter.com/SuaveFx"}

@@ -1,88 +1,220 @@
-.col-lg-3
-.col-lg-5.sign-up
-  %h2
-    Edit #{resource_name.to_s.humanize}
-  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-    = devise_error_messages!
-    -resource.assets.build unless resource.assets.first
-    .form-group
-      =f.label :name, class: 'control-label'
-      .controls
-        =f.text_field :name, type: "text", class: "form-control", :placeholder => "Eugene Jackson"
-    .form-group
-      = f.label :email, class: 'control-label'
-      .controls
-        = f.email_field :email, autofocus: true, class: "form-control", :placeholder => "big@dog.com"
-    /there are 8 fields because there are 8 assets associated with this record...make it so there is only ever one profile picture   
-    .form-group
-      =label_tag "Profile Picture"
-      .image-field
-        = f.file_field :profile_photo, type:"file"
-    
-    
-     
-    / =label_tag "Profile Picture"
-    / = f.fields_for :assets do |images_form|
-    /   = images_form.file_field :image, type:"file"
-    %br/
-    .form-group
-      = f.label "What are you?", class: 'control-label'
-      .controls
-        = f.text_field :occupation, autofocus: true, class: "form-control", :placeholder => "MMA Coach"
-    
-    .form-group
-      = f.label "Where do you want to be in 5 years?", class: 'control-label'
-      .controls
-        = f.text_area :ambition, type:"text",autofocus: true, class: "form-control", :placeholder => "Proud coach of champion MMA fighters", :rows => "5"  
-    
-    .form-group
-      = f.label "What are you doing right now to achieve your ambitions?", class: 'control-label'
-      .controls
-        = f.text_area :current_activities, type:"text", autofocus: true, class: "form-control", :placeholder => "Training, building a world-class gym at my house, mentoring kids in EPA", :rows => "5"
-    .form-group
-      = f.label "What is your story", class: 'control-label'
-      .controls
-        = f.text_area :bio, type:"text", autofocus: true, class: "form-control", :placeholder => "Tell us who you are and where you come from...", :rows => "5"
+/VERSION 2
 
-    .form-group
-      =f.label :facebook_url, class: 'control-label'
-      .controls
-        =f.text_field :facebook_url, type: "text", class: "form-control", :placeholder => "http://www..."
-  
-    .form-group
-      =f.label :twitter_url, class: 'control-label'
-      .controls
-        =f.text_field :twitter_url, type: "text", class: "form-control", :placeholder => "http://www..."
-        
-    .form-group
-      = f.label :email, class: 'control-label'
-      .controls
-        = f.email_field :email, autofocus: true, class: "form-control", :placeholder => "big@dog.com"
-    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-      %div
-        Currently waiting confirmation for: #{resource.unconfirmed_email}
-    .form-group
-      = f.label :password, class: 'control-label'
-      %i (leave blank if you don't want to change it)
-      %br/
-      = f.password_field :password, autocomplete: "off", class: "form-control"
-    .form-group
-      = f.label :password_confirmation, class: 'control-label'
-      .controls
-        = f.password_field :password_confirmation, autocomplete: "off", class: "form-control"
-    .form-group
-      = f.label :current_password, class: 'control-label'
-      %i{style:"color:white"} (we need your current password to confirm changes to email/password)
-      .controls
-        = f.password_field :current_password, autocomplete: "off", class: "form-control"
-        .shared-links
+.row
+  .col-lg-2
+  .user-card-container
+    .col-lg-8.user-card
+      .text-center
+        %h2
+          Edit #{resource_name.to_s.humanize}
+      = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+        = devise_error_messages!
+        -resource.assets.build unless resource.assets.first
+        .user-details-edit.text-center
+          .form-group
+            = f.label :email, class: 'control-label'
+            .controls
+              = f.email_field :email, autofocus: true, class: "form-control text-center", :placeholder => "big@dog.com"
+          - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+            %div
+              Currently waiting confirmation for: #{resource.unconfirmed_email}
+          
+          .change-password-veil{style:"display:none;"}
+            .form-group
+              = f.label :password, class: 'control-label'
+              %i ( leave blank if you don't want to change it )
+              %br/
+              = f.password_field :password, autocomplete: "off", class: "form-control text-center"
+            .form-group
+              = f.label :password_confirmation, class: 'control-label'
+              .controls
+                = f.password_field :password_confirmation, autocomplete: "off", class: "form-control text-center"
+          .form-group
+            = f.label :current_password, class: 'control-label'
+            %i ( To Make Changes )
+            .controls
+              = f.password_field :current_password, autocomplete: "off", class: "form-control text-center"
+              
           = link_to "Forgot your password?", new_password_path(resource_name)
-    .submit
-      =f.submit "Update", class: "btn btn-primary submit-button follow-button"
-  
-  .cancel-account
-    %p
-      Unhappy?
-      %span
-        #{link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: ""}
+          
+          %a{href:"#", class: "change-password"} | Change Your Password
 
+        
+          
+          .submit.text-center
+            =f.submit "Update", class: "btn btn-primary submit-button follow-button"
+          
+        /NAME
+        .story-name-edit
+          .controls
+            =f.text_field :name, type: "text", class: "form-control text-center", :placeholder => "Eugene Jackson"
+          
+        /PROFILE PHOTO
+
+        .profile-pic
+          .round-border
+            .round.round-center
+              -if !@user.profile_photo
+                =link_to image_tag(@user.profile_photo.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium), :alt => @user.name, class: "circle-image"), user_path(@user)
+              -else
+                =link_to image_tag(@user.assets.empty?  ? '/assets/user-placeholder.png': @user.assets.first.image.url(:medium), :alt => @user.name, class: "circle-image"), user_path(@user)
+        .form-group
+
+          .image-field
+            = f.file_field :profile_photo, type:"file"     
+                
+                
+        /AMBITION              
+        .text-center 
+          .story
+            .story-header
+              %p WHERE I WANT TO BE IN 5 YEARS...
+            .story-text
+              .controls
+                = f.text_area :ambition, type:"text",autofocus: true, class: "form-control text-center", :placeholder => "Proud coach of champion MMA fighters", :rows => "5"
+              /%p=@user.ambition
+
+
+          /CURRENT ACTIVITIES (3 focuses)
+          .story-header
+            %p WHAT I'M DOING TO GET THERE...
+          .story
+            .current-activities
+              .controls
+                = f.text_area :current_activities, type:"text", autofocus: true, class: "form-control text-center", :placeholder => "Training, building a world-class gym at my house, mentoring kids in EPA", :rows => "5"
+
+          /BIO            
+          .story
+            .story-header
+              %p WHO I AM...
+            .story
+              .story-bio
+                .controls
+                  = f.text_area :bio, type:"text", autofocus: true, class: "form-control", :placeholder => "Tell us who you are and where you come from...", :rows => "5"
+    
+          
+
+          
+          .submit
+            =f.submit "Update", class: "btn btn-primary submit-button follow-button"
+          %br/
+          / /YOUR FOLLOWING
+          / .story
+          /   .story-header
+          /     %p WHO BELIEVES IN ME...
+          /         
+          /     /have a "share profile" link or something to post on facebook
+          /         
+          /   .following
+          /     -if current_user && current_user == @user
+          /       //invite people
+          /   
+          /     .storyx
+          /       -if @followers
+          /         -@followers.each_with_index do |f, i|
+          /           %div{class: "#{ i % 3 == 0 || i == 0 ? 'row' : ''}" }
+          /           .col-sm-4
+          /             -if !f.profile_photo
+          /               .follower-pic-name.text-center
+          /                 .round-thumbnail
+          /                   =link_to image_tag(f.profile_photo.url(:small), :alt => f.name, class: "circle-image"), user_path(f)
+          /                 %p=f.name
+          /             -else
+          /               .follower-pic-name.text-center
+          /                 .round-thumbnail
+          /                   =link_to image_tag(f.assets.empty?  ? '/assets/user-placeholder-thumbnail.png': f.assets.first.image.url(:small), :alt => f.name, class: "circle-image"), user_path(f)
+          /                 %p=f.name
+          /       
+
+
+
+
+
+/ .col-lg-3
+/ .col-lg-5.sign-up
+/   %h2
+/     Edit #{resource_name.to_s.humanize}
+/   = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+/     = devise_error_messages!
+/     -resource.assets.build unless resource.assets.first
+/     .form-group
+/       =f.label :name, class: 'control-label'
+/       .controls
+/         =f.text_field :name, type: "text", class: "form-control", :placeholder => "Eugene Jackson"
+/     .form-group
+/       = f.label :email, class: 'control-label'
+/       .controls
+/         = f.email_field :email, autofocus: true, class: "form-control", :placeholder => "big@dog.com"
+/     /there are 8 fields because there are 8 assets associated with this record...make it so there is only ever one profile picture   
+/     .form-group
+/       =label_tag "Profile Picture"
+/       .image-field
+/         = f.file_field :profile_photo, type:"file"
+/     
+/     
+/      
+/     / =label_tag "Profile Picture"
+/     / = f.fields_for :assets do |images_form|
+/     /   = images_form.file_field :image, type:"file"
+/     %br/
+/     .form-group
+/       = f.label "What are you?", class: 'control-label'
+/       .controls
+/         = f.text_field :occupation, autofocus: true, class: "form-control", :placeholder => "MMA Coach"
+/     
+/     .form-group
+/       = f.label "Where do you want to be in 5 years?", class: 'control-label'
+/       .controls
+/         = f.text_area :ambition, type:"text",autofocus: true, class: "form-control", :placeholder => "Proud coach of champion MMA fighters", :rows => "5"  
+/     
+/     .form-group
+/       = f.label "What are you doing right now to achieve your ambitions?", class: 'control-label'
+/       .controls
+/         = f.text_area :current_activities, type:"text", autofocus: true, class: "form-control", :placeholder => "Training, building a world-class gym at my house, mentoring kids in EPA", :rows => "5"
+/     .form-group
+/       = f.label "What is your story", class: 'control-label'
+/       .controls
+/         = f.text_area :bio, type:"text", autofocus: true, class: "form-control", :placeholder => "Tell us who you are and where you come from...", :rows => "5"
+/ 
+/     .form-group
+/       =f.label :facebook_url, class: 'control-label'
+/       .controls
+/         =f.text_field :facebook_url, type: "text", class: "form-control", :placeholder => "http://www..."
+/   
+/     .form-group
+/       =f.label :twitter_url, class: 'control-label'
+/       .controls
+/         =f.text_field :twitter_url, type: "text", class: "form-control", :placeholder => "http://www..."
+/         
+/     .form-group
+/       = f.label :email, class: 'control-label'
+/       .controls
+/         = f.email_field :email, autofocus: true, class: "form-control", :placeholder => "big@dog.com"
+/     - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+/       %div
+/         Currently waiting confirmation for: #{resource.unconfirmed_email}
+/     .form-group
+/       = f.label :password, class: 'control-label'
+/       %i (leave blank if you don't want to change it)
+/       %br/
+/       = f.password_field :password, autocomplete: "off", class: "form-control"
+/     .form-group
+/       = f.label :password_confirmation, class: 'control-label'
+/       .controls
+/         = f.password_field :password_confirmation, autocomplete: "off", class: "form-control"
+/     .form-group
+/       = f.label :current_password, class: 'control-label'
+/       %i{style:"color:white"} (we need your current password to confirm changes to email/password)
+/       .controls
+/         = f.password_field :current_password, autocomplete: "off", class: "form-control"
+/         .shared-links
+/           = link_to "Forgot your password?", new_password_path(resource_name)
+/     .submit
+/       =f.submit "Update", class: "btn btn-primary submit-button follow-button"
+/   
+/   .cancel-account
+/     %p
+/       Unhappy?
+/       %span
+/         #{link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: ""}
+/ 
