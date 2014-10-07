@@ -110,9 +110,9 @@
                 / %li
                 /   =link_to "SIGN OUT", destroy_user_session_path, :method => :delete
               -else
-                %li
+                %li.underline-glow
                   =link_to "SIGN UP", new_user_registration_path
                 / %li
                 /   = link_to "Sign Up", new_user_registration_path
-                %li
+                %li.underline-glow
                   =link_to "SIGN IN", new_user_session_path
