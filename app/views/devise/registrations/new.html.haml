@@ -13,14 +13,7 @@
           .controls
             =f.text_field :name, type: "text", class: "form-control text-center", :placeholder => "Juan Smith", :validate => true
       
-        .form-group
-          =f.label :email, :class => 'control-label'
-          .controls
-            =f.text_field :email, type: "text", :class => "form-control text-center", :placeholder => "hello@mom.com", :validate => true
-        .form-group
-          =f.label :password, :class => 'control-label'
-          .controls
-            =f.password_field :password, type: "password", :class => "form-control text-center", :placeholder => "Password"
+        
         =label_tag "Profile Picture"
         .image-field
           =f.file_field :profile_photo
@@ -38,7 +31,15 @@
             .controls
               = f.text_area :ambition, type:"text",autofocus: true, class: "form-control text-center", :placeholder => "Running my own technology company and giving back to East Palo Alto through mentorship, philanthropy, and the multiplier effect", :rows => "5"
       
-      
+        
+        .form-group
+          =f.label :email, :class => 'control-label'
+          .controls
+            =f.text_field :email, type: "text", :class => "form-control text-center", :placeholder => "hello@mom.com", :validate => true
+        .form-group
+          =f.label :password, :class => 'control-label'
+          .controls
+            =f.password_field :password, type: "password", :class => "form-control text-center", :placeholder => "Password"
         / .form-group
         /         = f.label "What are you doing right now to achieve your ambitions?", class: 'control-label'
         /         .controls

@@ -26,10 +26,10 @@
           .story-text
             %p=@user.ambition
           -if current_user && current_user == @user
-            %h2
-              =link_to "Edit Details", edit_user_registration_path(current_user), style:"font-size:50%"
-              / -if @user.leader?
-              /   =link_to "Your Dashboard", leader_dashboard_path, style:"font-size:50%"
+            
+            =link_to "Edit Details", edit_user_registration_path(current_user)
+            / -if @user.leader?
+            /   =link_to "Your Dashboard", leader_dashboard_path, style:"font-size:50%"
           %h2.follow
             - unless current_user == @user
               #follow_form
@@ -50,11 +50,12 @@
             %p WHAT I'M DOING TO GET THERE...
           .story
             %p=@user.current_activities
+            / -if current_user && current_user == @user
+            /   =link_to "Add Photos", new_album_path
+            /   =link_to "Edit Photos", albums_path     
             -if current_user && current_user == @user
-              =link_to "Add Photos", new_album_path
-              =link_to "Edit Photos", albums_path
-      
-      
+
+              =link_to "Edit Details", edit_user_registration_path(current_user)
         /PHOTOS
         / .photos-spacer
         /   =image_tag '1.jpg', class: "story-photo"
@@ -65,7 +66,9 @@
             %p WHO I AM...
           .story
             %p=@user.bio 
-    
+            -if current_user && current_user == @user
+
+              =link_to "Edit Details", edit_user_registration_path(current_user)
       
 
         /YOUR FOLLOWING
