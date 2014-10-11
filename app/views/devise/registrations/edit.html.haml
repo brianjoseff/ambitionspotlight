@@ -14,7 +14,7 @@
           .form-group
             = f.label :email, class: 'control-label'
             .controls
-              = f.email_field :email, autofocus: true, class: "form-control text-center", :placeholder => "big@dog.com"
+              = f.email_field :email, autofocus: true, class: "form-control text-center .form-control-big", :placeholder => "big@dog.com"
           - if devise_mapping.confirmable? && resource.pending_reconfirmation?
             %div
               Currently waiting confirmation for: #{resource.unconfirmed_email}
@@ -24,16 +24,16 @@
               = f.label :password, class: 'control-label'
               %i ( leave blank if you don't want to change it )
               %br/
-              = f.password_field :password, autocomplete: "off", class: "form-control text-center"
+              = f.password_field :password, autocomplete: "off", class: "form-control text-center .form-control-big"
             .form-group
               = f.label :password_confirmation, class: 'control-label'
               .controls
-                = f.password_field :password_confirmation, autocomplete: "off", class: "form-control text-center"
+                = f.password_field :password_confirmation, autocomplete: "off", class: "form-control text-center .form-control-big"
           .form-group
             = f.label :current_password, class: 'control-label'
             %i ( To Make Changes )
             .controls
-              = f.password_field :current_password, autocomplete: "off", class: "form-control text-center"
+              = f.password_field :current_password, autocomplete: "off", class: "form-control text-center .form-control-big"
               
           = link_to "Forgot your password?", new_password_path(resource_name)
           
