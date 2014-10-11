@@ -6,8 +6,23 @@
 	margin-bottom: 60px;
 	background-color: rgba(0,0,0,0.5);
 	text-align: left;
+	color: #e6e6e6;
 }
 .about-story{
+/*  padding-bottom: 20px;
+  border-bottom: solid 1px #e6e6e6;*/
+  
+}
+.about-team{
   padding-bottom: 20px;
   border-bottom: solid 1px #e6e6e6;
+}
+.about-mast{
+
+  padding-bottom: 20px;
+  border-bottom: solid 1px #e6e6e6;
+  .about-header{
+    font-size: 300%;
+    font-weight: 800;
+  }
 }
