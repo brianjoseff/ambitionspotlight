@@ -1,0 +1,19 @@
+.user-ambition
+  -if current_user && current_user === @user
+    -if @user.ambition
+      %p=@user.ambition
+      =link_to "Edit", edit_ambition_user_path(@user), remote:true, class: "user-edit-button"
+    -else
+      = form_for(@user,url: update_ambition_user_path, remote: true, format: :json, html: {class: ""}) do |f|
+        #error_explanation{:style => "display:none;"}
+          %ul
+            - if @user.activities.last.errors.any?
+              - @activites[a].errors.full_messages.each do |msg|
+                %li= msg
+        
+        .controls   
+          = f.text_area :ambition, type:"text",autofocus: true, class: "form-control text-center", :placeholder => "Running my own technology company and giving back to East Palo Alto through mentorship, philanthropy, and the multiplier effect", :rows => "5"       
+        .submit
+          = f.submit "Update", class: ""
+  -else
+    %p=@user.ambition

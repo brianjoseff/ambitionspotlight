@@ -34,7 +34,7 @@ gem 'aws-sdk'
 gem "paperclip", "~> 4.1"
 gem 's3_direct_upload'
 gem 'jquery-fileupload-rails'
-# gem 'jquery-turbolinks'
+gem 'jquery-turbolinks'
 
 gem 'delayed_job_active_record'
 

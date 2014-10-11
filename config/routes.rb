@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :activities do
+    member do
+      get :deactivate
+    end
+  end
+
   mount Judge::Engine => '/judge'
   
   resources :albums
@@ -15,8 +21,24 @@ Rails.application.routes.draw do
   resources :documents
   resources :spotlights
   # devise_for :users
-  devise_for :users, controllers: { registrations: 'users/registrations'}
-  resources :users
+  devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions'}
+  resources :users do
+    member do
+      get :edit_ambition
+      patch :update_ambition
+      get :edit_bio
+      patch :update_bio
+    end
+  end
+  
+  match '/add_activity', to: "users#add_activity", via: :post
+  # resources :users do
+  #   member do
+  #     put :add_activity
+  #   end
+  # end
+  
+  
   # match 'user/:name' => 'user#profile'
   
   match '/about', to: "pages#about", via: :get

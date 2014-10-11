@@ -26,11 +26,14 @@ h1, h2, h3, p, label, input{
 
 h1{
 	font-size: 250%;
+	
 }
 p{
 	font-size: 120%;
 }
-
+input.form-control{
+  font-size: 120%;
+}
 a{
 	font-weight: 300;
 	letter-spacing: 1px;

@@ -25,7 +25,8 @@
         .carousel-caption
           .carousel-details
             =link_to @users.first.name, user_path(@users.first), class: 'carousel-name'
-            %p=truncate(@users.first.bio,20)
+            %p=@users.first.occupation
+            / %p=truncate(@users.first.bio,20)
       
       -@users[1..-1].each do |user|
         .item.leaderimg
@@ -33,7 +34,8 @@
           .carousel-caption
             .carousel-details
               =link_to user.name, user_path(user), class: 'carousel-name'
-              %p=truncate(user.bio,20)
+              /%p=truncate(user.bio,20)
+              %p=user.occupation
  
     
     %ul.list-group.col-sm-4
@@ -42,6 +44,7 @@
       -@users[1..-1].each_with_index do |user, index|
         %li.list-group-item{"data-slide-to" => index+1, "data-target" => "#myCarousel"}
           %h4=user.name
+          
  
 
     / Controls

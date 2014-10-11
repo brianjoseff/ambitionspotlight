@@ -1,0 +1,16 @@
+.user-bio
+  -if current_user && current_user === @user
+    -if @user.bio
+      %p=simple_format @user.bio
+      =link_to "Edit", edit_bio_user_path(@user), remote:true, class: "user-edit-button"
+    -else
+      #bio_field
+      
+        / =link_to "Guided Bio", "#", id: "guided_form_button", style: "pointer-events: none; cursor: default;"
+        / |
+        / =link_to "Free Form Bio", "#", id: "free_form_button"
+        %p hello
+        =render "bio_field"
+        
+  -else
+    %p=simple_format @user.bio, {}, wrapper_tag: "p"

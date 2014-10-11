@@ -1,10 +1,22 @@
-.sign-up{
+.sign-up-in{
 	margin: 10px;
 	padding-top: 15px;
 	border-radius: 4px;
 	box-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
 	margin-bottom: 60px;
-	background-color: rgba(0,0,0,0.5)
+	background-color: rgba(0,0,0,0.5);
+	label{
+	  color:#e6e6e6;
+	  text-align:center;
+	  font-size: 110%;
+	}
+	input{
+	  color: #555;
+	  font-size: 110%;
+	}
+	input[type="submit"]{
+	  color: #e6e6e6;
+	}
 }
 
 .image-field{

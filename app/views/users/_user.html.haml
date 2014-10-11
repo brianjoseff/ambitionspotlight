@@ -3,7 +3,7 @@
     .col-lg-12
       .link-container       
         .user-list-card-image
-          =link_to image_tag(user.profile_photo.nil?  ? '/assets/user-placeholder.png': user.profile_photo.url(:medium), :alt => user.name, class: "circle-image"), user_path(user)
+          =link_to image_tag(user.profile_photo_file_name.nil?  ? '/assets/user-placeholder.png': user.profile_photo.url(:medium), :alt => user.name, class: "circle-image"), user_path(user)
         .user-card-details
           =link_to user.name, user_path(user), class: 'user-list-card-name'
           %p=truncate(user.bio,20)

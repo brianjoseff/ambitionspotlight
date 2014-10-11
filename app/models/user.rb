@@ -42,6 +42,7 @@ class User < ActiveRecord::Base
   has_many :albums
   has_many :documents
   has_one :spotlight
+  has_many :activities
   
   accepts_nested_attributes_for :assets
   

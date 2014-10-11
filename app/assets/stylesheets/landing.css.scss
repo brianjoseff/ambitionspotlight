@@ -4,12 +4,14 @@
     text-align: center;
     color: #f8f8f8;
 /*    background: url(http://www.traemcneely.com/wp-content/uploads/2011/10/wpid-000035241.jpg) no-repeat center center;*/
-    background: url(http://www.traemcneely.com/wp-content/uploads/2011/10/wpid-000035241.jpg) no-repeat center center;
-    background-size: cover;
-    background-color: #2E1008;
+    
     
 }
-
+.background{
+  background: url(http://www.traemcneely.com/wp-content/uploads/2011/10/wpid-000035241.jpg) no-repeat center center;
+  background-size: cover;
+  background-color: #2E1008;
+}
 .intro-message {
     position: relative;
     padding-top: 20%;

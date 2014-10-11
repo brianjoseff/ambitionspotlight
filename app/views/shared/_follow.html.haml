@@ -1,0 +1,12 @@
+%h2.follow
+  - unless current_user == user
+    #follow_form
+      - if current_user && current_user.following?(user)
+        = render 'unfollow'
+
+      - elsif current_user.nil?
+        =link_to "BELIEVE IN ME", new_user_registration_path, class: "btn btn-large btn-primary make-button follow-button"
+      -else
+        = render 'follow'
+        / -unless @task.nil?
+        /   =link_to "Join the Following", new_task_submission_path(task_id: @task.id), class: "btn btn-large btn-primary make-button"

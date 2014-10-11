@@ -1,0 +1,65 @@
+/ =link_to "Guided", "#", id: "guided_form_button", class: "inactive-link ad-lib-link"
+/ |
+/ =link_to "Free Form", "#", id: "free_form_button", class: "free-form-link"
+
+%a.inactive-link.ad-lib-link{href:"#"} Guided Bio
+|
+%a.free-form-link{href:"#"} Free Form Bio
+  
+
+  
+.bio-fields
+  .ad-lib
+    = form_for(@user,url: update_bio_user_path, remote: true, format: :json, html: {class: ""}) do |f|
+      =hidden_field_tag 'ad_lib', 'ad_lib'
+      #error_explanation{:style => "display:none;"}
+        %ul
+          - if @user.errors.any?
+            - @user.errors.full_messages.each do |msg|
+              %li= msg
+
+      .controls
+        %p
+          I come from
+          %span=text_field_tag 'bio_pieces[a]', nil,class: "form-control bio-a", placeholder: "East Palo Alto"
+          #{'. '}
+          I believe in
+          %span=text_field_tag 'bio_pieces[b]', nil,class: "form-control bio-b", placeholder: "integrity"
+          #{', '}
+          %span=text_field_tag 'bio_pieces[c]',nil ,class: "form-control bio-c", placeholder: "hard work"
+          #{', and '}
+          %span=text_field_tag 'bio_pieces[d]',nil ,class: "form-control bio-d", placeholder: "my community"
+          #{'. '}
+          People know me for
+          %span=text_field_tag 'bio_pieces[e]',nil ,class: "form-control bio-e", placeholder: "my ambition and my tenacity"
+          #{'. '}
+          I am committed to
+          %span=text_field_tag 'bio_pieces[f]',nil ,class: "form-control bio-f", placeholder: "being a doer not a dreamer"
+          #{'. '}
+
+          I hope to
+          %span=text_area_tag 'bio_pieces[g]',nil ,class: "form-control bio-g", placeholder: "develop my entrepreneurial skills, build something great, and lift up my community with the value I generate", rows: 3
+          #{'. '}
+          
+          
+          
+        = debug(params) if Rails.env.development?
+        =f.hidden_field :bio
+        /= f.text_area :bio, type:"text",autofocus: true, class: "form-control text-center", :placeholder => "I come from ______. I believe in ______, ______, and ______. People know me for  ______. I am committed to ______. I hope to _______________.", :rows => "5"       
+      .submit
+        = f.submit "Update", class: ""
+
+  .free-form{style:"display:none"}
+    = form_for(@user,url: update_bio_user_path, remote: true, format: :json, html: {class: ""}) do |f|
+      =hidden_field_tag 'ad_lib', 'cod_fish'
+      #error_explanation{:style => "display:none;"}
+        %ul
+          - if @user.errors.any?
+            - @user.errors.full_messages.each do |msg|
+              %li= msg
+      
+      =hidden_field_tag 'bio_pieces[a]', nil
+      .controls 
+        = f.text_area :bio, type:"text",autofocus: true, class: "form-control text-center", :placeholder => "I come from ______. I believe in ______, ______, and ______. People know me for  ______. I am committed to ______. I hope to _______________.", :rows => "5"       
+      .submit
+        = f.submit "Update", class: ""

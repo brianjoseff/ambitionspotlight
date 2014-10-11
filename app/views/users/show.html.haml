@@ -4,71 +4,76 @@
   .col-lg-2
   .user-card-container
     .col-lg-8.user-card
+      /add top 3 activities right now
+    
       .text-center
       
-        %h1
+        %h1.name
           =@user.name
       .profile-pic
         .round-border
           .round.round-center
-            -if @user.profile_photo
+            -if @user.profile_photo_file_name
               
-              =link_to image_tag(@user.profile_photo.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium), :alt => @user.name, class: "circle-image"), user_path(@user)
+              =image_tag(@user.profile_photo.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium), :alt => @user.name, class: "circle-image")
             -else
-             
-              =link_to image_tag(@user.assets.empty?  ? '/assets/user-placeholder.png': @user.assets.first.image.url(:medium), :alt => @user.name, class: "circle-image"), user_path(@user)
+              
+              =image_tag(@user.assets.empty?  ? '/assets/user-placeholder.png': @user.assets.first.image.url(:medium), :alt => @user.name, class: "circle-image")
       / .occupation-follow
       /   %p.occupation=@user.occupation    
       .text-center 
         .story
           .story-header
-            %p WHERE I WANT TO BE IN 5 YEARS...
-          .story-text
-            %p=@user.ambition
-          -if current_user && current_user == @user
+            %p
+              WHERE I WANT TO BE IN 5 YEARS...
+          .story-text#ambition
+            =render partial: 'ambition', locals: {user: @user}
+            /%p=@user.ambition
+            / -if current_user && current_user == @user
+            /   %span.text-center.edit-link=link_to "Edit Details", edit_user_registration_path(current_user)
+          
             
-            =link_to "Edit Details", edit_user_registration_path(current_user)
+            
             / -if @user.leader?
             /   =link_to "Your Dashboard", leader_dashboard_path, style:"font-size:50%"
-          %h2.follow
-            - unless current_user == @user
-              #follow_form
-                - if current_user && current_user.following?(@user)
-                  = render 'unfollow'
-
-                - elsif current_user.nil?
-                  =link_to "BELIEVE IN ME", new_user_registration_path, class: "btn btn-large btn-primary make-button follow-button"
-                -else
-                  = render 'follow'
-                  / -unless @task.nil?
-                  /   =link_to "Join the Following", new_task_submission_path(task_id: @task.id), class: "btn btn-large btn-primary make-button"
+          =render partial: 'shared/follow', locals: {user: @user}  
+          
         /CURRENT ACTIVITIES
         /List them
         /Highlight 1
         .story
           .story-header
-            %p WHAT I'M DOING TO GET THERE...
-          .story
-            %p=@user.current_activities
-            / -if current_user && current_user == @user
-            /   =link_to "Add Photos", new_album_path
-            /   =link_to "Edit Photos", albums_path     
-            -if current_user && current_user == @user
+            %p
+              WHAT I'M DOING TO GET THERE...
+              / -if current_user && current_user == @user
+              /   %span=link_to "Edit Details", edit_user_registration_path(current_user)
+          .story#activities
+            =render partial: 'current_activities', locals: {user: @user, activities: @activities}
 
-              =link_to "Edit Details", edit_user_registration_path(current_user)
-        /PHOTOS
-        / .photos-spacer
-        /   =image_tag '1.jpg', class: "story-photo"
-        /   =image_tag '2.jpg', class: "story-photo"
+            
+            
+            
+        /PHOTOS    
+        / -if current_user && current_user == @user
+        /   =link_to "Add Photos", new_album_path
+        /   =link_to "Edit Photos", albums_path     
+
+        
+        
+        /Most important accomplishment this month
+
+        /History of accomlishments
       
         .story
           .story-header
-            %p WHO I AM...
-          .story
-            %p=@user.bio 
-            -if current_user && current_user == @user
+            %p
+              WHO I AM...
+              / -if current_user && current_user == @user
+              /   %span=link_to "Edit Details", edit_user_registration_path(current_user)
+          .story#bio
+            =render partial: 'bio', locals: {user: @user}
+            /%p=@user.bio 
 
-              =link_to "Edit Details", edit_user_registration_path(current_user)
       
 
         /YOUR FOLLOWING
@@ -95,6 +100,6 @@
                     -else
                       .follower-pic-name.text-center
                         .round-thumbnail
-                          =link_to image_tag(f.assets.empty?  ? '/assets/user-placeholder-thumbnail.png': f.assets.first.image.url(:small), :alt => f.name, class: "circle-image"), user_path(f)
+                          =link_to image_tag(f.assets.empty?  ? '/assets/user-placeholder-follower.png': f.assets.first.image.url(:small), :alt => f.name, class: "circle-image"), user_path(f)
                         %p=f.name
       

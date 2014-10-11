@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141003175405) do
+ActiveRecord::Schema.define(version: 20141011004030) do
+
+  create_table "activities", force: true do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "active",     default: true
+  end
 
   create_table "albums", force: true do |t|
     t.string   "name"

@@ -13,8 +13,9 @@ class Document < ActiveRecord::Base
   #little blimp method--mostly for uploading
   #http://blog.littleblimp.com/post/53942611764/direct-uploads-to-s3-with-rails-paperclip-and
   #validates :direct_upload_url, presence: true, format: { with: DIRECT_UPLOAD_URL_FORMAT }
-  before_create :set_upload_attributes
-  after_create :queue_processing
+  
+  # before_create :set_upload_attributes
+  # after_create :queue_processing
   
   # Store an unescaped version of the escaped URL that Amazon returns from direct upload.
   def direct_upload_url=(escaped_url)
@@ -56,14 +57,26 @@ class Document < ActiveRecord::Base
   
   def self.copy_and_delete(paperclip_file_path, raw_source)
     s3 = AWS::S3.new #create new s3 object
+    #destination = s3.buckets['ambition-dev'].objects.create(paperclip_file_path, '')
     destination = s3.buckets['ambition-dev'].objects[paperclip_file_path]
     sub_source = CGI.unescape(raw_source)
     sub_source.slice!(0) # the attached_file_file_path ends up adding an extra "/" in the beginning. We've removed this.
     puts "$%$%$%$%$ " + sub_source + "!!!!!"
     source = s3.buckets['ambition-dev'].objects[sub_source]
-    source.copy_to(destination) #copy_to is a method originating from the aws-sdk gem.  
-    source.delete #delete temp file.
-  end
+    tries ||= 3
+    source.copy_to(destination) #copy_to is a method originating from the aws-sdk gem.
+    
+  rescue AWS::S3::Errors::NoSuchKey => e
+    tries -= 1
+    if tries > 0
+      sleep(3)
+      retry
+    else
+      source.delete #delete temp file.
+    end
+  end  
+    # source.delete #delete temp file.
+  
   
   
   

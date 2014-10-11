@@ -6,6 +6,15 @@ $round-thumb: 100px;
 
 $user-details-edit-bottom-space: 20px;
 
+$max-form-width: 600px;
+
+/*User activity form*/
+$complete-color: #f1c40f;
+$complete-text-color: #A38E39; 
+$delete-color: #c0392b;
+$create-color: #27ae60;
+
+
 .user-fields-container{
   margin: auto;
   max-width: 600px;
@@ -17,6 +26,7 @@ $user-details-edit-bottom-space: 20px;
 	border-radius: 4px;
 	box-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
 	margin-bottom: 60px;
+	background-color: white;
 }
 .user-card-container{
 	padding-right: 10px;
@@ -46,6 +56,16 @@ $user-details-edit-bottom-space: 20px;
 	display:block;
 	width: 60px;
 	height: 60px;
+}
+
+.inactive-link{
+  pointer-events: none;
+  cursor: default;
+  color: #888;
+}
+
+h1.name{
+  margin-bottom: 20px;
 }
 
 .round img {
@@ -165,8 +185,51 @@ p.bio-header{
 	max-width: 600px;
 	margin: auto;
 }
+.bio-fields{
+  input.bio-a{
+    width: 200px;
+    display:inline-block;
+    margin-bottom: 5px;
+    font-size: 100%;
 
-
+  }
+  input.bio-b{
+    width: 150px;
+    display:inline-block;
+    margin-bottom: 5px;
+    font-size: 100%;
+  }
+  input.bio-c{
+    width: 150px;
+    display:inline-block;
+    margin-bottom: 5px;
+    font-size: 100%;
+  }
+  input.bio-d{
+    width: 160px;
+    display:inline-block;
+    margin-bottom: 5px;
+    font-size: 100%;
+  }
+  input.bio-e{
+    width: 300px;
+    display:inline-block;
+    margin-bottom: 5px;
+    font-size: 100%;
+  }
+  input.bio-f{
+    width: 300px;
+    display:inline-block;
+    margin-bottom: 5px;
+    font-size: 100%;
+  }
+  textarea.bio-g{
+    width: 400px;
+    display:inline-block;
+    margin-bottom: 5px;
+    font-size: 100%;
+  }
+}
 
 /*.ambition{
 	background: rgba(0,0,0,0.4);
@@ -240,7 +303,7 @@ p.bio-header{
 }*/
 .story-text p{
 	margin: auto;
-	max-width: 600px;
+	max-width: $max-form-width;;
 	font-size: 200%;
 	font-weight: 700;
 	/*font-style: italic;*/
@@ -250,7 +313,7 @@ p.bio-header{
 }
 .story-text textarea{
   margin: auto;
-	max-width: 600px;
+	max-width: $max-form-width;;
 	font-size: 200%;
 	font-weight: 700;
 	/*font-style: italic;*/
@@ -274,6 +337,89 @@ p.current-activity-header{
 .current-activities textarea{
   font-size: 120%;
 }
+
+.current-activities-form{
+  margin: auto;
+  padding-left: 30px;
+  max-width: $max-form-width;
+  label.number{
+    float:left;
+    width: 50px;
+    font-size: 18px;
+    margin-right:10px;
+    padding-bottom: 5px;
+    padding-top: 3px;
+  }
+  input{
+    max-width: 400px;
+    float:left;
+  }
+  .current-activity-button{
+    
+  }
+  input[type="submit"].add-activity{
+    font-size: 40px;
+    line-height: 0;
+    color: #666;
+    background-color: white;
+    border: solid 2px white;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    padding-top: 4px;
+    padding-left: 5px;
+    margin-left: 10px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.35);
+    
+  }
+  input[type="submit"].add-activity:hover{
+    border: solid 2px $create-color;
+    color: $create-color;
+  }
+  a.destroy-activity{
+    font-size: 18px;
+    padding-top: 1px;
+    padding-left: 1px;
+    color: #666;
+    background-color: white;
+    border: solid 2px white;
+    border-radius: 50%;
+    display:inline-block;
+    
+    height: 30px;
+    width: 30px;
+
+    margin-left: 10px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.35);
+
+  }
+  a.destroy-activity:hover{
+    border: solid 2px $delete-color ;
+    color: $delete-color;
+    text-decoration: none;
+  }
+  a.finish-activity{
+    font-size: 18px;
+    
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #666;
+    background-color: white;
+    border: solid 2px white;
+    display: inline-block;
+    height: 29px;
+    margin-left: 10px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.35);
+  }
+  a.finish-activity:hover{
+    border: solid 2px $complete-color;
+    color: $complete-text-color;
+    text-decoration: none;
+  }
+}
+
+
 .story-bio textarea{
   font-size: 120%;
 }

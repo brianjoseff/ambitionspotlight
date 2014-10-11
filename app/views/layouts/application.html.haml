@@ -24,7 +24,7 @@
             var triggerheight = Math.round(boxheight/itemlength+1);
           $('#myCarousel .list-group-item').outerHeight(triggerheight);
       };
-  %body{class: "#{!current_user && current_page?(root_url) || current_page?(new_user_registration_path) || current_page?(new_user_session_path) || current_page?(about_path) ? 'intro-header' : ''}", onload:"carousel()"}
+  %body{class: "#{ current_user && current_page?(user_path(current_user)) ? '' : 'background' }", onload:"carousel()"}
     / #holder
     /   #body
     .wrapper
