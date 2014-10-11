@@ -1,22 +1,28 @@
-.current-activities-form
-  -3.times do |a|
-    -if @user.activities[a]
-      %p
-        #{(a+1).to_s + ". " +@user.activities[a].title}
-        %a{href:@user.activities[a], method: :delete, remote: true, class: 'current-activity-button destroy-activity', data: { confirm: 'Are you sure?' }}
-          X
-          /%span.glyphicon.glyphicon-remove
-          / %span= link_to 'done', deactivate_activity_path(@user.activities[a]), remote: true, :class => 'current-activity-button finish-activity'
-    -else
-      = form_for(@user.activities.build,url: add_activity_path, remote: true, format: :json, html: {class: "activity-form form-horizontal"}) do |f|
-        #error_explanation{:style => "display:none;"}
-          %ul
-            - if @user.activities.last.errors.any?
-              - @activites[a].errors.full_messages.each do |msg|
-                %li= msg
-        .form-group
-          %label.control-label.number #{(a+1).to_s + ". "}
-          .field   
-            = f.text_field :title, class: "form-control", placeholder: "#{if a ==0 then 'Working out in the gym everyday' elsif a==1 then 'Building my network' else 'Receiving guidance from Ambition Spotlight' end}"       
-            .submit
-              = f.submit "+", class: "current-activity-button add-activity"
+-if current_user && current_user === @user
+  .current-activities-form
+    -3.times do |a|
+      -if @user.activities[a]
+        %p
+          #{(a+1).to_s + ". " +@user.activities[a].title}
+          %a{href:@user.activities[a], method: :delete, remote: true, class: 'current-activity-button destroy-activity', data: { confirm: 'Are you sure?' }}
+            X
+            /%span.glyphicon.glyphicon-remove
+            / %span= link_to 'done', deactivate_activity_path(@user.activities[a]), remote: true, :class => 'current-activity-button finish-activity'
+      -else
+        = form_for(@user.activities.build,url: add_activity_path, remote: true, format: :json, html: {class: "activity-form form-horizontal"}) do |f|
+          #error_explanation{:style => "display:none;"}
+            %ul
+              - if @user.activities.last.errors.any?
+                - @activites[a].errors.full_messages.each do |msg|
+                  %li= msg
+          .form-group
+            %label.control-label.number #{(a+1).to_s + ". "}
+            .field   
+              = f.text_field :title, class: "form-control", placeholder: "#{if a ==0 then 'Working out in the gym everyday' elsif a==1 then 'Building my network' else 'Receiving guidance from Ambition Spotlight' end}"       
+              .submit
+                = f.submit "+", class: "current-activity-button add-activity"
+-else
+  -@user.activities.each_with_index do |a, i|
+    %p
+      #{(i+1).to_s + ". " +a.title}
+  
