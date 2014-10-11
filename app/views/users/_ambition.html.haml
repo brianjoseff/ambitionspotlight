@@ -7,8 +7,8 @@
       = form_for(@user,url: update_ambition_user_path, remote: true, format: :json, html: {class: ""}) do |f|
         #error_explanation{:style => "display:none;"}
           %ul
-            - if @user.activities.last.errors.any?
-              - @activites[a].errors.full_messages.each do |msg|
+            - if @user.errors.any?
+              - @user.errors.full_messages.each do |msg|
                 %li= msg
         
         .controls   
