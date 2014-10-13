@@ -27,6 +27,8 @@
       
 -else
   -@user.activities.each_with_index do |a, i|
+    -if i==4
+      break
     %p
       #{(i+1).to_s + ". " + (a.title ? a.title : '')}
   

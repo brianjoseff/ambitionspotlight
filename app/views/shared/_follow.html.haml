@@ -5,7 +5,7 @@
         = render 'unfollow'
 
       - elsif current_user.nil?
-        =link_to "BELIEVE IN ME", new_user_registration_path, class: "btn btn-large btn-primary make-button follow-button"
+        =link_to "BELIEVE IN ME", new_user_registration_path, class: "btn btn-large make-button follow-button"
       -else
         = render 'follow'
         / -unless @task.nil?

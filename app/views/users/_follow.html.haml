@@ -1,4 +1,4 @@
 = form_for(current_user.followships.build(followed_id: @user.id), remote: true) do |f|
   %div
     = f.hidden_field :followed_id
-  = f.submit "BELIEVE IN ME", class: "btn btn-large btn-primary follow-button"
+  = f.submit "BELIEVE IN ME", class: "btn btn-large follow-button"
