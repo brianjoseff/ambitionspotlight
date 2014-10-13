@@ -11,7 +11,13 @@ ready = ->
     e.preventDefault()
     $('div.change-password-veil').toggle()
   
-
+  $(document).on 'click', '.destroy-activity', "current-activity", (e) ->
+    activity_holder = $(this).closest('.current-activity')
+    activity_holder.toggleClass('delete-activity')
+    temp_id = $(this).data('temp-id')
+    console.log(temp_id)
+    activity_holder.data('temp-id', temp_id)
+  
   $(document).on 'click', '.ad-lib-link', "bio-fields", (e) ->
     e.preventDefault()
     $(".ad-lib").toggle()

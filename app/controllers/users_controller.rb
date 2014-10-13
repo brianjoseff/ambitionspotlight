@@ -6,7 +6,7 @@ class UsersController < ApplicationController
       @followers = @user.followers
       @task = @user.tasks.last
     end
-    
+    @activity = @user.activities.build
     
   end
   
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   def add_activity
     @user = User.find(current_user.id)
     @activity = @user.activities.create(activity_params)
-    
+    @temp_id = params[:temp_id]
     respond_to do |format|
       if @activity.save
         format.js {}

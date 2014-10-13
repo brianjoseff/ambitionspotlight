@@ -47,6 +47,15 @@ padding-bottom: 200px;
 html, body {
     height: 100%;
 }
+
+
+.background{
+  background: url(http://www.traemcneely.com/wp-content/uploads/2011/10/wpid-000035241.jpg) center center;
+  background-attachment:fixed;
+  background-size: cover;
+/*  background-color: #2E1008;*/
+}
+
 .wrapper {
     min-height: 100%;
     height: auto !important;

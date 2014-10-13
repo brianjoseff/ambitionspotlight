@@ -1,27 +1,30 @@
 -if current_user && current_user === @user
   .current-activities-form
     -3.times do |a|
-      -if @user.activities[a]
-        %p
-          #{(a+1).to_s + ". " +@user.activities[a].title}
-          =link_to "X", @user.activities[a], method: :delete, remote: true, class:'current-activity-button destroy-activity', data: { confirm: 'Are you sure?' }
-          / %a{href:@user.activities[a], method: :delete, remote: true, class: 'current-activity-button destroy-activity', data: { confirm: 'Are you sure?' }}
-          /   X
-          /   /%span.glyphicon.glyphicon-remove
-          /   / %span= link_to 'done', deactivate_activity_path(@user.activities[a]), remote: true, :class => 'current-activity-button finish-activity'
-      -else
-        = form_for(@user.activities.build,url: add_activity_path, remote: true, format: :json, html: {class: "activity-form form-horizontal"}) do |f|
-          #error_explanation{:style => "display:none;"}
-            %ul
-              - if @user.activities.last.errors.any?
-                - @activites[a].errors.full_messages.each do |msg|
-                  %li= msg
-          .form-group
-            %label.control-label.number #{(a+1).to_s + ". "}
-            .field   
-              = f.text_field :title, class: "form-control", placeholder: "#{if a ==0 then 'Working out in the gym everyday' elsif a==1 then 'Building my network' else 'Receiving guidance from Ambition Spotlight' end}"       
-              .submit
-                = f.submit "+", class: "current-activity-button add-activity"
+      %div
+        %span.number
+          %p
+            #{(a+1).to_s + ". " }
+            #{puts "$$$$$$$$$" + @user.activities[a].to_s + "and" + @user.activities[a].nil?.to_s }
+        .current-activity
+          -if !@user.activities[a].nil? && @user.activities[a].title
+            #{puts "!!!!!!!1user activity exists1!!!!!!!!!"}
+            %div{id: "activity_#{a}"}
+              /activity not equal to nil
+              =render partial: 'activity', locals: {user: @user, activity: @user.activities[a], temp_id: a}
+        
+        
+            / %div{id: "activity_#{@user.activities[a].id}"}
+            /   /activity not equal to nil
+            /   =render partial: 'activity', locals: {user: @user, activity: @user.activities[a], temp_id: a}
+          -else
+            /activity is NIL
+            %div{id: "activity_#{a}"}
+              =render partial: 'activity', locals: {user: @user, activity: @activity, temp_id: a}
+            / %div{id: "new_activity_#{a}"}
+            /   =render partial: 'activity', locals: {user: @user, activity: @activity, temp_id: a}
+    
+      
 -else
   -@user.activities.each_with_index do |a, i|
     %p

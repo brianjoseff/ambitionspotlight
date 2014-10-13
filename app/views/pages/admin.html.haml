@@ -1,16 +1,17 @@
--@leaders.each do |leader|
-  %h2=leader.name
+.admin
+  -@leaders.each do |leader|
+    %h2=leader.name
  
-  -if leader.spotlight
-    %p=leader.spotlight.active
-    =form_for leader.spotlight, url: spotlight_path(leader.spotlight) do |f|
-      =hidden_field_tag 'user_id', leader.id
-      =f.file_field :image, type: "file"
+    -if leader.spotlight
+      %p=leader.spotlight.active
+      =form_for leader.spotlight, url: spotlight_path(leader.spotlight) do |f|
+        =hidden_field_tag 'user_id', leader.id
+        =f.file_field :image, type: "file"
     
-      =f.submit
-  -else
-    =form_for leader.build_spotlight do |f|
-      =hidden_field_tag 'user_id', leader.id
-      =f.file_field :image, type: "file"
+        =f.submit
+    -else
+      =form_for leader.build_spotlight do |f|
+        =hidden_field_tag 'user_id', leader.id
+        =f.file_field :image, type: "file"
     
-      =f.submit
+        =f.submit

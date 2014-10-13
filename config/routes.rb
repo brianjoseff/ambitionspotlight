@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
-  resources :activities do
-    member do
-      get :deactivate
-    end
-  end
+
 
   mount Judge::Engine => '/judge'
   
@@ -22,6 +18,11 @@ Rails.application.routes.draw do
   resources :spotlights
   # devise_for :users
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions'}
+  resources :activities do
+    member do
+      get :deactivate
+    end
+  end
   resources :users do
     member do
       get :edit_ambition
@@ -29,6 +30,7 @@ Rails.application.routes.draw do
       get :edit_bio
       patch :update_bio
     end
+
   end
   
   match '/add_activity', to: "users#add_activity", via: :post

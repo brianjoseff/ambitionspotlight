@@ -1,0 +1,22 @@
+
+-if activity.id
+  .title
+    =activity.title
+    =link_to "X", activity_path(activity, temp_id: temp_id), method: :delete, remote: true, class:'current-activity-button destroy-activity', data: { confirm: 'Are you sure?', temp_id: temp_id }
+
+-else
+  = form_for(activity,url: add_activity_path, remote: true, format: :json, html: {class: "activity-form form-horizontal"}) do |f|
+    #error_explanation{:style => "display:none;"}
+      %ul
+        - if @user.activities.last.errors.any?
+          - @user.activities.last.errors.full_messages.each do |msg|
+            %li= msg
+    =hidden_field_tag 'temp_id', temp_id
+    .form-group
+      /%label.control-label.number #{(a+1).to_s + ". "}
+      .field   
+        = f.text_field :title, class: "form-control", placeholder: "#{if temp_id ==0 then 'Working out in the gym everyday' elsif temp_id==1 then 'Building my network' else 'Receiving guidance from Ambition Spotlight' end}"       
+        .submit
+          = f.submit "+", class: "current-activity-button add-activity"
+            
+

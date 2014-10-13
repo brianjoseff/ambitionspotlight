@@ -57,8 +57,11 @@ class ActivitiesController < ApplicationController
   def destroy
     @activity.destroy
     @user = current_user
+    @new_activity = @user.activities.build
+    @temp_id = params[:temp_id]
+    
     respond_to do |format|
-      format.js {@user}
+      format.js {}
     end
   end
 
