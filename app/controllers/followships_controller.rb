@@ -5,12 +5,14 @@ class FollowshipsController < ApplicationController
   
   def create
     @user = User.find(params[:followship][:followed_id])
+    @followers = @user.followers
     current_user.follow!(@user)
     respond_with @user
   end
 
   def destroy
     @user = Followship.find(params[:id]).followed
+    @followers = @user.followers
     current_user.unfollow!(@user)
     respond_with @user
   end

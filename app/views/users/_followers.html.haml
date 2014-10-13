@@ -1,0 +1,14 @@
+-if @followers
+  -@followers.each_with_index do |f, i|
+    %div{class: "#{ i % 3 == 0 || i == 0 ? 'row' : ''}" }
+    .col-sm-4
+      -if !f.profile_photo
+        .follower-pic-name.text-center
+          .round-thumbnail
+            =link_to image_tag(f.profile_photo.url(:small), :alt => f.name, class: "circle-image"), user_path(f)
+          %p=f.name
+      -else
+        .follower-pic-name.text-center
+          .round-thumbnail
+            =link_to image_tag(f.assets.empty?  ? '/assets/user-placeholder-follower.png': f.assets.first.image.url(:small), :alt => f.name, class: "circle-image"), user_path(f)
+          %p=f.name
