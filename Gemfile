@@ -45,6 +45,7 @@ gem 'social-share-button'
 
 gem 'merit'
 
+gem 'mandrill-api'
 
 # TASKS
 gem 'forgery'

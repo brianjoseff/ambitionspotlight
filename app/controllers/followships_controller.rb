@@ -5,8 +5,14 @@ class FollowshipsController < ApplicationController
   
   def create
     @user = User.find(params[:followship][:followed_id])
+    @believer = current_user
+    
     @followers = @user.followers
     current_user.follow!(@user)
+    
+    # InvitationMailer.delay.follow_notification
+    InvitationMailer.invite(@user, @believer).deliver
+    
     respond_with @user
   end
 

@@ -1,0 +1,7 @@
+=link_to @user.name, user_path(@user)
+%p=@user.email
+-if @user.ambition
+  %p=@user.ambition
+-if @user.bio
+  %p=@user.bio
+

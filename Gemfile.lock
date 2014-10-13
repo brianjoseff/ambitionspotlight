@@ -112,6 +112,9 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mandrill-api (1.0.52)
+      excon (>= 0.16.0, < 1.0)
+      json (>= 1.7.7, < 2.0)
     merit (1.7.0)
       ambry (~> 0.3.0)
     mime-types (1.25.1)
@@ -227,6 +230,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   judge
+  mandrill-api
   merit
   paperclip (~> 4.1)
   pg

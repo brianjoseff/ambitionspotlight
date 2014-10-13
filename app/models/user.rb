@@ -14,7 +14,10 @@ class User < ActiveRecord::Base
   
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-         
+  
+  after_create :notify_admins
+  
+      
   has_attached_file :profile_photo, styles: { :normal => "100%",:small => "100 x100>",:medium => "200x200>", :thumb => "50x50>", spacer: "x50" },
                                     storage: :s3,
                                     :s3_credentials => Proc.new{|a| Rails.env.production? ? a.instance.prod_s3_credentials :  a.instance.s3_credentials},
@@ -61,6 +64,14 @@ class User < ActiveRecord::Base
     all.select{|x| x.leader?}
   end
   
+  def self.admins
+    all.select{|x| x.admin?}
+  end
+  
+  def admin?
+    return self.admin
+  end
+  
   def leader?
     return self.leader
   end
@@ -75,5 +86,13 @@ class User < ActiveRecord::Base
 
   def unfollow!(other_user)
     followships.find_by_followed_id(other_user.id).destroy
+  end
+  
+  
+  def notify_admins
+    @admins = User.admins
+    @admins.each do |admin|
+      AdminMailer.notify_about_sign_up(self,admin)
+    end
   end
 end
