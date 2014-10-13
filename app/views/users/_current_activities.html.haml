@@ -28,5 +28,5 @@
 -else
   -@user.activities.each_with_index do |a, i|
     %p
-      #{(i+1).to_s + ". " +a.title}
+      #{(i+1).to_s + ". " + (a.title ? a.title : '')}
   
