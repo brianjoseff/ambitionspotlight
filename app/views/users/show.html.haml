@@ -27,7 +27,7 @@
         .story
           .story-header
             %p
-              WHERE I WANT TO BE IN 5 YEARS...
+              WHERE I WANT TO BE IN 5 YEARS
           .story-text#ambition
             =render partial: 'ambition', locals: {user: @user}
             /%p=@user.ambition
@@ -46,7 +46,7 @@
         .story
           .story-header
             %p
-              WHAT I'M DOING TO GET THERE...
+              WHAT I'M DOING TO GET THERE
               / -if current_user && current_user == @user
               /   %span=link_to "Edit Details", edit_user_registration_path(current_user)
           .story#activities
@@ -69,7 +69,7 @@
         .story
           .story-header
             %p
-              WHO I AM...
+              WHO I AM
               / -if current_user && current_user == @user
               /   %span=link_to "Edit Details", edit_user_registration_path(current_user)
           .story#bio
@@ -81,7 +81,7 @@
         /YOUR FOLLOWING
         .story
           .story-header
-            %p WHO BELIEVES IN ME...
+            %p WHO BELIEVES IN ME
         
             /have a "share profile" link or something to post on facebook
         
