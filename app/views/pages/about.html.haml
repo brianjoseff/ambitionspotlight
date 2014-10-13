@@ -9,8 +9,7 @@
   
   //lines?
   .about-team.text-center
-    %h1 Team
-    %p.text-center Founded in East Palo Alto
+
     .row
       .col-lg-6
         -if @david
@@ -30,7 +29,8 @@
                 
           %h3=link_to 'Brian Joseff', user_path(@brian), class: "about-name"
           /%p Founder
-  
+      
+  %p.text-center Founded in East Palo Alto
   / .about-story.text-center
   /     %h2.text-center Diamonds in the Rough
   / 
