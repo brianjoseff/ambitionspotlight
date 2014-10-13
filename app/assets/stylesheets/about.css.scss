@@ -26,3 +26,14 @@
     font-weight: 800;
   }
 }
+
+a.about-name{
+	font-size: 30px;
+	color: #fff;
+	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+a.about-name:hover{
+		text-decoration:none;
+		color: #e6e6e6;
+		text-shadow: rgb(255, 255, 255) 0px 0px 9px;
+}

@@ -3,8 +3,7 @@ $img: 150px;
 .user-list-card{
 	padding-top: 0;
 	border-radius: 4px;
-	-webkit-transition: all 250ms ease;
-	-webkit-transition: box-shadow 1s ease;
+	-webkit-transition: box-shadow 1s ease, background-color 500ms ease, transform 500ms ease;
 	
 	-moz-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.35), inset 0 0 0 #000;
 	-webkit-box-shadow: 0 1px 10px rgba(0,0,0,0.35),inset 0 0 0 #000;
@@ -37,6 +36,7 @@ $img: 150px;
 
 .user-list-card:hover{
   background-color: rgba(255, 255, 255, 0.75);
+  transform: scale(1.05,1.05);
   p, a.user-list-card-name{
     color: #333;
   }

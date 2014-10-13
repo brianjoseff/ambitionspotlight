@@ -120,6 +120,7 @@ min-height: 100%;
 .follow-button{
 	background-color: #333;
 	border: solid 1px black;
+	color: white;
 
 }
 .follow-button a{
@@ -361,6 +362,12 @@ p.current-activity-header{
   .current-activity-button{
     
   }
+  .activity-form{
+    input[type="text"]{
+      position:relative;
+      
+    }
+  }
   input[type="submit"].add-activity{
     font-size: 40px;
     line-height: 0;
@@ -421,17 +428,22 @@ p.current-activity-header{
     color: $complete-text-color;
     text-decoration: none;
   }
-  span.number{
-    display:inline-block;
+  .number{
+    float:left;
     width: 50px;
   }
+  .edit-buttons{
+    float:right;
+  }
   .current-activity{
-    display:inline-block;
-    max-width: 400px;
+    padding-bottom: 12px;
   }
   .title{
     font-size:120%;
     font-weight: 300;
+  }
+  .form-horizontal .form-group{
+    margin-right: 0px;
   }
 }
 

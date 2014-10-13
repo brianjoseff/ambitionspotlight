@@ -19,7 +19,7 @@
               .round.round-center 
                 =link_to image_tag(@david.profile_photo.nil?  ? '/assets/user-placeholder.png': @david.profile_photo.url(:medium), :alt => @david.name, class: "circle-image"), user_path(@david)
                 
-          %h3 David Chatman
+          %h3=link_to 'David Chatman', user_path(@david), class: "about-name"
           /%p Founder
       .col-lg-6
         -if @brian
@@ -28,7 +28,7 @@
               .round.round-center
                 =link_to image_tag(@brian.profile_photo.nil?  ? '/assets/user-placeholder.png': @brian.profile_photo.url(:medium), :alt => @brian.name, class: "circle-image"), user_path(@brian)          
                 
-          %h3 Brian Joseff
+          %h3=link_to 'Brian Joseff', user_path(@brian), class: "about-name"
           /%p Founder
   
   / .about-story.text-center
