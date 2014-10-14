@@ -72,6 +72,10 @@ class User < ActiveRecord::Base
     return self.admin
   end
   
+  def self.sort_by_rating
+    all.sort_by {|u| u.rating ? u.rating : 0}
+  end
+  
   def leader?
     return self.leader
   end

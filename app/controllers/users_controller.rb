@@ -11,6 +11,9 @@ class UsersController < ApplicationController
     
   end
   
+  
+
+  
   def delete_activity
     @user = User.find(current_user.id)
     @activity = Activity.find(params[:activity_id])
