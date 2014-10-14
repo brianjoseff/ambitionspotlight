@@ -73,7 +73,7 @@ class User < ActiveRecord::Base
   end
   
   def self.sort_by_rating
-    all.sort_by {|u| u.rating ? u.rating : 0}
+    order('rating DESC')
   end
   
   def leader?
