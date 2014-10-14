@@ -12,4 +12,9 @@ class InvitationMailer < ActionMailer::Base
 
     mail(:to => user.email, :subject => "#{believer.name.nil? ? user.email : user.name} believes in you", :reply_to => "believe@ambitionspotlight.com")
   end
+  
+  
+  
+  
+  
 end
