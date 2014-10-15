@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       patch :update_ambition
       get :edit_bio
       patch :update_bio
+      patch :update_rating
     end
 
   end

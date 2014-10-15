@@ -1,17 +1,29 @@
-.admin
-  -@leaders.each do |leader|
-    %h2=leader.name
+.admin-page
+  %div
+    -@leaders.each do |leader|
+      %h2=leader.name
  
-    -if leader.spotlight
-      %p=leader.spotlight.active
-      =form_for leader.spotlight, url: spotlight_path(leader.spotlight) do |f|
-        =hidden_field_tag 'user_id', leader.id
-        =f.file_field :image, type: "file"
+      -if leader.spotlight
+        %p=leader.spotlight.active
+        =form_for leader.spotlight, url: spotlight_path(leader.spotlight) do |f|
+          =hidden_field_tag 'user_id', leader.id
+          =f.file_field :image, type: "file"
     
-        =f.submit
-    -else
-      =form_for leader.build_spotlight do |f|
-        =hidden_field_tag 'user_id', leader.id
-        =f.file_field :image, type: "file"
+          =f.submit
+      -else
+        =form_for leader.build_spotlight do |f|
+          =hidden_field_tag 'user_id', leader.id
+          =f.file_field :image, type: "file"
     
-        =f.submit
+          =f.submit
+  %div
+    %table
+      -@users.each do |u|
+        %tr
+          =form_for update_rating_user_path(u) do |f|
+            %td
+              =u.name
+            %td
+              =f.number_field :rating
+            %td
+              =f.submit "Update Rating"
