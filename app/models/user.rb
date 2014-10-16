@@ -96,7 +96,7 @@ class User < ActiveRecord::Base
   def notify_admins
     @admins = User.admins
     @admins.each do |admin|
-      AdminMailer.notify_about_sign_up(self,admin)
+      AdminMailer.notify_about_sign_up(self , admin).deliver
     end
   end
 end

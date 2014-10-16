@@ -10,4 +10,5 @@ class AdminMailer < ActionMailer::Base
     @user = user
     mail(:to => admin.email, :subject => "New User | #{user.name}", :reply_to => "new_user@ambitionspotlight.com")
   end
+  
 end
