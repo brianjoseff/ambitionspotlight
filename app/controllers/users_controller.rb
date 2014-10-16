@@ -71,6 +71,13 @@ class UsersController < ApplicationController
     end
   end
   
+  
+  def destroy
+    @user = User.friendly.find(params[:id])
+    @user.destroy
+    render @user
+  end
+  
   def edit_bio
     @user = current_user
     respond_to do |format|

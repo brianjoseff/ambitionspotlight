@@ -7,7 +7,11 @@
       /add top 3 activities right now
     
       .text-center
-      
+        -if current_user && current_user.admin?
+          %p
+            admin:
+          %p
+            #{@user.email}
         %h1.name
           =@user.name
         -if current_user && current_user == @user

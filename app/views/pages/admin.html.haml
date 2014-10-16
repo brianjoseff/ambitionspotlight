@@ -19,13 +19,25 @@
           =f.submit
   %div
     %table
+      %tr
+        
+        %th User Name
+        %th Destroy
+        %th Rating
+        %th Submit
+        %th Email
       -@users.each do |u|
         %tr
+          %td
+            =u.name
+          %td=link_to 'destroy', u, method: :delete, data: { confirm: 'Are you sure?'}
           = form_for(u, url: update_rating_user_path(u), html: { method: :put }) do |f|
-            %td
-              =u.name
+
             %td
               =f.hidden_field :id
               =f.number_field :rating
             %td
               =f.submit "Update Rating"
+          %td
+            =u.email
+          
