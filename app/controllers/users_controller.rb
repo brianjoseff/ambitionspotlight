@@ -11,6 +11,8 @@ class UsersController < ApplicationController
     
   end
   
+  def update
+  end
   
 
   
@@ -77,10 +79,14 @@ class UsersController < ApplicationController
   end
   
   def update_rating
-    @user = User.find(user_params)
-    
+    @user = User.find(user_params[:id])
+    @user.rating = user_params[:rating]
+    if @user.ambition.nil?
+      @user.ambition = '.'
+    end
+    @user.save!
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.save
         format.html { render @user}
       else
         format.html { render @user}
@@ -142,7 +148,7 @@ private
     params.require(:activity).permit(:user_id, :title)
   end
   def user_params
-    params.require(:user).permit(:ambition, :name, :bio,:rating, bio_pieces: [:a, :b, :c, :d, :e, :f, :g])
+    params.require(:user).permit(:id, :ambition, :name, :bio,:rating, bio_pieces: [:a, :b, :c, :d, :e, :f, :g])
   end
   def bio_params
     params.require(:bio_pieces).permit(:a, :b,:c, :d, :e, :f, :g)
