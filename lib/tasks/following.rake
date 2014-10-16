@@ -19,7 +19,8 @@ namespace :db do
                    bio: bio,
                    occupation: occupation,
                    current_activities: current_activities,
-                   ambition: ambition)
+                   ambition: ambition,
+                   rating: 0)
     end
 
     users = User.all

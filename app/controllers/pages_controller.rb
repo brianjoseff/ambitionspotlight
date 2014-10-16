@@ -9,7 +9,7 @@ class PagesController < ApplicationController
   
   def admin
     @leaders = User.leaders
-    @users = User.all
+    @users = User.order('rating DESC')
   end
   
   def about

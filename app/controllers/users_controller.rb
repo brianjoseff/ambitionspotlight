@@ -133,7 +133,7 @@ class UsersController < ApplicationController
   end
   
   def index
-    @users = User.sort_by_rating
+    @users = User.order('rating DESC')
   end
 
 
