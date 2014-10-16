@@ -1,4 +1,5 @@
 .admin-page
+  %h1 User Count: #{@users.count}
   %div
     -@leaders.each do |leader|
       %h2=leader.name
