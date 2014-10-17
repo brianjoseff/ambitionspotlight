@@ -78,7 +78,7 @@ Rails.application.configure do
   config.log_formatter = ::Logger::Formatter.new
   
   config.action_mailer.default_url_options = { :host => 'www.ambitionspotlight.com' }
-  config.acion_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default :charset => "utf-8"
