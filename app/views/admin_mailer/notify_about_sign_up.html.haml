@@ -1,4 +1,4 @@
-=link_to @user.name, user_path(@user)
+=link_to @user.name, user_path(@user, host: "ambitionspotlight.com")
 %p=@user.email
 -if @user.ambition
   %p=@user.ambition
