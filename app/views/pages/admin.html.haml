@@ -29,7 +29,7 @@
       -@users.each do |u|
         %tr
           %td
-            =u.name
+            =link_to u.name, user_path(u)
           %td=link_to 'destroy', u, method: :delete, data: { confirm: 'Are you sure?'}
           = form_for(u, url: update_rating_user_path(u), html: { method: :put }) do |f|
 
