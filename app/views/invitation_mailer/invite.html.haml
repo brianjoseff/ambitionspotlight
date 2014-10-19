@@ -1,5 +1,10 @@
 %h2 #{@believer.name} believes in you
 %p Check out their profile: #{link_to @believer.name, user_url(@believer , host: "ambitionspotlight.com")}
 
+-if @user.bio.nil? || @user.profile_photo_file_name.nil? || @user.activities == 0 || @user.admin?
+  %h2 Your profile is incomplete!
+  %p Finish #{link_to 'your profile', user_url(@user, host: "ambitionspotlight.com")} to become eligible for AmbitionSpotlight's White Glove Service.
+  %p Join other gifted and talented people benefitting from personalized, hands-on help from Ambition Spotlight mentors. Trust us. It will change your life.
+  %p=link_to 'Yes, I Want To Complete My Profile', user_url(@user, host: "ambitionspotlight.com")
 
 %p Ambition Spotlight
