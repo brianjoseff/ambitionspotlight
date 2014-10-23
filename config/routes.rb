@@ -31,6 +31,7 @@ Rails.application.routes.draw do
       patch :update_bio
       put :update_rating
       put :update_youtube
+      put :update_soundcloud
     end
 
   end

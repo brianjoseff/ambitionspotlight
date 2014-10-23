@@ -28,6 +28,8 @@
         %th Email
         %th Video
         %th Submit
+        %th Sound
+        %th Submit
       -@users.each do |u|
         %tr
           %td
@@ -39,7 +41,7 @@
               =f.hidden_field :id
               =f.number_field :rating
             %td
-              =f.submit "Update Rating"
+              =f.submit "+ r"
           %td
             =u.email
           
@@ -49,5 +51,12 @@
               =f.hidden_field :id
               =f.text_field :youtube_id
             %td
-              =f.submit "Update Vid"
+              =f.submit "+ v"
           
+          = form_for(u, url: update_soundcloud_user_path(u), html: { method: :put }) do |f|
+
+            %td
+              =f.hidden_field :id
+              =f.text_field :soundcloud_id
+            %td
+              =f.submit "+ s"
