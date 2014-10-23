@@ -26,6 +26,8 @@
         %th Rating
         %th Submit
         %th Email
+        %th Video
+        %th Submit
       -@users.each do |u|
         %tr
           %td
@@ -40,4 +42,12 @@
               =f.submit "Update Rating"
           %td
             =u.email
+          
+          = form_for(u, url: update_youtube_user_path(u), html: { method: :put }) do |f|
+
+            %td
+              =f.hidden_field :id
+              =f.text_field :youtube_id
+            %td
+              =f.submit "Update Vid"
           

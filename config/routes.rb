@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       get :edit_bio
       patch :update_bio
       put :update_rating
+      put :update_youtube
     end
 
   end

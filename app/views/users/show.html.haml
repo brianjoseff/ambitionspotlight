@@ -7,11 +7,11 @@
       /add top 3 activities right now
     
       .text-center
-        -if current_user && current_user.admin?
-          %p
-            admin:
-          %p
-            #{@user.email}
+        / -if current_user && current_user.admin?
+        /   %p
+        /     admin:
+        /   %p
+        /     #{@user.email}
         %h1.name
           =@user.name
         -if current_user && current_user == @user
@@ -78,6 +78,11 @@
               /   %span=link_to "Edit Details", edit_user_registration_path(current_user)
           .story#bio
             =render partial: 'bio', locals: {user: @user}
+          
+          -if @user.youtube_id
+            .video-container
+              %iframe{:allowfullscreen => "", :frameborder => "0", :height => "360", :src => "//www.youtube.com/embed/#{@user.youtube_id}", :width => "640"}
+          
             /%p=@user.bio 
 
       
