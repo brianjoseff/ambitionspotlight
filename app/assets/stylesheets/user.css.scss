@@ -241,6 +241,12 @@ p.bio-header{
 	overflow: hidden;
 }
 
+#new_user{
+  #error_explanation{
+    color: white;
+    border: solid 1px red;
+  }
+}
 
 /*.ambition{
 	background: rgba(0,0,0,0.4);
