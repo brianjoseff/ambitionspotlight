@@ -54,7 +54,7 @@
           - content_for :head do
             %meta{:content => "Ambition Spotlight | #{@user.name}", :property => "og:title"}
             %meta{:content => "#{@user.ambition}", :property => "og:description"}
-            %meta{:content => "http://ambitionspotlight.com" + user_path(@user), :property => "og:url"}
+            %meta{:content => "http://www.ambitionspotlight.com" + user_path(@user), :property => "og:url"}
             
             %meta{:content => "#{@user.profile_photo_file_name.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium)}", :property => "og:image"} 
             %meta{property: "og:type", content:"article"} 
