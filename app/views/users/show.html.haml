@@ -33,8 +33,7 @@
          
       /.fb-share-button{"data-href" => "http://www.ambitionspotlight.com/#{user_path(@user)}", "data-width" => "100"}
       
-      %meta{property:"og:title", content:"Ambition Spotlight | #{@user.name}"}
-      %meta{property:"og:description", content:"#{@user.ambition}"}
+
       .text-center 
         .story
           .story-header
@@ -50,12 +49,37 @@
             
             / -if @user.leader?
             /   =link_to "Your Dashboard", leader_dashboard_path, style:"font-size:50%"
-          =render partial: 'shared/follow', locals: {user: @user}  
+            
+          =render partial: 'shared/follow', locals: {user: @user}
+          - content_for :head do
+            %meta{:content => "Ambition Spotlight | #{@user.name}", :property => "og:title"}
+            %meta{:content => "#{@user.ambition}", :property => "og:description"}
+            %meta{:content => "http://ambitionspotlight.com" + user_path(@user), :property => "og:url"}
+            
+            %meta{:content => "#{@user.profile_photo_file_name.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium)}", :property => "og:image"} 
+            %meta{property: "og:type", content:"article"} 
+          
+          :javascript
+            $(function() {
+              var fb_share;
+              fb_share = function(o) {
+                console.log(o.data("link"));
+                FB.ui({
+                  method: 'share',
+                  href: o.data("link")
+                }, function(response) {});
+              };
+              return $(".fb-share-link").click(function(e) {
+                console.log(e);
+                e.preventDefault();
+                fb_share($(e.target));
+              });
+            });
           .share.text-center
-            %a{class: "fb-share-link btn btn-large make-button follow-button", remote:true, "data-name"=> "#{@user.name}", "data-link"=> "http://ambitionspotlight.com#{user_path(@user)}", "data-image" => "#{@user.profile_photo.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium)}", "data-description"=>"#{@user.ambition}"}
+            %a{class: "fb-share-link btn btn-large make-button follow-button", "data-name"=> "#{@user.name}", "data-link"=> "http://ambitionspotlight.com#{user_path(@user)}", "data-image" => "#{@user.profile_photo.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium)}", "data-description"=>"#{@user.ambition}"}
               %i.fa.fa-facebook.fb-icon
               | Share My Story
-          
+
         /CURRENT ACTIVITIES
         /List them
         /Highlight 1

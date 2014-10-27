@@ -26,23 +26,24 @@ ready = ->
     $("a.free-form-link").toggleClass('inactive-link')
   
   
-  fb_share = (o) ->
-    console.log(o.data("link"))
-    FB.ui
-      method: "share"
-      href: o.data("link")
-      # href: "ambitionspotlight.com"
-
-    , (response) ->
-    
-    return
-
-  $(".fb-share-link").click (e) ->
-    console.log(e)
-    e.preventDefault()
-    fb_share($(e.target))
-    
-    return
+  # fb_share = (o) ->
+  #   console.log(o.data("link"))
+  #   FB.ui
+  #     method: 'share'
+  #     href: o.data("link")
+  #     
+  #     # href: "ambitionspotlight.com"
+  # 
+  #   , (response) ->
+  #   
+  #   return
+  # 
+  # $(".fb-share-link").click (e) ->
+  #   console.log(e)
+  #   e.preventDefault()
+  #   fb_share($(e.target))
+  #   
+  #   return
 
   # fb_share = ->
   # 
