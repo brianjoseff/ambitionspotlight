@@ -1,11 +1,12 @@
 !!!
 %html
   %head
-    %title Ambitionspotlight
+    %title Ambition Spotlight
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
     %link{:href => "http://fonts.googleapis.com/css?family=Lato:300,400,700", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css", :rel => "stylesheet"}/
     %meta{content: "width=device-width, initial-scale=1", name: "viewport"}
     :javascript
       var _gaq = _gaq || [];
@@ -24,6 +25,23 @@
             var triggerheight = Math.round(boxheight/itemlength+1);
           $('#myCarousel .list-group-item').outerHeight(triggerheight);
       };
+    
+    :javascript
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '284714538404819',
+          xfbml      : true,
+          version    : 'v2.1'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
   %body{class: "background", onload:"carousel()"}
     /#{ current_user && current_page?(user_path(current_user)) ? '' : 'background' }
     / #holder

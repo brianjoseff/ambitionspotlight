@@ -14,6 +14,9 @@
         /     #{@user.email}
         %h1.name
           =@user.name
+        
+        /.fb-like{"data-share" => "true", "data-show-faces" => "true", "data-width" => "450"}
+        
         -if current_user && current_user == @user
           %span=link_to "Edit Details", edit_user_registration_path(current_user)
       .profile-pic
@@ -26,7 +29,12 @@
               
               =image_tag(@user.assets.empty?  ? '/assets/user-placeholder.png': @user.assets.first.image.url(:medium), :alt => @user.name, class: "circle-image")
       / .occupation-follow
-      /   %p.occupation=@user.occupation    
+      /   %p.occupation=@user.occupation 
+         
+      /.fb-share-button{"data-href" => "http://www.ambitionspotlight.com/#{user_path(@user)}", "data-width" => "100"}
+      
+      %meta{property:"og:title", content:"Ambition Spotlight | #{@user.name}"}
+      %meta{property:"og:description", content:"#{@user.ambition}"}
       .text-center 
         .story
           .story-header
@@ -43,6 +51,10 @@
             / -if @user.leader?
             /   =link_to "Your Dashboard", leader_dashboard_path, style:"font-size:50%"
           =render partial: 'shared/follow', locals: {user: @user}  
+          .share.text-center
+            %a{class: "fb-share-link btn btn-large make-button follow-button", remote:true, "data-name"=> "#{@user.name}", "data-link"=> "http://ambitionspotlight.com#{user_path(@user)}", "data-image" => "#{@user.profile_photo.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium)}", "data-description"=>"#{@user.ambition}"}
+              %i.fa.fa-facebook.fb-icon
+              | Share My Story
           
         /CURRENT ACTIVITIES
         /List them

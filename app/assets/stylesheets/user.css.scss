@@ -247,7 +247,16 @@ p.bio-header{
     border: solid 1px red;
   }
 }
-
+.share{
+  margin-top: 20px;
+  .fb-icon{
+    height: 15px;
+    width: 15px;
+    color: white;
+    margin-left: -5px;
+  }
+  
+}
 /*.ambition{
 	background: rgba(0,0,0,0.4);
 	padding: 15px;
