@@ -13,6 +13,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def edit
 
     resource.assets.build
+    puts params
+    @user = User.friendly.find(params[:format])
     
   end
   

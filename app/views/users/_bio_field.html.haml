@@ -2,14 +2,14 @@
 / |
 / =link_to "Free Form", "#", id: "free_form_button", class: "free-form-link"
 
-%a.inactive-link.ad-lib-link{href:"#"} Guided Bio
+%a.ad-lib-link{class: "#{@user.bio? ? '' : 'inactive-link'}", href: "#"} Guided Bio
 |
-%a.free-form-link{href:"#"} Free Form Bio
-  
+%a.free-form-link{class: "#{@user.bio? ? 'inactive-link' : ''}", href:"#"} Free Form Bio
+
 
   
 .bio-fields
-  .ad-lib
+  .ad-lib{style:"#{@user.bio? ? 'display:none' : ''}"}
     = form_for(@user,url: update_bio_user_path, remote: true, format: :json, html: {class: ""}) do |f|
       =hidden_field_tag 'ad_lib', 'ad_lib'
       #error_explanation{:style => "display:none;"}
@@ -49,7 +49,7 @@
       .submit
         = f.submit "Update", class: ""
 
-  .free-form{style:"display:none"}
+  .free-form{style:"#{@user.bio? ? '' : 'display:none'}"}
     = form_for(@user,url: update_bio_user_path, remote: true, format: :json, html: {class: ""}) do |f|
       =hidden_field_tag 'ad_lib', 'cod_fish'
       #error_explanation{:style => "display:none;"}

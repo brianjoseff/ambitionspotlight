@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   def show
+    
     @user = User.friendly.find(params[:id])
     if @user.leader?
       
@@ -14,6 +15,22 @@ class UsersController < ApplicationController
   def update
   end
   
+  def admin_edit
+    @user = User.friendly.find(params[:id])
+  end
+  
+  def admin_update
+    @user = User.friendly.find(params[:id])
+    respond_to do |format|
+      if @user.update_attributes(user_params)
+        format.html { redirect_to @user, notice: 'Post was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   
   def delete_activity
@@ -187,7 +204,7 @@ private
     params.require(:activity).permit(:user_id, :title)
   end
   def user_params
-    params.require(:user).permit(:id, :ambition, :name, :bio,:youtube_id,:soundcloud_id, :rating, bio_pieces: [:a, :b, :c, :d, :e, :f, :g])
+    params.require(:user).permit(:id, :ambition, :name, :bio,:youtube_id,:soundcloud_id, :rating, :profile_photo, bio_pieces: [:a, :b, :c, :d, :e, :f, :g])
   end
   def bio_params
     params.require(:bio_pieces).permit(:a, :b,:c, :d, :e, :f, :g)

@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   end
   resources :users do
     member do
+      get :admin_edit
+      put :admin_update
       get :edit_ambition
       patch :update_ambition
       get :edit_bio

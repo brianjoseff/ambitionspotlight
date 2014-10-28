@@ -1,0 +1,15 @@
+-if current_user && current_user.admin?
+  =form_for(@user, url: admin_update_user_path(@user), html:{method: :put}) do |f|
+    .profile-pic
+      .round-border
+        .round.round-center
+          -if @user.profile_photo_file_name
+            =link_to image_tag(@user.profile_photo.nil?  ? '/assets/user-placeholder.png' : @user.profile_photo.url(:medium), :alt => @user.name, class: "circle-image"), user_path(@user)
+          -else
+            =link_to image_tag(@user.assets.empty?  ? '/assets/user-placeholder.png': @user.assets.first.image.url(:medium), :alt => @user.name, class: "circle-image"), user_path(@user)
+    .form-group
+
+      .image-field
+        = f.file_field :profile_photo, type:"file"
+    
+    =f.submit "Update", class: "btn btn-primary submit-button follow-button"

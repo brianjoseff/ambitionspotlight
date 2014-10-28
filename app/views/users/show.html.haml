@@ -59,24 +59,9 @@
             %meta{:content => "#{@user.profile_photo_file_name.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium)}", :property => "og:image"} 
             %meta{property: "og:type", content:"article"} 
           
-          :javascript
-            $(function() {
-              var fb_share;
-              fb_share = function(o) {
-                console.log(o.data("link"));
-                FB.ui({
-                  method: 'share',
-                  href: o.data("link")
-                }, function(response) {});
-              };
-              return $(".fb-share-link").click(function(e) {
-                console.log(e);
-                e.preventDefault();
-                fb_share($(e.target));
-              });
-            });
+
           .share.text-center
-            %a{class: "fb-share-link btn btn-large make-button follow-button", "data-name"=> "#{@user.name}", "data-link"=> "http://ambitionspotlight.com#{user_path(@user)}", "data-image" => "#{@user.profile_photo.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium)}", "data-description"=>"#{@user.ambition}"}
+            %a{class: "fb-share-link btn btn-large make-button follow-button", "data-name"=> "#{@user.name}", "data-link"=> "http://www.ambitionspotlight.com#{user_path(@user)}", "data-image" => "#{@user.profile_photo.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium)}", "data-description"=>"#{@user.ambition}"}
               %i.fa.fa-facebook.fb-icon
               | Share My Story
 
