@@ -3,6 +3,9 @@ class UsersController < ApplicationController
   def show
     
     @user = User.friendly.find(params[:id])
+    if @user == current_user
+      @story_element = @user.story_elements.build
+    end
     if @user.leader?
       
       @task = @user.tasks.last
@@ -32,6 +35,19 @@ class UsersController < ApplicationController
     end
   end
 
+  # def add_story_element
+  #   @user = User.find(current_user.id)
+  #   @story_element = @user.story_elements.create(story_element_params)
+  #   # @temp_id = params[:temp_id]
+  #   respond_to do |format|
+  #     if @story_element.save
+  #       format.js {}
+  #       format.json { render @user}
+  #     else
+  #       format.json { render json: @story_element.errors.full_messages, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
   
   def delete_activity
     @user = User.find(current_user.id)
@@ -76,10 +92,44 @@ class UsersController < ApplicationController
   end
   
   def update_ambition
-    @user = User.find(current_user.id)
-    
+    # @user = User.find(current_user.id)
+    @user = current_user
     respond_to do |format|
       if @user.update(user_params)
+        format.js {}
+        format.json { render @user }
+      else
+        format.json { render json: @activity.errors.full_messages, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  def add_story_element
+    @user = User.find(current_user.id)
+    @story_element = @user.story_elements.create(story_element_params)
+    # @temp_id = params[:temp_id]
+    respond_to do |format|
+      if @story_element.save
+        format.js {}
+        format.json { render @user }
+      else
+        format.json { render json: @story_element.errors.full_messages, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  def edit_story_element
+    @user = current_user
+    respond_to do |format|
+      format.js {@user}
+    end
+  end
+  
+  def update_story_element
+    @user = current_user
+    
+    respond_to do |format|
+      if @user.update(story_element_params)
         format.js {}
         format.json { render @user }
       else
@@ -99,6 +149,39 @@ class UsersController < ApplicationController
     @user = current_user
     respond_to do |format|
       format.js {@user}
+    end
+  end
+  
+  def update_bio
+    @user = User.find(current_user.id)
+
+    respond_to do |format|
+      # puts "************" + params[:ad_lib]
+      
+      if params[:ad_lib] == 'ad_lib'
+        # puts "%%%%%%%%%%%" + params[:ad_lib]
+        # bio_params
+        bio = "I come from "+ bio_params[:a] +". I believe in "+ bio_params[:b]+", "+bio_params[:c]+", and " +bio_params[:d]+". People know me for "+ bio_params[:e]+". I am committed to "+bio_params[:f]+". I hope to "+bio_params[:g]+"."
+        # puts "!!!!!!!!!" + bio
+        # +", ______, and ______. People know me for  ______. I am committed to ______. I hope to _______________."
+        if @user.update(bio: bio)
+          format.js {}
+          format.json { render @user }
+        else
+          format.json { render json: @user.errors.full_messages, status: :unprocessable_entity }
+        end
+      else
+        # puts "xzxzxzxzxzxzxzxzxzx"
+        # bio = user_params[:bio].gsub! /\n /, "\n\n"
+        bio = user_params[:bio]
+        # puts bio
+        if @user.update(bio: bio)
+          format.js {}
+          format.json { render @user }
+        else
+          format.json { render json: @user.errors.full_messages, status: :unprocessable_entity }
+        end
+      end
     end
   end
   
@@ -150,38 +233,7 @@ class UsersController < ApplicationController
     end
   end
   
-  def update_bio
-    @user = User.find(current_user.id)
 
-    respond_to do |format|
-      # puts "************" + params[:ad_lib]
-      
-      if params[:ad_lib] == 'ad_lib'
-        # puts "%%%%%%%%%%%" + params[:ad_lib]
-        # bio_params
-        bio = "I come from "+ bio_params[:a] +". I believe in "+ bio_params[:b]+", "+bio_params[:c]+", and " +bio_params[:d]+". People know me for "+ bio_params[:e]+". I am committed to "+bio_params[:f]+". I hope to "+bio_params[:g]+"."
-        # puts "!!!!!!!!!" + bio
-        # +", ______, and ______. People know me for  ______. I am committed to ______. I hope to _______________."
-        if @user.update(bio: bio)
-          format.js {}
-          format.json { render @user }
-        else
-          format.json { render json: @user.errors.full_messages, status: :unprocessable_entity }
-        end
-      else
-        # puts "xzxzxzxzxzxzxzxzxzx"
-        # bio = user_params[:bio].gsub! /\n /, "\n\n"
-        bio = user_params[:bio]
-        # puts bio
-        if @user.update(bio: bio)
-          format.js {}
-          format.json { render @user }
-        else
-          format.json { render json: @user.errors.full_messages, status: :unprocessable_entity }
-        end
-      end
-    end
-  end
   
   
   def leader_dashboard
@@ -209,4 +261,8 @@ private
   def bio_params
     params.require(:bio_pieces).permit(:a, :b,:c, :d, :e, :f, :g)
   end
+  def story_element_params
+    params.require(:story_element).permit(:id, :user_id, :improvement, :achievement, achievement_pieces: [:a, :b, :c, :d, :e, :f, :g], improvement_pieces: [:a, :b, :c, :d, :e, :f, :g])
+  end
+  
 end

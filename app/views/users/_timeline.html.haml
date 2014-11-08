@@ -1,0 +1,19 @@
+.story-elements.text-center
+  #story_form
+    -if @user.story_elements.first.improvement    
+      -@user.story_elements.each_with_index do |se, i|
+        
+        %div{id: "story_element_#{se.id}"}
+          -unless se.new_record?
+            =render partial: "story_elements/story_element", locals: {story_element: se }
+          
+
+            -unless i == @user.story_elements.size - 2
+              .long-line
+
+    -else
+      -if current_user && current_user === @user
+        .story-element-form
+        
+        =render partial: "story_elements/story_element", locals: {story_element: @story_element}
+

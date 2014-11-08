@@ -1,10 +1,15 @@
-%h2 #{@believer.name} believes in you
+%h2 #{@believer.name} just read your profile and wants you to know that they believe in you!
+-if @believer.profile_photo_file_name 
+  =link_to image_tag(@believer.profile_photo.nil?  ? '/assets/user-placeholder.png': @believer.profile_photo.url(:medium), :alt => @believer.name, class: "circle-image"), user_url(@believer, host:"ambitionspotlight.com")
+  
 %p Check out their profile: #{link_to @believer.name, user_url(@believer , host: "ambitionspotlight.com")}
 
+
 -if @user.bio.nil? || @user.profile_photo_file_name.nil? || @user.activities == 0
-  %h2 Your profile is incomplete!
-  %p Finish #{link_to 'your profile', user_url(@user, host: "ambitionspotlight.com")} to become eligible for AmbitionSpotlight's White Glove Service.
-  %p Join other gifted and talented people benefitting from personalized, hands-on help from Ambition Spotlight mentors. Trust us. It will change your life.
+  %h3 Your profile is incomplete!
+  %p Finish #{link_to 'your profile', user_url(@user, host: "ambitionspotlight.com")} to become eligible for our Spotlight Program and receive personal mentorship.
+  %p This will change your life.
   %p=link_to 'Yes, I Want To Complete My Profile', user_url(@user, host: "ambitionspotlight.com")
 
 %p Ambition Spotlight
+%p For daily inspiration, check us out on #{link_to 'facebook', "https://www.facebook.com/ambitionspotlight"} and follow us on #{link_to 'twitter', "https://twitter.com/dreamers2doers" }.

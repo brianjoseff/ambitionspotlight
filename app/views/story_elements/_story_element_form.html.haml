@@ -1,0 +1,10 @@
+=form_for @story_element, remote: true, html: { class: "form story-element-form"} do |f|
+  / =hidden_field_tag 'temp_id', temp_id
+  %p.timeline-header Achieved
+  .controls
+    =f.text_area :achievement, class: "form-control", placeholder: "Created professional looking business cards with my contact info on them"
+  %p.timeline-header Need to improve
+  .controls
+    =f.text_area :improvement, class: "form-control", placeholder: "I did not stay on top of my email and let some emails fall through the cracks"
+  .submit-button.text-center
+    =f.submit "#{@story_element.persisted? ? 'Update Your Reflection' : 'Post Your Reflection'}" , class: "btn btn-large make-button landing-button"

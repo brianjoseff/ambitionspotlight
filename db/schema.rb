@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141023063114) do
+ActiveRecord::Schema.define(version: 20141106040040) do
 
   create_table "activities", force: true do |t|
     t.integer  "user_id"
@@ -154,6 +154,14 @@ ActiveRecord::Schema.define(version: 20141023063114) do
     t.boolean  "active"
   end
 
+  create_table "story_elements", force: true do |t|
+    t.text     "achievement"
+    t.text     "improvement"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "task_submissions", force: true do |t|
     t.integer  "user_id"
     t.integer  "task_id"
@@ -171,12 +179,12 @@ ActiveRecord::Schema.define(version: 20141023063114) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                      default: "", null: false
-    t.string   "encrypted_password",         default: "", null: false
+    t.string   "email",                      default: "",    null: false
+    t.string   "encrypted_password",         default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",              default: 0,  null: false
+    t.integer  "sign_in_count",              default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -200,6 +208,7 @@ ActiveRecord::Schema.define(version: 20141023063114) do
     t.integer  "rating",                     default: 0
     t.string   "youtube_id"
     t.string   "soundcloud_id"
+    t.boolean  "thinking",                   default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -1,0 +1,2 @@
+module StoryElementHelper
+end

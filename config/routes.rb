@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   mount Judge::Engine => '/judge'
   
   resources :albums
-
+  
+  resources :story_elements
+  
   resources :task_submissions do
     member do
       get :reject
@@ -34,10 +36,14 @@ Rails.application.routes.draw do
       put :update_rating
       put :update_youtube
       put :update_soundcloud
+      # put :add_story_element
+      # get :edit_story_element
+      # put :update_story_element
     end
-
+    resources :story_elements
   end
   
+  match '/add_story_element', to: "users#add_story_element", via: :post
   match '/add_activity', to: "users#add_activity", via: :post
   # resources :users do
   #   member do

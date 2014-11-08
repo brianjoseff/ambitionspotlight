@@ -1,0 +1,19 @@
+.time-circle
+  -if story_element.created_at.nil?
+    %p=l(Time.now, format: "%^b")
+
+  -else
+    %p=l(story_element.created_at, format: "%^b")
+    .line
+  
+  /%p=@story_element.created_at.month
+-if current_user && current_user === @user
+  .line
+.story-element-contents{id: "story_element_contents_#{story_element.id}"}
+  -if story_element.created_at.nil?
+    -if current_user && current_user === @user
+      
+      =render partial: 'story_elements/story_element_form', locals: {story_element: story_element}
+  -else
+    =render partial: 'story_elements/story_element_contents', locals: {story_element: story_element}
+    

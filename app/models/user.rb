@@ -46,11 +46,13 @@ class User < ActiveRecord::Base
   has_many :documents
   has_one :spotlight
   has_many :activities
+  has_many :story_elements
   
   accepts_nested_attributes_for :assets
   
+  ######## VALIDATION ########
+  validates_presence_of :name, :email
   
-  validates_presence_of :name, :email, :ambition
   
   def self.spotlit_users
     all.select do |u|

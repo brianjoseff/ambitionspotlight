@@ -27,11 +27,16 @@
         /     = f.text_field :occupation, autofocus: true, class: "form-control", :placeholder => "Example: MMA Coach", :validate => true
         .form-group
           = f.label "Where do you want to be in 5 years?", class: 'control-label'
+          %label
+            =f.check_box :thinking
+            I don't know yet! Let me think about it.
           .story-text
             .controls
               = f.text_area :ambition, type:"text",autofocus: true, class: "form-control text-center", :placeholder => "Running my own technology company and giving back to East Palo Alto through mentorship, philanthropy, and the multiplier effect", :rows => "5"
-      
-        
+        / %label.checkbox{style: "text-align:left"} 
+        /   =check_box_tag "I don't know yet! Let me think about it."
+        /   I don't know! Let me think about it.
+
         .form-group
           =f.label :email, :class => 'control-label'
           .controls
