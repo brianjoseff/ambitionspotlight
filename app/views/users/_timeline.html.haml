@@ -1,6 +1,6 @@
 .story-elements.text-center
   #story_form
-    -if @user.story_elements.first.improvement    
+    -if !@user.story_elements.first.nil?  
       -@user.story_elements.each_with_index do |se, i|
         
         %div{id: "story_element_#{se.id}"}
