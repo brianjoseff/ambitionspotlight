@@ -46,57 +46,59 @@
           .submit.text-center
             =f.submit "Update", class: "btn btn-primary submit-button follow-button"
           
-        /NAME
-        .story-name-edit
-          .controls
-            =f.text_field :name, type: "text", class: "form-control text-center", :placeholder => "Eugene Jackson"
-          
-        /PROFILE PHOTO
-
-        .profile-pic
-          .round-border
-            .round.round-center
-              -if @user.profile_photo_file_name
-                =link_to image_tag(@user.profile_photo.nil?  ? '/assets/user-placeholder.png' : @user.profile_photo.url(:medium), :alt => @user.name, class: "circle-image"), user_path(@user)
-              -else
-                =link_to image_tag(@user.assets.empty?  ? '/assets/user-placeholder.png': @user.assets.first.image.url(:medium), :alt => @user.name, class: "circle-image"), user_path(@user)
-        .form-group
-
-          .image-field
-            = f.file_field :profile_photo, type:"file"     
-                
-                
-        /AMBITION              
-        .text-center 
-          .story
-            .story-header
-              %p WHERE I WANT TO BE IN 5 YEARS...
-            .story-text
-              .controls
-                = f.text_area :ambition, type:"text",autofocus: true, class: "form-control text-center", :placeholder => "Running my own technology company and giving back to East Palo Alto through mentorship, philanthropy, and the multiplier effect", :rows => "5"
-              /%p=@user.ambition
-
-
-          /CURRENT ACTIVITIES (3 focuses)
-          .story-header
-            %p WHAT I'M DOING TO GET THERE...
-          .story
-            .current-activities
-              .controls
-                = f.text_area :current_activities, type:"text", autofocus: true, class: "form-control text-center", :placeholder => "Training, building a world-class gym at my house, mentoring kids in EPA", :rows => "5"
-
-          /BIO            
-          .story
-            .story-header
-              %p WHO I AM...
-            .story
-              .story-bio
-                .controls
-                  = f.text_area :bio, type:"text", autofocus: true, class: "form-control", :placeholder => "Tell us who you are and where you come from...", :rows => "5"
+        / /NAME
+        /     .story-name-edit
+        /       .controls
+        /         =f.text_field :name, type: "text", class: "form-control text-center", :placeholder => "Eugene Jackson"
+        /       
+        /     /PROFILE PHOTO
+        /     #profile_photo
+        /     .profile-pic
+        /       .round-border
+        /         .round.round-center
+        /           -if @user.profile_photo_file_name
+        /             =link_to image_tag(@user.profile_photo.nil?  ? '/assets/user-placeholder.png' : @user.profile_photo.url(:medium), :alt => @user.name, class: "circle-image"), user_path(@user)
+        /           -else
+        /             =link_to image_tag(@user.assets.empty?  ? '/assets/user-placeholder.png': @user.assets.first.image.url(:medium), :alt => @user.name, class: "circle-image"), user_path(@user)
+        /     .form-group
+        / 
+        /       .image-field
+        /         = f.file_field :profile_photo, type:"file"     
+        /             
+        /     
+        /     #ambition        
+        /     /AMBITION              
+        /     .text-center 
+        /       .story
+        /         .story-header
+        /           %p WHERE I WANT TO BE IN 5 YEARS...
+        /         .story-text
+        /           .controls
+        /             = f.text_area :ambition, type:"text",autofocus: true, class: "form-control text-center", :placeholder => "Running my own technology company and giving back to East Palo Alto through mentorship, philanthropy, and the multiplier effect", :rows => "5"
+        /           /%p=@user.ambition
+        / 
+        / 
+        /       /CURRENT ACTIVITIES (3 focuses)
+        /       .story-header
+        /         %p WHAT I'M DOING TO GET THERE...
+        /       .story
+        /         .current-activities
+        /           .controls
+        /             = f.text_area :current_activities, type:"text", autofocus: true, class: "form-control text-center", :placeholder => "Training, building a world-class gym at my house, mentoring kids in EPA", :rows => "5"
+        /       #bio
+        /       /BIO            
+        /       .story
+        /         .story-header
+        /           %p WHO I AM...
+        /         .story
+        /           .story-bio
+        /             .controls
+        /               = f.text_area :bio, type:"text", autofocus: true, class: "form-control", :placeholder => "Tell us who you are and where you come from...", :rows => "5"
+        / 
+        /       
+        / 
+        /       
+        /       .submit
+        /         =f.submit "Update", class: "btn btn-primary submit-button follow-button"
+        /       %br/
     
-          
-
-          
-          .submit
-            =f.submit "Update", class: "btn btn-primary submit-button follow-button"
-          %br/

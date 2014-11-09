@@ -44,7 +44,20 @@ ready = ->
     fb_share($(e.target))
     
     return
+  
+  # ------------------------------------------------------
+  # pretty-fy the upload field
+  # ------------------------------------------------------
+  $realInputField = $('#user_profile_photo')
 
+  # drop just the filename in the display field
+  $realInputField.change ->
+    $('#file_display').html $(@).val().replace(/^.*[\\\/]/, '')
+    $('.submit-profile-photo').show()
+
+  # trigger the real input field click to bring up the file selection dialog
+  $('#upload_btn').click ->
+    $realInputField.click()
   # fb_share = ->
   # 
   #   # facebook share dialog

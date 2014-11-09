@@ -1,0 +1,37 @@
+.next-profile-actions{
+  font-size: 85%;
+  border: solid 2px green;
+  border-radius: 4px;
+	box-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
+	margin-bottom: 60px;
+	background-color: rgba(255,255,255, 0.85);
+	padding-left: 10px;
+	padding-bottom: 10px;
+	max-width: 300px;
+  ul{
+    
+  }
+  .submit-profile-photo{
+    display:inline;
+    width: 50px;
+  }
+  h5{
+    margin-bottom: 5px;
+  }
+  h6{
+    margin-top: 5px;
+    color: #696969;
+  }
+  input[type="submit"]{
+    padding-top: 4px;
+    border: solid 2px green;
+    border-radius: 4px;
+    background-color: white;
+    color: green;
+    font-weight: bold;
+  }
+  input[type="submit"]:hover{
+    background-color: green;
+    color: white;
+  }
+}

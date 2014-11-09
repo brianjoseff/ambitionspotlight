@@ -18,7 +18,7 @@
 
 
 
-h1, h2, h3, p, label, input{
+h1, h2, h3, p, label, input, textarea{
 /*	color: #ebebeb;*/
 	font-weight: 300;
 	letter-spacing: 1px;

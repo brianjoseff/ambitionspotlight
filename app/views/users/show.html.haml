@@ -5,7 +5,27 @@
   .user-card-container
     .col-lg-8.user-card
       /add top 3 activities right now
-    
+      
+      -if current_user && current_user == @user
+        .next-profile-actions
+          %h5 Your profile is incomplete
+          %h6 Take it from zero to 100
+          /%p Do these things to make it 100%:
+          -unless current_user.profile_photo_file_name
+            =link_to "Upload Profile Picture", "#", id: "upload_btn"
+            =form_for current_user, url: registration_path(current_user), html: { method: :put } do |f|
+              = f.file_field :profile_photo, type: "file", label: 'Upload Attachment', style: "display:none;"
+              .input-append
+                %span#file_display.input-large.uneditable-input
+                %div.submit-profile-photo{style:"display:none;"}
+                  =f.submit "Upload"
+            
+          -unless current_user.ambition
+            =link_to "Tell us your ambition", edit_user_registration_path(current_user, anchor: "ambition")
+          -unless current_user.activities.first && current_user.activities.first.count == 3
+            =link_to "What are 3 things you are doing",anchor: "doing"
+          /=link_to "Tell us your ambition", edit_user_registration_path(current_user, anchor: "ambition")
+          
       .text-center
         / -if current_user && current_user.admin?
         /   %p
@@ -18,7 +38,7 @@
         /.fb-like{"data-share" => "true", "data-show-faces" => "true", "data-width" => "450"}
         
         -if current_user && current_user == @user
-          %span=link_to "Edit Details", edit_user_registration_path(current_user)
+          %span=link_to "Your Settings", edit_user_registration_path(current_user)
       .profile-pic
         .round-border
           .round.round-center
@@ -33,7 +53,7 @@
          
       /.fb-share-button{"data-href" => "http://www.ambitionspotlight.com/#{user_path(@user)}", "data-width" => "100"}
       
-
+      #ambition
       .text-center 
         .story
           .story-header
@@ -64,7 +84,8 @@
             %a{class: "fb-share-link btn btn-large make-button follow-button", "data-name"=> "#{@user.name}", "data-link"=> "http://www.ambitionspotlight.com#{user_path(@user)}", "data-image" => "#{@user.profile_photo.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium)}", "data-description"=>"#{@user.ambition}"}
               %i.fa.fa-facebook.fb-icon
               | Share My Story
-
+        
+        #doing
         /CURRENT ACTIVITIES
         /List them
         /Highlight 1
@@ -90,7 +111,7 @@
         /Most important accomplishment this month
 
         /History of accomlishments
-      
+        #bio
         .story
           .story-header
             %p
@@ -108,7 +129,7 @@
           /     %iframe{:frameborder => "no", :height => "350", :scrolling => "no", :src => "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/#{@user.soundcloud_id}&color=ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false", :width => "100%"}
           /   /%p=@user.bio 
 
-      
+        #timeline
         /TIMELINE WITH UPDATE
         .story
           .story-header
@@ -116,6 +137,7 @@
           .story#timeline
             =render partial: 'timeline', locals: {user: @user}
         
+        #believers
         /YOUR FOLLOWING
         .story
           .story-header
