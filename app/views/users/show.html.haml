@@ -22,7 +22,7 @@
             
           -unless current_user.ambition
             =link_to "Tell us your ambition", edit_user_registration_path(current_user, anchor: "ambition")
-          -unless current_user.activities.first && current_user.activities.first.count == 3
+          -unless current_user.activities.first && current_user.activities.count == 3
             =link_to "What are 3 things you are doing",anchor: "doing"
           /=link_to "Tell us your ambition", edit_user_registration_path(current_user, anchor: "ambition")
           
