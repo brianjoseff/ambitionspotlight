@@ -39,6 +39,7 @@ Rails.application.routes.draw do
       # put :add_story_element
       # get :edit_story_element
       # put :update_story_element
+      put :add_profile_photo
     end
     resources :story_elements
   end

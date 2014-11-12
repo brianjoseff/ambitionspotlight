@@ -7,24 +7,25 @@
       /add top 3 activities right now
       
       -if current_user && current_user == @user
-        .next-profile-actions
-          %h5 Your profile is incomplete
-          %h6 Take it from zero to 100
-          /%p Do these things to make it 100%:
-          -unless current_user.profile_photo_file_name
-            =link_to "Upload Profile Picture", "#", id: "upload_btn"
-            =form_for current_user, url: registration_path(current_user), html: { method: :put } do |f|
-              = f.file_field :profile_photo, type: "file", label: 'Upload Attachment', style: "display:none;"
-              .input-append
-                %span#file_display.input-large.uneditable-input
-                %div.submit-profile-photo{style:"display:none;"}
-                  =f.submit "Upload"
+        -if @no_activities || @no_ambition || @no_photo
+          .next-profile-actions
+            %h5 Your profile is incomplete
+            %h6 Take it from zero to 100
+            /%p Do these things to make it 100%:
+            -if @no_photo
+              =link_to "Upload Profile Picture", "#", id: "upload_btn"
+              =form_for current_user, url: add_profile_photo_user_path, html: { method: :put } do |f|
+                = f.file_field :profile_photo, type: "file", label: 'Upload Attachment', style: "display:none;"
+                .input-append
+                  %span#file_display.input-large.uneditable-input
+                  %div.submit-profile-photo{style:"display:none;"}
+                    =f.submit "Upload"
             
-          -unless current_user.ambition
-            =link_to "Tell us your ambition", edit_user_registration_path(current_user, anchor: "ambition")
-          -unless current_user.activities.first && current_user.activities.count == 3
-            =link_to "What are 3 things you are doing",anchor: "doing"
-          /=link_to "Tell us your ambition", edit_user_registration_path(current_user, anchor: "ambition")
+            -if @no_ambition
+              =link_to "Tell us your ambition", edit_user_registration_path(current_user, anchor: "ambition")
+            -if @no_activities
+              =link_to "What are 3 things you are doing",anchor: "doing"
+            /=link_to "Tell us your ambition", edit_user_registration_path(current_user, anchor: "ambition")
           
       .text-center
         / -if current_user && current_user.admin?

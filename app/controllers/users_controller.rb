@@ -5,7 +5,17 @@ class UsersController < ApplicationController
     @user = User.friendly.find(params[:id])
     if @user == current_user
       @story_element = @user.story_elements.build
+      unless @user.profile_photo_file_name
+        @no_photo = true
+      end
+      unless @user.activities.first && current_user.activities.count == 3
+        @no_activities = true
+      end
+      unless @user.ambition
+        @no_ambition = true
+      end
     end
+    
     if @user.leader?
       
       @task = @user.tasks.last
@@ -13,6 +23,20 @@ class UsersController < ApplicationController
     @followers = @user.followers
     @activity = @user.activities.build
     
+  end
+  
+  def add_profile_photo
+    @user = User.friendly.find(params[:id])
+    
+    respond_to do |format|
+      if @user.update_attributes(user_params)
+        format.html { redirect_to @user, notice: 'Photo was successfully added.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
   end
   
   def update
