@@ -46,14 +46,27 @@
             -if @user.profile_photo_file_name
               
               =image_tag(@user.profile_photo.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium), :alt => @user.name, class: "circle-image")
+              
+
             -else
               
               =image_tag(@user.assets.empty?  ? '/assets/user-placeholder.png': @user.assets.first.image.url(:medium), :alt => @user.name, class: "circle-image")
+            
+            
       / .occupation-follow
       /   %p.occupation=@user.occupation 
          
       /.fb-share-button{"data-href" => "http://www.ambitionspotlight.com/#{user_path(@user)}", "data-width" => "100"}
-      
+      -if current_user && current_user == @user
+        .text-center
+          =link_to "Edit Profile Picture", "#", id: "upload_btn"
+          .edit-photo
+            =form_for current_user, url: add_profile_photo_user_path, html: { method: :put } do |f|
+              = f.file_field :profile_photo, type: "file", label: 'Upload Attachment', style: "display:none;"
+              .input-append
+                %span#file_display.input-large.uneditable-input
+                %div.submit-profile-photo{style:"display:none;"}
+                  =f.submit "Upload"
       #ambition
       .text-center 
         .story

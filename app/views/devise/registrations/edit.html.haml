@@ -12,6 +12,11 @@
       = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
         = devise_error_messages!
         -resource.assets.build unless resource.assets.first
+        
+        
+        .story-name-edit
+          .controls
+            =f.text_field :name, type: "text", class: "form-control text-center", :placeholder => "Eugene Jackson"
         .user-details-edit.text-center
           .form-group
             = f.label :email, class: 'control-label'
@@ -21,6 +26,7 @@
             %div
               Currently waiting confirmation for: #{resource.unconfirmed_email}
           
+        
           .change-password-veil{style:"display:none;"}
             .form-group
               = f.label :password, class: 'control-label'
