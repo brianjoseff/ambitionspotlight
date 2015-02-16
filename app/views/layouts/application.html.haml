@@ -43,18 +43,20 @@
          js.src = "//connect.facebook.net/en_US/sdk.js";
          fjs.parentNode.insertBefore(js, fjs);
        }(document, 'script', 'facebook-jssdk'));
-  %body{class: "background", onload:"carousel()"}
+  %body.background
+    /.background-cloak
     /#{ current_user && current_page?(user_path(current_user)) ? '' : 'background' }
     / #holder
     /   #body
-    .wrapper
-      .container
-        = render 'layouts/header'    
-      .container
-        .content
-          %p.notice.text-center= notice
-          %p.alert= alert
-          = yield
+    .overlay
+      .wrapper
+        .container
+          = render 'layouts/header'    
+        .container
+          .content
+            %p.notice.text-center= notice
+            %p.alert= alert
+            = yield
     / .push
     / 
     / %footer
