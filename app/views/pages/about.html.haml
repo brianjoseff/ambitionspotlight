@@ -18,28 +18,7 @@
       It just needs to be realized.
   .landing-buttons.text-center
     =link_to "Take Your First Step Now", new_user_registration_path, class: "btn btn-large btn-primary make-button landing-button"
-  .about-team.text-center
-
-    .row
-      .col-lg-6
-        -if @david
-          .profile-pic
-            .round-border
-              .round.round-center 
-                =link_to image_tag(@david.profile_photo.nil?  ? '/assets/user-placeholder.png': @david.profile_photo.url(:medium), :alt => @david.name, class: "circle-image"), user_path(@david)
-                
-          %h3=link_to 'David Chatman', user_path(@david), class: "about-name"
-          /%p Founder
-      .col-lg-6
-        -if @brian
-          .profile-pic
-            .round-border
-              .round.round-center
-                =link_to image_tag(@brian.profile_photo.nil?  ? '/assets/user-placeholder.png': @brian.profile_photo.url(:medium), :alt => @brian.name, class: "circle-image"), user_path(@brian)          
-                
-          %h3=link_to 'Brian Joseff', user_path(@brian), class: "about-name"
-          /%p Founder
-      
+  
   %p.text-center Founded in East Palo Alto
   / .about-story.text-center
   /     %h2.text-center Diamonds in the Rough
