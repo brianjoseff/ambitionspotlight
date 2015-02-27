@@ -13,6 +13,6 @@ class DailyAccomplishment < ActiveRecord::Base
 		{:bucket => "ambition-prod", :access_key_id => ENV['S3_KEY'], :secret_access_key => ENV['S3_SECRET']}
 	end
 	def s3_credentials
-		{:bucket => "ambition-dev", :access_key_id => "AKIAJUFJRKBTVBDQERXQ", :secret_access_key => "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"}
+		{:bucket => "ambition-dev", :access_key_id => ENV['S3_KEY'], :secret_access_key => ENV['S3_SECRET']}
 	end
 end
