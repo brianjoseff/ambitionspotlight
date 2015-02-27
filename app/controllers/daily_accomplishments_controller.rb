@@ -24,9 +24,6 @@ class DailyAccomplishmentsController < ApplicationController
   # POST /daily_accomplishments
   # POST /daily_accomplishments.json
   def create
-    p "PARAMS"
-    p daily_accomplishment_params
-
     @daily_accomplishment = DailyAccomplishment.new(daily_accomplishment_params)
 
     respond_to do |format|

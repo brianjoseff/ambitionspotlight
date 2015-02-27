@@ -144,6 +144,7 @@
                         %span Drag File Here Or Click
                         =f.file_field :image, class: "upload"
                       %img#preview_upload.hidden.row
+                      =token_tag nil
                       =f.submit "Upload"
 
             -else
