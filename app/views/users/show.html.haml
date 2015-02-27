@@ -132,12 +132,15 @@
               -if @goal.nil? || @goal.completed?
                 =link_to "Create Goal", new_goal_path
               -else
-                %p=@goal.title
-                -if @goal.daily_accomplishments.count > 0
+                %h1=@goal.title
+                -if @daily_accomplishments.count > 0
                   -@daily_accomplishments.each do |da|
-                    %p da
+                    .accomplishment
+                      %p=da.content
+                      =image_tag(da.image.nil?  ? '/assets/user-placeholder.png': da.image.url(:medium), :alt => "picture of accomplishment", class: "circle-image")
                 -unless !@edit_da.nil?
                   =form_for @da , remote: true, html: { class: "form"} do |f|
+                    =f.hidden_field :goal_id
                     .controls
                       =f.text_area :content, class: "form-control text-center", placeholder: "Created professional looking business cards with my contact info on them", rows: 3
                       .fileUpload.btn

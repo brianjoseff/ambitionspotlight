@@ -17,14 +17,18 @@ class UsersController < ApplicationController
     end
 
     @goal = @user.goals.last
-
-    if !@goal.nil? && !@goal.completed?
-      @edit_da = @goal.daily_accomplishments.where(["created_at < ?", 1.days.ago]).first
+    unless @goal.nil?
+      @da = @goal.daily_accomplishments.new
       @daily_accomplishments = @goal.daily_accomplishments
-      unless @edit_da
-        @da = @goal.daily_accomplishments.new
-      end
     end
+
+    # if !@goal.nil? && !@goal.completed?
+    #   @edit_da = @goal.daily_accomplishments.where(["created_at < ?", 1.days.ago]).first
+    #   @daily_accomplishments = @goal.daily_accomplishments
+    #   unless @edit_da
+    #     @da = @goal.daily_accomplishments.new
+    #   end
+    # end
     
     if @user.leader?
       

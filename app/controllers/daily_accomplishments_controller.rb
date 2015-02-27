@@ -69,6 +69,6 @@ class DailyAccomplishmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def daily_accomplishment_params
-      params.require(:daily_accomplishment).permit(:content, :image)
+      params.require(:daily_accomplishment).permit(:content, :image, :goal_id)
     end
 end
