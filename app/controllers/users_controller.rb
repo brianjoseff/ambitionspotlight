@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
 
-  def show
-    
+  def show   
     @user = User.friendly.find(params[:id])
     if @user == current_user
       @story_element = @user.story_elements.build
@@ -14,6 +13,17 @@ class UsersController < ApplicationController
       unless @user.ambition
         @no_ambition = true
       end
+
+    end
+
+    @goal = @user.goals.last
+
+    if !@goal.nil? && !@goal.completed?
+      @edit_da = @goal.daily_accomplishments.where(["created_at < ?", 1.days.ago]).first
+      @daily_accomplishments = @goal.daily_accomplishments
+      unless @edit_da
+        @da = @goal.daily_accomplishments.new
+      end
     end
     
     if @user.leader?
@@ -21,8 +31,12 @@ class UsersController < ApplicationController
       @task = @user.tasks.last
     end
     @followers = @user.followers
-    @activity = @user.activities.build
-    
+    @activity = @user.activities.build  
+  end
+
+  def public_profile
+    @user = User.friendly.find(params[:id])
+    @goal = @user.goals.last
   end
   
   def add_profile_photo

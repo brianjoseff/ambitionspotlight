@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
 
+  resources :daily_accomplishments
+
+  resources :goals
+
   mount Judge::Engine => '/judge'
   
   resources :albums

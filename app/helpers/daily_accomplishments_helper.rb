@@ -1,0 +1,2 @@
+module DailyAccomplishmentsHelper
+end

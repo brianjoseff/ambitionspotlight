@@ -47,6 +47,7 @@ class User < ActiveRecord::Base
   has_one :spotlight
   has_many :activities
   has_many :story_elements
+  has_many :goals
   
   accepts_nested_attributes_for :assets
   

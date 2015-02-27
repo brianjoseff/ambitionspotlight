@@ -1,0 +1,19 @@
+%h1 Listing daily_accomplishments
+
+%table
+  %tr
+    %th Content
+    %th
+    %th
+    %th
+
+  - @daily_accomplishments.each do |daily_accomplishment|
+    %tr
+      %td= daily_accomplishment.content
+      %td= link_to 'Show', daily_accomplishment
+      %td= link_to 'Edit', edit_daily_accomplishment_path(daily_accomplishment)
+      %td= link_to 'Destroy', daily_accomplishment, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Daily accomplishment', new_daily_accomplishment_path

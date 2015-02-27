@@ -100,31 +100,7 @@
               | Share My Story
         
         #doing
-        /CURRENT ACTIVITIES
-        /List them
-        /Highlight 1
-        .story
-          .story-header
-            %p
-              WHAT I'M DOING TO GET THERE
-              / -if current_user && current_user == @user
-              /   %span=link_to "Edit Details", edit_user_registration_path(current_user)
-          .story#activities
-            =render partial: 'current_activities', locals: {user: @user, activities: @activities}
 
-            
-            
-            
-        /PHOTOS    
-        / -if current_user && current_user == @user
-        /   =link_to "Add Photos", new_album_path
-        /   =link_to "Edit Photos", albums_path     
-
-        
-        
-        /Most important accomplishment this month
-
-        /History of accomlishments
         #bio
         .story
           .story-header
@@ -142,14 +118,41 @@
           /   .soundcloud-container
           /     %iframe{:frameborder => "no", :height => "350", :scrolling => "no", :src => "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/#{@user.soundcloud_id}&color=ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false", :width => "100%"}
           /   /%p=@user.bio 
-
-        #timeline
-        /TIMELINE WITH UPDATE
+        
+        /GOAL
+        /List them
+        /Highlight 1
         .story
           .story-header
-            %p MY GROWTH
-          .story#timeline
-            =render partial: 'timeline', locals: {user: @user}
+            %p
+              GOAL
+              / -if current_user && current_user == @user
+              /   %span=link_to "Edit Details", edit_user_registration_path(current_user)
+          .story#activities
+            -if current_user
+              -if @goal.nil? || @goal.completed?
+                =link_to "Create Goal", new_goal_path
+              -else
+                %p=@goal.title
+                -if @goal.daily_accomplishments.count > 0
+                  -@daily_accomplishments.each do |da|
+                    %p da
+                -unless !@edit_da.nil?
+                  =form_for @da , remote: true, html: { class: "form"} do |f|
+                    .controls
+                      =f.text_area :content, class: "form-control text-center", placeholder: "Created professional looking business cards with my contact info on them", rows: 3
+            -else
+              %p=@goal.title
+              =@big_daily_accomplishments.each do |bda|
+                /render bda
+
+        / #timeline
+        / /TIMELINE WITH UPDATE
+        / .story
+        /   .story-header
+        /     %p MY GROWTH
+        /   .story#timeline
+        /     =render partial: 'timeline', locals: {user: @user}
         
         #believers
         /YOUR FOLLOWING

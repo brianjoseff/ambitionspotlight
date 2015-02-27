@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Content:
+  = @daily_accomplishment.content
+
+= link_to 'Edit', edit_daily_accomplishment_path(@daily_accomplishment)
+\|
+= link_to 'Back', daily_accomplishments_path
