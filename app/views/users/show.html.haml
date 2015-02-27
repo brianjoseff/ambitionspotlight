@@ -1,5 +1,4 @@
 /VERSION 2
-
 .row
   .col-lg-2
   .user-card-container
@@ -141,6 +140,12 @@
                   =form_for @da , remote: true, html: { class: "form"} do |f|
                     .controls
                       =f.text_area :content, class: "form-control text-center", placeholder: "Created professional looking business cards with my contact info on them", rows: 3
+                      .fileUpload.btn
+                        %span Drag File Here Or Click
+                        =f.file_field :image, class: "upload"
+                      %img#preview_upload.hidden.row
+                      =f.submit "Upload"
+
             -else
               %p=@goal.title
               =@big_daily_accomplishments.each do |bda|

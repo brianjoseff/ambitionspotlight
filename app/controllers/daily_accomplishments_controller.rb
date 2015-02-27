@@ -24,6 +24,9 @@ class DailyAccomplishmentsController < ApplicationController
   # POST /daily_accomplishments
   # POST /daily_accomplishments.json
   def create
+    p "PARAMS"
+    p daily_accomplishment_params
+
     @daily_accomplishment = DailyAccomplishment.new(daily_accomplishment_params)
 
     respond_to do |format|
@@ -69,6 +72,6 @@ class DailyAccomplishmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def daily_accomplishment_params
-      params.require(:daily_accomplishment).permit(:content)
+      params.require(:daily_accomplishment).permit(:content, :image)
     end
 end
