@@ -1,0 +1,17 @@
+-if goal.nil? || goal.completed?
+  =link_to "Create Goal", new_goal_path
+-else
+  %p=goal.title
+  -if goal.daily_accomplishments.count > 0
+    -daily_accomplishments.each do |da|
+      %p da
+  -unless !edit_da.nil?
+    =form_for da , remote: true, html: { class: "form"} do |f|
+      .controls
+        =f.text_area :content, class: "form-control text-center", placeholder: "Created professional looking business cards with my contact info on them", rows: 3
+        .fileUpload.btn
+          %span Drag File Here Or Click
+          =f.file_field :image, class: "upload"
+        %img#preview_upload.hidden.row
+        =token_tag nil
+        =f.submit "Upload"
