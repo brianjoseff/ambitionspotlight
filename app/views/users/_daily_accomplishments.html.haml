@@ -20,10 +20,10 @@
         =f.submit "Upload"
   -else
     -da_edit = goal.daily_accomplishments.where("created_at >= ?", Time.zone.now.beginning_of_day).last
-    =form_for da_edit , remote: true, html: { class: "form"}, :url => {:controller => "daily_accomplishments", :action => 'edit'} do |f|
+    =form_for da_edit , remote: true, html: { class: "form"} do |f|
       =f.hidden_field :goal_id
       .controls
-        =f.text_area :content, class: "form-control text-center", placeholder: "Created professional looking business cards with my contact info on them", text: da_edit.content, rows: 3
+        =f.text_area :content, class: "form-control text-center", placeholder: "Created professional looking business cards with my contact info on them", rows: 3
         .fileUploadWithImage.btn{ :style => "background: url(#{da_edit.image.url(:medium)}) no-repeat;" }
           =f.file_field :image, class: "upload"
         %img#preview_upload.hidden.row

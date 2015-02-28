@@ -1,5 +1,6 @@
 class DailyAccomplishmentsController < ApplicationController
   before_action :set_daily_accomplishment, only: [:show, :edit, :update, :destroy]
+  before_action :find_goal_and_dailies, only: [:create, :update]
 
   # GET /daily_accomplishments
   # GET /daily_accomplishments.json
@@ -26,12 +27,6 @@ class DailyAccomplishmentsController < ApplicationController
   def create
     @daily_accomplishment = DailyAccomplishment.new(daily_accomplishment_params)
 
-    @goal = Goal.find(daily_accomplishment_params[:goal_id])
-    unless @goal.nil?
-      @da = @goal.daily_accomplishments.new
-      @daily_accomplishments = @goal.daily_accomplishments
-    end
-
     respond_to do |format|
       if @daily_accomplishment.save
         # format.html { redirect_to @daily_accomplishment, notice: 'Daily accomplishment was successfully created.' }
@@ -49,8 +44,7 @@ class DailyAccomplishmentsController < ApplicationController
   def update
     respond_to do |format|
       if @daily_accomplishment.update(daily_accomplishment_params)
-        format.html { redirect_to @daily_accomplishment, notice: 'Daily accomplishment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @daily_accomplishment }
+        format.js { render 'refresh_daily_accomplishments.js.erb' }
       else
         format.html { render :edit }
         format.json { render json: @daily_accomplishment.errors, status: :unprocessable_entity }
@@ -74,8 +68,16 @@ class DailyAccomplishmentsController < ApplicationController
       @daily_accomplishment = DailyAccomplishment.find(params[:id])
     end
 
+    def find_goal_and_dailies
+      @goal = Goal.find(daily_accomplishment_params[:goal_id])
+      unless @goal.nil?
+        @da = @goal.daily_accomplishments.new
+        @daily_accomplishments = @goal.daily_accomplishments
+      end
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def daily_accomplishment_params
-      params.require(:daily_accomplishment).permit(:content, :goal_id)
+      params.require(:daily_accomplishment).permit(:content, :image, :goal_id)
     end
 end
