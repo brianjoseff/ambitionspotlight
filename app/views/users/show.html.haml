@@ -130,8 +130,7 @@
           .story#activities
             -if current_user
               #daily_accomplishments_partial
-                =render partial: 'daily_accomplishments', locals: {goal: @goal, daily_accomplishments: @daily_accomplishments, da: @da, edit_da: @edit_da}
-                
+                =render partial: 'daily_accomplishments', locals: {goal: @goal, daily_accomplishments: @daily_accomplishments, da: @da}
 
             -else
               %p=@goal.title

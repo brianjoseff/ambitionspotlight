@@ -26,10 +26,17 @@ class DailyAccomplishmentsController < ApplicationController
   def create
     @daily_accomplishment = DailyAccomplishment.new(daily_accomplishment_params)
 
+    @goal = Goal.find(daily_accomplishment_params[:goal_id])
+    unless @goal.nil?
+      @da = @goal.daily_accomplishments.new
+      @daily_accomplishments = @goal.daily_accomplishments
+    end
+
     respond_to do |format|
       if @daily_accomplishment.save
-        format.html { redirect_to @daily_accomplishment, notice: 'Daily accomplishment was successfully created.' }
-        format.json { render :show, status: :created, location: @daily_accomplishment }
+        # format.html { redirect_to @daily_accomplishment, notice: 'Daily accomplishment was successfully created.' }
+        # format.json { render :show, status: :created, location: @daily_accomplishment }
+        format.js { render 'refresh_daily_accomplishments.js.erb' }
       else
         format.html { render :new }
         format.json { render json: @daily_accomplishment.errors, status: :unprocessable_entity }
@@ -69,6 +76,6 @@ class DailyAccomplishmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def daily_accomplishment_params
-      params.require(:daily_accomplishment).permit(:content, :image)
+      params.require(:daily_accomplishment).permit(:content, :goal_id)
     end
 end
