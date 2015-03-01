@@ -24,30 +24,6 @@ ready = ->
     $(".free-form").toggle()
     $("a.ad-lib-link").toggleClass('inactive-link')
     $("a.free-form-link").toggleClass('inactive-link')
-
-  $('.upload').change ->
-    try
-      $input = $(this)
-      inputFiles = @files
-      if inputFiles == undefined or inputFiles.length == 0
-        return
-      inputFile = inputFiles[0]
-      reader = new FileReader
-
-      reader.onload = (event) ->
-        $('#preview_upload').removeClass 'hidden'
-        $('#preview_upload').attr 'src', event.target.result
-        return
-
-      reader.onerror = (event) ->
-        #alert("I AM ERROR: " + event.target.error.code);
-        return
-
-      reader.readAsDataURL inputFile
-    catch e
-      console.log e
-    return
-  
   
   fb_share = (o) ->
     console.log(o.data("link"))

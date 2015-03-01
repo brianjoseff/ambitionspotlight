@@ -1,4 +1,4 @@
-console.log("Hello from js.erb");
+console.log("WTF FROM REFRESH>JS>ERB");
 $('#daily_accomplishments_partial').fadeOut("slow", function(){
 	$('#daily_accomplishments_partial').html('<%= escape_javascript(render(:partial => "users/daily_accomplishments", :locals => {:goal => @goal, daily_accomplishments: @daily_accomplishments, da: @da})) %>');
     $('#daily_accomplishments_partial').fadeIn("slow");

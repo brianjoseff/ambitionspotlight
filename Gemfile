@@ -30,10 +30,10 @@ gem 'friendly_id'
 gem 'devise'
 gem "html2haml"
 
+gem 'remotipart', '~> 1.2'
+
 gem 'aws-sdk'
 gem "paperclip", "~> 4.1"
-gem 's3_direct_upload'
-gem 'jquery-fileupload-rails'
 gem 'jquery-turbolinks'
 
 gem 'delayed_job_active_record'

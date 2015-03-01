@@ -12,10 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require s3_direct_upload
+//= require jquery.remotipart
 
-//= require jquery-fileupload/basic
-//= require jquery-fileupload/vendor/tmpl
 //= require turbolinks
 //= require underscore
 //= require json2

@@ -1,3 +1,38 @@
+:javascript
+  $(document).ready( function() {
+    bindings();
+  });
+
+  function bindings() {
+    $( "[id^=edit_da_]" ).click(function() {
+      da_id = $(this).attr("id").split("_")[2];
+      $("#da_"+da_id).hide();
+      $("#edit_form_"+da_id).removeClass('hidden');
+    });
+
+    $('.upload').change(function() {
+      var $input, e, inputFile, inputFiles, reader;
+      try {
+        $input = $(this);
+        inputFiles = this.files;
+        if (inputFiles === void 0 || inputFiles.length === 0) {
+          return;
+        }
+        inputFile = inputFiles[0];
+        reader = new FileReader;
+        reader.onload = function(event) {
+          $('#preview_upload').removeClass('hidden');
+          $('#preview_upload').empty();
+          $('#preview_upload').attr('src', event.target.result);
+        };
+        reader.onerror = function(event) {};
+        reader.readAsDataURL(inputFile);
+      } catch (_error) {
+        e = _error;
+        console.log(e);
+      }
+    });
+  }
 /VERSION 2
 .row
   .col-lg-2

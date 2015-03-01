@@ -18,8 +18,8 @@ class UsersController < ApplicationController
 
     @goal = @user.goals.last
     unless @goal.nil?
-      @da = @goal.daily_accomplishments.new
       @daily_accomplishments = @goal.daily_accomplishments
+      @da = @goal.daily_accomplishments.new
     end
 
     # if !@goal.nil? && !@goal.completed?
