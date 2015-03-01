@@ -579,6 +579,16 @@ margin: auto;
   line-height: 90px;
   font-size: 25px;
 }
+
+.fileUploadWithImage {
+  position: relative;
+  overflow: hidden;
+  margin: 10px auto;
+  width: 25%;
+  height: auto;
+
+}
+
 .fileUpload input.upload {
   position: absolute;
   top: 0;
@@ -592,6 +602,21 @@ margin: auto;
   height: 100%;
   width: 100%;
 }
+
+.fileUploadWithImage input.upload {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  height: 100%;
+  width: 100%;
+}
+
 #preview_upload {
   display: block;
   margin: 10px auto;

@@ -19,8 +19,8 @@ class UsersController < ApplicationController
     @goal = @user.goals.last
     @goal_category = GoalCategory.find(@goal.goal_category_id)
     unless @goal.nil?
-      @da = @goal.daily_accomplishments.new
       @daily_accomplishments = @goal.daily_accomplishments
+
     end
 
     # if !@goal.nil? && !@goal.completed?
