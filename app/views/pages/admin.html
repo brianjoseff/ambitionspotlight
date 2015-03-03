@@ -1,0 +1,62 @@
+.admin-page
+  %h1 User Count: #{@users.count}
+  %div
+    -@leaders.each do |leader|
+      %h2=leader.name
+ 
+      -if leader.spotlight
+        %p=leader.spotlight.active
+        =form_for leader.spotlight, url: spotlight_path(leader.spotlight) do |f|
+          =hidden_field_tag 'user_id', leader.id
+          =f.file_field :image, type: "file"
+    
+          =f.submit
+      -else
+        =form_for leader.build_spotlight do |f|
+          =hidden_field_tag 'user_id', leader.id
+          =f.file_field :image, type: "file"
+    
+          =f.submit
+  %div
+    %table
+      %tr
+        
+        %th User Name
+        %th Destroy
+        %th Rating
+        %th Submit
+        %th Email
+        %th Video
+        %th Submit
+        %th Sound
+        %th Submit
+      -@users.each do |u|
+        %tr
+          %td
+            =link_to u.name, user_path(u)
+          %td=link_to 'destroy', u, method: :delete, data: { confirm: 'Are you sure?'}
+          = form_for(u, url: update_rating_user_path(u), html: { method: :put }) do |f|
+
+            %td
+              =f.hidden_field :id
+              =f.number_field :rating
+            %td
+              =f.submit "+ r"
+          %td
+            =u.email
+          
+          = form_for(u, url: update_youtube_user_path(u), html: { method: :put }) do |f|
+
+            %td
+              =f.hidden_field :id
+              =f.text_field :youtube_id
+            %td
+              =f.submit "+ v"
+          
+          = form_for(u, url: update_soundcloud_user_path(u), html: { method: :put }) do |f|
+
+            %td
+              =f.hidden_field :id
+              =f.text_field :soundcloud_id
+            %td
+              =f.submit "+ s"

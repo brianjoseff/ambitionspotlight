@@ -7,6 +7,9 @@ class PagesController < ApplicationController
   def landing
   end
   
+  def icons
+  end
+
   def admin
     @leaders = User.leaders
     @users = User.order('rating DESC')
