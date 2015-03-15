@@ -1,12 +1,16 @@
 class PagesController < ApplicationController
    before_filter :require_admin_login, :only => [:admin]
   def index
-    @users = User.spotlit_users
+    # @users = User.spotlit_users
+    @users = User.all
   end
   
   def landing
   end
   
+  def icons
+  end
+
   def admin
     @leaders = User.leaders
     @users = User.order('rating DESC')
