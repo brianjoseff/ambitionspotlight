@@ -10,7 +10,7 @@
     %meta{content: "width=device-width, initial-scale=1", name: "viewport"}
     = content_for?(:head) ? yield(:head) : ''
     %script{:src => "//use.fonticons.com/7c33fe1c.js"}
-    %script{:src => "//intercom.js"}
+    / %script{:src => "//intercom.js"}
     :javascript
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-54764266-1']);
@@ -45,6 +45,7 @@
          js.src = "//connect.facebook.net/en_US/sdk.js";
          fjs.parentNode.insertBefore(js, fjs);
        }(document, 'script', 'facebook-jssdk'));
+  
   %body{ class:"#{current_page?('/about') ? 'about-background' : 'background' }"}
     /.background-cloak
     /#{ current_user && current_page?(user_path(current_user)) ? '' : 'background' }
