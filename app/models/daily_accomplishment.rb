@@ -1,7 +1,7 @@
 class DailyAccomplishment < ActiveRecord::Base
 	belongs_to :goal
 
-	has_attached_file :image, :styles => { :normal => "100%",:small => "100 x100>",:medium => "200x200>", :thumb => "50x50>", spacer: "x50" },
+	has_attached_file :image, :styles => { :normal => "100%",:medium => "200x200>", large: "600x", feed: "400x300>" },
                             :storage => :s3,
                             :s3_credentials => Proc.new{|a| Rails.env.production? ? a.instance.prod_s3_credentials :  a.instance.s3_credentials},
                             :path => "/:class/:attachment/:id/:style/:filename"

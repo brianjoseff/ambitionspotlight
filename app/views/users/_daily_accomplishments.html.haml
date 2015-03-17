@@ -1,68 +1,50 @@
-<<<<<<< HEAD
 
--if daily_accomplishments.count > 0
-  -daily_accomplishments.each do |d|
-    %div.accomplishment{class: "#{'accomplishment'+d.id.to_s}"}
-      %p=d.content
-      =image_tag(d.image.nil?  ? '/assets/user-placeholder.png': d.image.url(:medium), :alt => "picture of accomplishment", class: "circle-image")
--if goal.daily_accomplishments.where("created_at >= ?", Time.zone.now.beginning_of_day).count == 0
-  =form_for goal.daily_accomplishments.new , remote: true, html: { class: "form"} do |f|
-    =f.hidden_field :goal_id
-    .controls
-      =f.text_area :content, class: "form-control text-center", placeholder: "Created professional looking business cards with my contact info on them", rows: 3
-      .fileUpload.btn
-        %span Drag File Here Or Click
-        =f.file_field :image, class: "upload"
-      %img#preview_upload.hidden.row
-      =token_tag nil
-      =f.submit "Upload"
--else
-  -da_edit = goal.daily_accomplishments.where("created_at >= ?", Time.zone.now.beginning_of_day).last
-  =form_for da_edit , remote: true, html: { class: "form"} do |f|
-    =f.hidden_field :goal_id
-    .controls
-      =f.text_area :content, class: "form-control text-center", placeholder: "Created professional looking business cards with my contact info on them", rows: 3
-      .fileUploadWithImage.btn{ :style => "background: url(#{da_edit.image.url(:medium)}) no-repeat;" }
-        =f.file_field :image, class: "upload"
-      %img#preview_upload.hidden.row
-      =token_tag nil
-      %br
-      =f.submit "Edit"
-=======
 :javascript
   bindings()
 
 -if goal.nil? || goal.completed?
   =link_to "Create Goal", new_goal_path
+
 -else
-  %h1=goal.title
+
   -if daily_accomplishments.count > 0
     -daily_accomplishments.each do |d|
       - if !d.id.nil?
+
+        /DAILY ACCOMPLISHMENT
         .accomplishment{:id => "da_#{d.id}"}
+          
+          =image_tag(d.image.nil?  ? '/assets/user-placeholder.png': d.image.url(:large), :alt => "picture of accomplishment", class: "accomplishment-image")
           %p=d.content
-          =image_tag(d.image.nil?  ? '/assets/user-placeholder.png': d.image.url(:medium), :alt => "picture of accomplishment", class: "circle-image")
-          %button{:id => "edit_da_#{d.id}"} Edit
+          .button-hover{style:"display:none;"}
+            %div
+              %span.glyphicon.glyphicon-cog
+              %button{:id => "edit_da_#{d.id}"} Edit
         .hidden{:id => "edit_form_#{d.id}"}
+          /EDIT MOST RECENT DAILY ACCOMPLISHMENT
           =form_for d , remote: true, html: { class: "form"} do |f|
             =f.hidden_field :goal_id
             .controls
-              =f.text_area :content, class: "form-control text-center", placeholder: "Created professional looking business cards with my contact info on them", rows: 3
-              .fileUploadWithImage.btn{ :style => "background: url(#{d.image.url(:medium)}) no-repeat;" }
+              .fileUploadWithImage.btn{ :style => "background: url(#{d.image.url(:large)}) no-repeat;" }
                 =f.file_field :image, class: "upload"
               %img#preview_upload.hidden.row
               =token_tag nil
+              =f.text_area :content, class: "form-control text-center", placeholder: "Created professional looking business cards with my contact info on them", rows: 3
               %br
               =f.submit "Edit"
+        ////////////////////////
+
   -if goal.daily_accomplishments.where("created_at >= ?", Time.zone.now.beginning_of_day).count == 0
-    =form_for da , remote: true, html: { class: "form", :multipart => true} do |f|
+
+    
+    =form_for goal.daily_accomplishments.new , remote: true, html: { class: "form", :multipart => true} do |f|
       =f.hidden_field :goal_id
       .controls
-        =f.text_area :content, class: "form-control text-center", placeholder: "Created professional looking business cards with my contact info on them", rows: 3
         .fileUpload.btn
           %span Drag File Here Or Click
           =f.file_field :image, class: "upload"
         %img#preview_upload.hidden.row
         =token_tag nil
+        =f.text_area :content, class: "form-control text-center", placeholder: "Created professional looking business cards with my contact info on them", rows: 3        
         =f.submit "Upload"
->>>>>>> b8a738bb1744f6f3957d79e0478c14366367ed6b
+

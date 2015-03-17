@@ -10,6 +10,12 @@
       $("#edit_form_"+da_id).removeClass('hidden');
     });
 
+    $('[id^=da_]').hover(function(){
+      console.log($(this).next('div.button-hover'));
+      $(this).children().next('.button-hover').toggle();
+    });
+
+
     $('.upload').change(function() {
       var $input, e, inputFile, inputFiles, reader;
       try {
@@ -37,197 +43,176 @@
 .row
   .col-lg-2
   .user-card-container
-    .col-lg-8.user-card
-      /add top 3 activities right now
-      
-      -if current_user && current_user == @user
-        -if @no_activities || @no_ambition || @no_photo
-          .next-profile-actions
-            %h5 Your profile is incomplete
-            %h6 Take it from zero to 100
-            /%p Do these things to make it 100%:
-            -if @no_photo
-              =link_to "Upload Profile Picture", "#", id: "upload_btn"
+    .col-lg-8
+      .user-card
+        /add top 3 activities right now
+        
+
+        ///CARD 1
+
+        -if current_user && current_user == @user
+          -if @no_activities || @no_ambition || @no_photo
+            .next-profile-actions
+              %h5 Your profile is incomplete
+              %h6 Take it from zero to 100
+              /%p Do these things to make it 100%:
+              -if @no_photo
+                =link_to "Upload Profile Picture", "#", id: "upload_btn"
+                =form_for current_user, url: add_profile_photo_user_path, html: { method: :put } do |f|
+                  = f.file_field :profile_photo, type: "file", label: 'Upload Attachment', style: "display:none;"
+                  .input-append
+                    %span#file_display.input-large.uneditable-input
+                    %div.submit-profile-photo{style:"display:none;"}
+                      =f.submit "Upload"
+              
+              -if @no_ambition
+                =link_to "Tell us your ambition", edit_user_registration_path(current_user, anchor: "ambition")
+              -if @no_activities
+                =link_to "What are 3 things you are doing",anchor: "doing"
+              /=link_to "Tell us your ambition", edit_user_registration_path(current_user, anchor: "ambition")
+            
+        .text-center
+          %h1.name
+            =@user.name
+          
+          /.fb-like{"data-share" => "true", "data-show-faces" => "true", "data-width" => "450"}
+          
+          -if current_user && current_user == @user
+            %span=link_to "Your Settings", edit_user_registration_path(current_user)
+        .profile-pic
+          .round-border
+            .round.round-center
+              -if @user.profile_photo_file_name
+                
+                =image_tag(@user.profile_photo.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium), :alt => @user.name, class: "circle-image")
+                
+
+              -else
+                
+                =image_tag(@user.assets.empty?  ? '/assets/user-placeholder.png': @user.assets.first.image.url(:medium), :alt => @user.name, class: "circle-image")
+              
+              
+        / .occupation-follow
+        /   %p.occupation=@user.occupation 
+           
+        /.fb-share-button{"data-href" => "http://www.ambitionspotlight.com/#{user_path(@user)}", "data-width" => "100"}
+        -if current_user && current_user == @user
+          .text-center
+            =link_to "Edit Profile Picture", "#", id: "upload_btn"
+            .edit-photo
               =form_for current_user, url: add_profile_photo_user_path, html: { method: :put } do |f|
                 = f.file_field :profile_photo, type: "file", label: 'Upload Attachment', style: "display:none;"
                 .input-append
                   %span#file_display.input-large.uneditable-input
                   %div.submit-profile-photo{style:"display:none;"}
                     =f.submit "Upload"
-            
-            -if @no_ambition
-              =link_to "Tell us your ambition", edit_user_registration_path(current_user, anchor: "ambition")
-            -if @no_activities
-              =link_to "What are 3 things you are doing",anchor: "doing"
-            /=link_to "Tell us your ambition", edit_user_registration_path(current_user, anchor: "ambition")
-          
-      .text-center
-        / -if current_user && current_user.admin?
-        /   %p
-        /     admin:
-        /   %p
-        /     #{@user.email}
-        %h1.name
-          =@user.name
         
-        /.fb-like{"data-share" => "true", "data-show-faces" => "true", "data-width" => "450"}
-        
-        -if current_user && current_user == @user
-          %span=link_to "Your Settings", edit_user_registration_path(current_user)
-      .profile-pic
-        .round-border
-          .round.round-center
-            -if @user.profile_photo_file_name
-              
-              =image_tag(@user.profile_photo.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium), :alt => @user.name, class: "circle-image")
-              
+        .text-center 
+          #ambition.story
+            .story-header
+              %p
+                WHERE I WANT TO BE IN 5 YEARS
+            .story-text#ambition
+              =render partial: 'ambition', locals: {user: @user}
 
-            -else
+            
               
-              =image_tag(@user.assets.empty?  ? '/assets/user-placeholder.png': @user.assets.first.image.url(:medium), :alt => @user.name, class: "circle-image")
+              
+              / -if @user.leader?
+              /   =link_to "Your Dashboard", leader_dashboard_path, style:"font-size:50%"
+              
+            =render partial: 'shared/follow', locals: {user: @user}
+            - content_for :head do
+              %meta{:content => "Ambition Spotlight | #{@user.name}", :property => "og:title"}
+              %meta{:content => "#{@user.ambition}", :property => "og:description"}
+              %meta{:content => "http://www.ambitionspotlight.com" + user_path(@user), :property => "og:url"}
+              
+              %meta{:content => "#{@user.profile_photo_file_name.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium)}", :property => "og:image"} 
+              %meta{property: "og:type", content:"article"} 
             
+
+            .share.text-center
+              %a{class: "fb-share-link btn btn-large make-button follow-button", "data-name"=> "#{@user.name}", "data-link"=> "http://www.ambitionspotlight.com#{user_path(@user)}", "data-image" => "#{@user.profile_photo.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium)}", "data-description"=>"#{@user.ambition}"}
+                %i.fa.fa-facebook.fb-icon
+                | Share My Story
+          
+
+
+          #bio.story
+            .story-header
+              %p
+                WHO I AM
+            .story#bio
+              =render partial: 'bio', locals: {user: @user}
             
-      / .occupation-follow
-      /   %p.occupation=@user.occupation 
-         
-      /.fb-share-button{"data-href" => "http://www.ambitionspotlight.com/#{user_path(@user)}", "data-width" => "100"}
-      -if current_user && current_user == @user
+            / -if @user.youtube_id
+            /   .video-container
+            /     %iframe{:allowfullscreen => "", :frameborder => "0", :height => "360", :src => "//www.youtube.com/embed/#{@user.youtube_id}", :width => "640"}
+            / -if @user.soundcloud_id
+            /   .soundcloud-container
+            /     %iframe{:frameborder => "no", :height => "350", :scrolling => "no", :src => "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/#{@user.soundcloud_id}&color=ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false", :width => "100%"}
+            /   /%p=@user.bio 
+          
+          /GOAL
+          /List them
+          /Highlight 1
+      .user-card
         .text-center
-          =link_to "Edit Profile Picture", "#", id: "upload_btn"
-          .edit-photo
-            =form_for current_user, url: add_profile_photo_user_path, html: { method: :put } do |f|
-              = f.file_field :profile_photo, type: "file", label: 'Upload Attachment', style: "display:none;"
-              .input-append
-                %span#file_display.input-large.uneditable-input
-                %div.submit-profile-photo{style:"display:none;"}
-                  =f.submit "Upload"
-      #ambition
-      .text-center 
-        .story
-          .story-header
-            %p
-              WHERE I WANT TO BE IN 5 YEARS
-          .story-text#ambition
-            =render partial: 'ambition', locals: {user: @user}
-            /%p=@user.ambition
-            / -if current_user && current_user == @user
-            /   %span.text-center.edit-link=link_to "Edit Details", edit_user_registration_path(current_user)
-          
-            
-            
-            / -if @user.leader?
-            /   =link_to "Your Dashboard", leader_dashboard_path, style:"font-size:50%"
-            
-          =render partial: 'shared/follow', locals: {user: @user}
-          - content_for :head do
-            %meta{:content => "Ambition Spotlight | #{@user.name}", :property => "og:title"}
-            %meta{:content => "#{@user.ambition}", :property => "og:description"}
-            %meta{:content => "http://www.ambitionspotlight.com" + user_path(@user), :property => "og:url"}
-            
-            %meta{:content => "#{@user.profile_photo_file_name.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium)}", :property => "og:image"} 
-            %meta{property: "og:type", content:"article"} 
-          
+          #goal
+            .story#activities
+              -if current_user
+                -if @goal.nil? || @goal.completed?
+                  =link_to "Create Goal", new_goal_path
+                -else
+                  .goal-header
+                    %h1=@goal.title
+                    %h3=@goal_category.name
+                  
+                  =render partial: 'daily_accomplishments', locals: {goal: @goal, daily_accomplishments: @daily_accomplishments}
 
-          .share.text-center
-            %a{class: "fb-share-link btn btn-large make-button follow-button", "data-name"=> "#{@user.name}", "data-link"=> "http://www.ambitionspotlight.com#{user_path(@user)}", "data-image" => "#{@user.profile_photo.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium)}", "data-description"=>"#{@user.ambition}"}
-              %i.fa.fa-facebook.fb-icon
-              | Share My Story
-        
-        #doing
+                
 
-        #bio
-        .story
-          .story-header
-            %p
-              WHO I AM
-              / -if current_user && current_user == @user
-              /   %span=link_to "Edit Details", edit_user_registration_path(current_user)
-          .story#bio
-            =render partial: 'bio', locals: {user: @user}
-          
-          / -if @user.youtube_id
-          /   .video-container
-          /     %iframe{:allowfullscreen => "", :frameborder => "0", :height => "360", :src => "//www.youtube.com/embed/#{@user.youtube_id}", :width => "640"}
-          / -if @user.soundcloud_id
-          /   .soundcloud-container
-          /     %iframe{:frameborder => "no", :height => "350", :scrolling => "no", :src => "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/#{@user.soundcloud_id}&color=ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false", :width => "100%"}
-          /   /%p=@user.bio 
-        
-        /GOAL
-        /List them
-        /Highlight 1
-        .story
-          .story-header
-            %p
-              GOAL
-              / -if current_user && current_user == @user
-              /   %span=link_to "Edit Details", edit_user_registration_path(current_user)
-          .story#activities
-            -if current_user
-              -if @goal.nil? || @goal.completed?
-                =link_to "Create Goal", new_goal_path
               -else
-                %h1=@goal.title
-                %h3=@goal_category.name
-                #daily_accomplishments_partial
-                =render partial: 'daily_accomplishments', locals: {goal: @goal, daily_accomplishments: @daily_accomplishments}
-                / -if @daily_accomplishments.count > 0
-                /   -@daily_accomplishments.each do |da|
-                /     .accomplishment
-                /       %p=da.content
-                /       =image_tag(da.image.nil?  ? '/assets/user-placeholder.png': da.image.url(:medium), :alt => "picture of accomplishment", class: "circle-image")
-                / -unless !@edit_da.nil?
-                /   =form_for @da , remote: true, html: { class: "form"} do |f|
-                /     =f.hidden_field :goal_id
-                /     .controls
-                /       =f.text_area :content, class: "form-control text-center", placeholder: "Created professional looking business cards with my contact info on them", rows: 3
-                /       .fileUpload.btn
-                /         %span Drag File Here Or Click
-                /         =f.file_field :image, class: "upload"
-                /       %img#preview_upload.hidden.row
-                /       =token_tag nil
-                /       =f.submit "Upload"
+                %p=@goal.title
+                =@big_daily_accomplishments.each do |bda|
+                  /render bda
+
+          / #timeline
+          / /TIMELINE WITH UPDATE
+          / .story
+          /   .story-header
+          /     %p MY GROWTH
+          /   .story#timeline
+          /     =render partial: 'timeline', locals: {user: @user}
+      
+      .user-card
+        .text-center    
+          #believers
+          /YOUR FOLLOWING
+          .story
+            .story-header
+              %p WHO BELIEVES IN ME
+              /have a "share profile" link or something to post on facebook
+            
+            - unless current_user == @user
+              .follow_form
+                - if current_user && current_user.following?(@user)
+                  = render 'unfollow'
+
+                - elsif current_user.nil?
+                  =link_to "I BELIEVE", new_user_registration_path, class: "btn btn-large make-button follow-button"
+                -else
+                  = form_for(current_user.followships.build(followed_id: @user.id), remote: true) do |f|
+                    %div
+                      = f.hidden_field :followed_id
+                    = f.submit "I BELIEVE", class: "btn btn-large follow-button"
+            %br/
+            
+            .following
+              -if current_user && current_user == @user
+                //invite people
               
-
-            -else
-              %p=@goal.title
-              =@big_daily_accomplishments.each do |bda|
-                /render bda
-
-        / #timeline
-        / /TIMELINE WITH UPDATE
-        / .story
-        /   .story-header
-        /     %p MY GROWTH
-        /   .story#timeline
-        /     =render partial: 'timeline', locals: {user: @user}
-        
-        #believers
-        /YOUR FOLLOWING
-        .story
-          .story-header
-            %p WHO BELIEVES IN ME
-            /have a "share profile" link or something to post on facebook
-          
-          - unless current_user == @user
-            .follow_form
-              - if current_user && current_user.following?(@user)
-                = render 'unfollow'
-
-              - elsif current_user.nil?
-                =link_to "I BELIEVE", new_user_registration_path, class: "btn btn-large make-button follow-button"
-              -else
-                = form_for(current_user.followships.build(followed_id: @user.id), remote: true) do |f|
-                  %div
-                    = f.hidden_field :followed_id
-                  = f.submit "I BELIEVE", class: "btn btn-large follow-button"
-          %br/
-          
-          .following
-            -if current_user && current_user == @user
-              //invite people
-            
-            #followers
-              =render partial: 'followers', locals: {followers: @followers}
+              #followers
+                =render partial: 'followers', locals: {followers: @followers}
 
       
