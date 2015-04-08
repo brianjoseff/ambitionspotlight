@@ -6,45 +6,47 @@
   =link_to "Create Goal", new_goal_path
 
 -else
+  #daily_accomplishments_partial
+    -if daily_accomplishments.count > 0
+      -daily_accomplishments.each do |d|
+        - if !d.id.nil?
 
-  -if daily_accomplishments.count > 0
-    -daily_accomplishments.each do |d|
-      - if !d.id.nil?
+          /DAILY ACCOMPLISHMENT
+          .accomplishment{:id => "da_#{d.id}"}
+            
+            =image_tag(d.image.nil?  ? '/assets/user-placeholder.png': d.image.url(:large), :alt => "picture of accomplishment", class: "accomplishment-image")
+            %p=d.content
+            //hidden edit selector--clicking turns on edit form
+            .button-hover{style:"display:none;"}
+              %div
+                %span.glyphicon.glyphicon-cog
+                %button{:id => "edit_da_#{d.id}"} Edit
+          .hidden{:id => "edit_form_#{d.id}"}
+            /EDIT MOST RECENT DAILY ACCOMPLISHMENT
+            =form_for d , remote: true, html: { class: "form"} do |f|
+              =f.hidden_field :goal_id
+              .controls
+                %h1 what up welcome to the edit
+                .fileUploadWithImage.btn{ :style => "background: url(#{d.image.url(:large)}) no-repeat;" }
+                  =f.file_field :image, class: "upload"
+                %img#preview_upload.hidden.row
+                =token_tag nil
+                =f.text_area :content, class: "form-control text-center", placeholder: "Created professional looking business cards with my contact info on them", rows: 3
+                %br
+                =f.submit "Edit"
+          ////////////////////////
 
-        /DAILY ACCOMPLISHMENT
-        .accomplishment{:id => "da_#{d.id}"}
-          
-          =image_tag(d.image.nil?  ? '/assets/user-placeholder.png': d.image.url(:large), :alt => "picture of accomplishment", class: "accomplishment-image")
-          %p=d.content
-          .button-hover{style:"display:none;"}
-            %div
-              %span.glyphicon.glyphicon-cog
-              %button{:id => "edit_da_#{d.id}"} Edit
-        .hidden{:id => "edit_form_#{d.id}"}
-          /EDIT MOST RECENT DAILY ACCOMPLISHMENT
-          =form_for d , remote: true, html: { class: "form"} do |f|
-            =f.hidden_field :goal_id
-            .controls
-              .fileUploadWithImage.btn{ :style => "background: url(#{d.image.url(:large)}) no-repeat;" }
-                =f.file_field :image, class: "upload"
-              %img#preview_upload.hidden.row
-              =token_tag nil
-              =f.text_area :content, class: "form-control text-center", placeholder: "Created professional looking business cards with my contact info on them", rows: 3
-              %br
-              =f.submit "Edit"
-        ////////////////////////
+    -if goal.daily_accomplishments.where("created_at >= ?", Time.zone.now.beginning_of_day).count == 0
 
-  -if goal.daily_accomplishments.where("created_at >= ?", Time.zone.now.beginning_of_day).count == 0
-
-    
-    =form_for goal.daily_accomplishments.new , remote: true, html: { class: "form", :multipart => true} do |f|
-      =f.hidden_field :goal_id
-      .controls
-        .fileUpload.btn
-          %span Drag File Here Or Click
-          =f.file_field :image, class: "upload"
-        %img#preview_upload.hidden.row
-        =token_tag nil
-        =f.text_area :content, class: "form-control text-center", placeholder: "Created professional looking business cards with my contact info on them", rows: 3        
-        =f.submit "Upload"
+      %h1 sdfsdsfsdfs
+      =form_for goal.daily_accomplishments.new , remote: true, html: { class: "form", :multipart => true} do |f|
+        =f.hidden_field :goal_id
+        .controls
+          .fileUpload.btn
+            %span Drag File Here Or Click
+            =f.file_field :image, class: "upload"
+          %img#preview_upload.hidden.row
+          =token_tag nil
+          =f.text_area :content, class: "form-control text-center", placeholder: "Created professional looking business cards with my contact info on them", rows: 3        
+          =f.submit "Upload"
 

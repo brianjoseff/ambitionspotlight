@@ -26,10 +26,13 @@
         }
         inputFile = inputFiles[0];
         reader = new FileReader;
+        //preview = $('#preview_upload')
+        preview = $(this).parent().next('#preview_upload');
+        console.log("FUCKING PREVIEW", preview);
         reader.onload = function(event) {
-          $('#preview_upload').removeClass('hidden');
-          $('#preview_upload').empty();
-          $('#preview_upload').attr('src', event.target.result);
+          preview.removeClass('hidden');
+          preview.empty();
+          preview.attr('src', event.target.result);
         };
         reader.onerror = function(event) {};
         reader.readAsDataURL(inputFile);
