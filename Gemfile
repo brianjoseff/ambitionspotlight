@@ -19,6 +19,7 @@ gem 'coffee-rails', '~> 4.0.0'
 
 gem "haml-rails"
 
+gem 'intercom-rails'
 
 gem 'pg'
 gem 'heroku'

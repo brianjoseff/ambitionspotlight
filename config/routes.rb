@@ -58,7 +58,7 @@ Rails.application.routes.draw do
   
   
   # match 'user/:name' => 'user#profile'
-  
+  match '/icons', to: "pages#icons", via: :get
   match '/about', to: "pages#about", via: :get
   match '/leader_dashboard', to: "users#leader_dashboard", via: :get
   match '/admin', to: "pages#admin", via: :get
