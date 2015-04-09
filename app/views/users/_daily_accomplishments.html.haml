@@ -37,8 +37,6 @@
           ////////////////////////
 
     -if goal.daily_accomplishments.where("created_at >= ?", Time.zone.now.beginning_of_day).count == 0
-
-      %h1 sdfsdsfsdfs
       =form_for goal.daily_accomplishments.new , remote: true, html: { class: "form", :multipart => true} do |f|
         =f.hidden_field :goal_id
         .controls
