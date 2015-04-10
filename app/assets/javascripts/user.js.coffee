@@ -25,7 +25,6 @@ ready = ->
     $("a.ad-lib-link").toggleClass('inactive-link')
     $("a.free-form-link").toggleClass('inactive-link')
   
-  
   fb_share = (o) ->
     console.log(o.data("link"))
     FB.ui

@@ -27,11 +27,12 @@ class GoalsController < ApplicationController
     
     @user = current_user
     @goal = @user.goals.new(goal_params)
-
+    @daily_accomplishments = @goal.daily_accomplishments
+    
     respond_to do |format|
       if @goal.save
-        format.html { redirect_to @goal, notice: 'Goal was successfully created.' }
-        format.json { render :show, status: :created, location: @goal }
+        format.js { }
+        format.html {}
       else
         format.html { render :new }
         format.json { render json: @goal.errors, status: :unprocessable_entity }

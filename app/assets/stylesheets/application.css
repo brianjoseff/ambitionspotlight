@@ -10,7 +10,6 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require s3_direct_upload_progress_bars
  *= require_tree .
  *= require_self
  */
@@ -101,7 +100,7 @@ box-shadow: inset 0 0 300px #000;
 }
 
 .content{
-	padding-top:100px;
+	padding-top:65px;
 }
 
 

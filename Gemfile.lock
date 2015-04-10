@@ -97,9 +97,6 @@ GEM
     jbuilder (2.1.3)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
-    jquery-fileupload-rails (0.4.1)
-      actionpack (>= 3.1)
-      railties (>= 3.1)
     jquery-rails (3.1.1)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -158,16 +155,12 @@ GEM
     rake (10.3.2)
     rdoc (4.1.1)
       json (~> 1.4)
+    remotipart (1.2.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     ruby_parser (3.1.3)
       sexp_processor (~> 4.1)
     rubyzip (1.1.0)
-    s3_direct_upload (0.1.7)
-      coffee-rails (>= 3.1)
-      jquery-fileupload-rails (~> 0.4.1)
-      rails (>= 3.1)
-      sass-rails (>= 3.1)
     sass (3.2.19)
     sass-rails (4.0.3)
       railties (>= 4.0.0, < 5.0)
@@ -229,7 +222,6 @@ DEPENDENCIES
   html2haml
   intercom-rails
   jbuilder (~> 2.0)
-  jquery-fileupload-rails
   jquery-rails
   jquery-turbolinks
   judge
@@ -239,7 +231,7 @@ DEPENDENCIES
   pg
   rails (= 4.1.4)
   rails_12factor
-  s3_direct_upload
+  remotipart (~> 1.2)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   shareable

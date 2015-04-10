@@ -9,3 +9,4 @@
     = f.text_area :ambition, type:"text",autofocus: true, class: "form-control text-center", :placeholder => "Running my own technology company and giving back to East Palo Alto through mentorship, philanthropy, and the multiplier effect", :rows => "5"       
   .submit
     = f.submit "Update", class: ""
+    =link_to "cancel", user_path(@user)
