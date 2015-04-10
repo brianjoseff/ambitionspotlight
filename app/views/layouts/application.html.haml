@@ -57,7 +57,8 @@
         g.identify=function(i,v){g(l,{uid:i});if(v)g(l,v)};g.setUserVars=function(v){FS(l,v)};
         g.clearUserCookie=function(d,i){d=n.domain;while(1){n.cookie='fs_uid=;domain='+d+
         ';path=/;expires='+new Date(0);i=d.indexOf('.');if(i<0)break;d=d.slice(i+1)}}
-      })(window,document,'FS','script','user');    
+      })(window,document,'FS','script','user'); 
+
   %body{ class:"#{current_page?('/about') ? 'about-background' : 'background' }"}
     /.background-cloak
     /#{ current_user && current_page?(user_path(current_user)) ? '' : 'background' }
@@ -77,3 +78,9 @@
     / %footer
     /   .footer
     /     = render 'layouts/footer'
+    - if current_user
+      :javascript
+        FS.identify("#{current_user.id}", {
+        displayName: "#{current_user.name}",
+        email: "#{current_user.email}"
+        });
