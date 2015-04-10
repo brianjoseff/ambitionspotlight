@@ -33,10 +33,16 @@ Rails.application.routes.draw do
     member do
       get :admin_edit
       put :admin_update
+      
       get :edit_ambition
       patch :update_ambition
+
+      get :edit_goal
+      patch :update_goal
+
       get :edit_bio
       patch :update_bio
+      
       put :update_rating
       put :update_youtube
       put :update_soundcloud
@@ -44,6 +50,8 @@ Rails.application.routes.draw do
       # get :edit_story_element
       # put :update_story_element
       put :add_profile_photo
+
+      get :cancel_edit
     end
     resources :story_elements
   end
