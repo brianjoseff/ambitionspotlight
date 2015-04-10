@@ -70,6 +70,8 @@
               
               -if @no_ambition
                 =link_to "Tell us your ambition", edit_user_registration_path(current_user, anchor: "ambition")
+              -if @no_goals
+                =link_to "Set a Goal", anchor: "goals"
               -if @no_activities
                 =link_to "What are 3 things you are doing",anchor: "doing"
               /=link_to "Tell us your ambition", edit_user_registration_path(current_user, anchor: "ambition")
@@ -161,24 +163,25 @@
           /Highlight 1
       .user-card
         .text-center
-          #goal
-            .story#activities
-              -if current_user
-                -if @goal.nil? || @goal.completed?
-                  =link_to "Create Goal", new_goal_path
-                -else
-                  .goal-header
-                    %h1=@goal.title
-                    %h3=@goal_category.name
+          #goals
+            #goal
+              =render partial: 'users/goals/goal', locals: {user: @user}
+              / -if current_user
+              /   -if @goal.nil? || @goal.completed?
+              /     =link_to "Create Goal", new_goal_path
+              /     / =link_to "Add Goal", add_goal_path, remote:true
+              /   -else
+              /     .goal-header
+              /       %h1=@goal.title
+              /       %h3=@goal_category.name
                   
-                  =render partial: 'daily_accomplishments', locals: {goal: @goal, daily_accomplishments: @daily_accomplishments}
+              /     =render partial: 'daily_accomplishments', locals: {goal: @goal, daily_accomplishments: @daily_accomplishments}
 
                 
 
-              -else
-                %p=@goal.title
-                =@big_daily_accomplishments.each do |bda|
-                  /render bda
+              / -else
+              /   %p=@goal.title
+              /   =@big_daily_accomplishments.each do |bda|
 
           / #timeline
           / /TIMELINE WITH UPDATE

@@ -7,8 +7,11 @@ class UsersController < ApplicationController
       unless @user.profile_photo_file_name
         @no_photo = true
       end
-      unless @user.activities.first && current_user.activities.count == 3
-        @no_activities = true
+      # unless @user.activities.first && current_user.activities.count == 3
+      #   @no_activities = true
+      # end
+      unless @user.goals.first
+        @no_goals = true
       end
       unless @user.ambition
         @no_ambition = true
@@ -17,9 +20,13 @@ class UsersController < ApplicationController
     end
 
     @goal = @user.goals.last
-    @goal_category = GoalCategory.find(@goal.goal_category_id)
-    unless @goal.nil?
+    if @goal
+      if @goal.goal_category_id
+        @goal_category = GoalCategory.find(@goal.goal_category_id)
+      end
       @daily_accomplishments = @goal.daily_accomplishments
+    else
+      @goal = Goal.new
 
     end
 
@@ -35,9 +42,33 @@ class UsersController < ApplicationController
       
       @task = @user.tasks.last
     end
+    
     @followers = @user.followers
-    @activity = @user.activities.build  
+    if @followers
+      @followers_groups_of_three = @followers.each_slice(3)
+    end
+
+    @activity = @user.activities.build
   end
+
+
+
+  def add_goal
+    @user = User.find(current_user.id)
+    @goal = @user.goals.create(goal_params)
+    @temp_id = params[:temp_id]
+    respond_to do |format|
+      if @activity.save
+        format.js {}
+        format.json { render :add_activity }
+      else
+        format.json { render json: @activity.errors.full_messages, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
+
 
   def public_profile
     @user = User.friendly.find(params[:id])
@@ -146,6 +177,38 @@ class UsersController < ApplicationController
       end
     end
   end
+
+
+
+
+  def edit_goal
+    @user = current_user
+    respond_to do |format|
+      format.js {@user}
+    end
+  end
+  
+  def update_goal
+    # @user = User.find(current_user.id)
+    @user = current_user
+    respond_to do |format|
+      if @user.update(user_params)
+        format.js {}
+        format.json { render @user }
+      else
+        format.json { render json: @activity.errors.full_messages, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
+
+
+
+
+
+
+
   
   def add_story_element
     @user = User.find(current_user.id)

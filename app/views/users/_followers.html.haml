@@ -1,8 +1,21 @@
--if @followers
-  -@followers.each_with_index do |f, i|
-    %div{class: "#{ i % 3 == 0 || i == 0 ? 'row' : ''}" }
-    .col-sm-4
-      .follower-pic-name.text-center
-        .round-thumbnail
-          =link_to image_tag(f.profile_photo_file_name ? f.profile_photo.url(:small) : '/assets/user-placeholder-follower.png', :alt => f.name, class: "circle-image"), user_path(f)
-        %p=f.name
+-if @followers_groups_of_three
+  .row
+    .col-lg-12
+      -@followers_groups_of_three.each do |f3|
+        .row.team-row
+          -f3.each_with_index do |f, i|
+            .col-md-4
+              .follower-pic-name.text-center
+                .round-thumbnail
+                  =link_to image_tag(f.profile_photo_file_name ? f.profile_photo.url(:small) : '/assets/user-placeholder-follower.png', :alt => f.name, class: "circle-image"), user_path(f)
+                %p=f.name
+  / -@followers.each_with_index do |f, i|
+  /   %div{class: "#{ i % 3 == 0 || i == 0 ? 'row' : ''}" }
+  /   .col-sm-4
+  /     .follower-pic-name.text-center
+  /       .round-thumbnail
+  /         =link_to image_tag(f.profile_photo_file_name ? f.profile_photo.url(:small) : '/assets/user-placeholder-follower.png', :alt => f.name, class: "circle-image"), user_path(f)
+  /       %p=f.name
+
+
+

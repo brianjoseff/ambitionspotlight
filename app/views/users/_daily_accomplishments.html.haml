@@ -26,7 +26,7 @@
             =form_for d , remote: true, html: { class: "form"} do |f|
               =f.hidden_field :goal_id
               .controls
-                %h1 what up welcome to the edit
+                
                 .fileUploadWithImage.btn{ :style => "background: url(#{d.image.url(:large)}) no-repeat;" }
                   =f.file_field :image, class: "upload"
                 %img#preview_upload.hidden.row

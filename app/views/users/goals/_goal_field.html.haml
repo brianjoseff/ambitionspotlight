@@ -1,4 +1,4 @@
-= form_for(@user,url: update_ambition_user_path, remote: true, format: :json, html: {class: ""}) do |f|
+= form_for(@goal,url: update_goal_user_path, remote: true, format: :json, html: {class: ""}) do |f|
   #error_explanation{:style => "display:none;"}
     %ul
       - if @user.errors.any?
