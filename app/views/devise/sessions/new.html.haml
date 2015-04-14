@@ -13,7 +13,8 @@
         =f.label :password, :class => 'control-label'
         .controls
           =f.password_field :password, type: "password", :class => "form-control text-center", :placeholder => "Password"
-
+        = f.check_box :remember_me
+        = f.label :remember_me
 
       .spotlight-button.text-center
         =f.submit "Sign in", class: "btn btn-large make-button landing-button"
