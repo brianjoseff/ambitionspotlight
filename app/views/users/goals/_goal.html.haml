@@ -3,7 +3,7 @@
     -if @user.goals.first
       %h1=@user.goals.first.title
       /=link_to "Edit", edit_goal_user_path(@user), remote:true, class: "user-edit-button"
-      =render partial: 'users/daily_accomplishments', locals: {goal: @goal, daily_accomplishments: @daily_accomplishments}
+      =render partial: 'users/daily_accomplishments/daily_accomplishments', locals: {goal: @goal, daily_accomplishments: @daily_accomplishments}
     -else
       = form_for(@goal, remote: true, format: :js, html: {class: ""}) do |f|
         #error_explanation{:style => "display:none;"}

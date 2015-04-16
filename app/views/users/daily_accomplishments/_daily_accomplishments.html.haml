@@ -1,0 +1,22 @@
+
+:javascript
+  bindings()
+
+-if goal.nil? || goal.completed?
+  =link_to "Create Goal", new_goal_path
+
+-else
+  #daily_accomplishments_partial
+    -if goal.daily_accomplishments.where("created_at >= ?", Time.zone.now.beginning_of_day).count == 0 || Rails.env.development?
+      =render partial: "users/daily_accomplishments/form", locals: {goal: goal}     
+    -if daily_accomplishments.count > 0
+      -daily_accomplishments.each do |d|
+        - if !d.id.nil?
+
+          /DAILY ACCOMPLISHMENT
+          =render partial: "users/daily_accomplishments/daily_accomplishment", locals: {d: d}
+          ////////////////////////
+
+
+
+

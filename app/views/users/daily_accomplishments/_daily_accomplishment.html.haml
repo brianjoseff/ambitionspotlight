@@ -1,0 +1,21 @@
+.accomplishment{:id => "da_#{d.id}"}           
+  =image_tag(d.image.nil?  ? '/assets/user-placeholder.png': d.image.url(:large), :alt => "picture of accomplishment", class: "accomplishment-image")
+  %p=d.content
+  //hidden edit selector--clicking turns on edit form
+  .button-hover{style:"display:none;"}
+    %div
+      %span.glyphicon.glyphicon-cog
+      %button{:id => "edit_da_#{d.id}"} Edit
+.hidden{:id => "edit_form_#{d.id}"}
+  /EDIT MOST RECENT DAILY ACCOMPLISHMENT
+  =form_for d , remote: true, html: { class: "form"} do |f|
+    =f.hidden_field :goal_id
+    .controls
+      
+      .fileUploadWithImage.btn{ :style => "background: url(#{d.image.url(:large)}) no-repeat;" }
+        =f.file_field :image, class: "upload"
+      %img#preview_upload.hidden.row
+      =token_tag nil
+      =f.text_area :content, class: "form-control text-center", placeholder: "Created professional looking business cards with my contact info on them", rows: 3
+      %br
+      =f.submit "Edit"
