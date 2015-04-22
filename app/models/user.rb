@@ -32,6 +32,8 @@ class User < ActiveRecord::Base
       {:bucket => "ambition-dev", :access_key_id => ENV['S3_KEY'], :secret_access_key => ENV['S3_SECRET']}
   end
   
+
+
   has_many :assets, as: :imageable, :dependent => :destroy
   has_many :followships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed
@@ -48,6 +50,7 @@ class User < ActiveRecord::Base
   has_many :activities
   has_many :story_elements
   has_many :goals
+  has_many :posts
   
   accepts_nested_attributes_for :assets
   

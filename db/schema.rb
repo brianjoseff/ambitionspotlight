@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150227112531) do
+ActiveRecord::Schema.define(version: 20150421040826) do
 
   create_table "activities", force: true do |t|
     t.integer  "user_id"
@@ -49,6 +49,19 @@ ActiveRecord::Schema.define(version: 20150227112531) do
   add_index "badges_sashes", ["badge_id", "sash_id"], name: "index_badges_sashes_on_badge_id_and_sash_id"
   add_index "badges_sashes", ["badge_id"], name: "index_badges_sashes_on_badge_id"
   add_index "badges_sashes", ["sash_id"], name: "index_badges_sashes_on_sash_id"
+
+  create_table "bangbangings", force: true do |t|
+    t.integer  "post_id"
+    t.integer  "bangbang_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "bangbangs", force: true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "daily_accomplishments", force: true do |t|
     t.text     "content"
@@ -164,6 +177,13 @@ ActiveRecord::Schema.define(version: 20150227112531) do
     t.string  "category", default: "default"
   end
 
+  create_table "posts", force: true do |t|
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
   create_table "sashes", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -184,6 +204,19 @@ ActiveRecord::Schema.define(version: 20150227112531) do
     t.text     "achievement"
     t.text     "improvement"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "taggings", force: true do |t|
+    t.integer  "post_id"
+    t.integer  "tag_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tags", force: true do |t|
+    t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -235,10 +268,12 @@ ActiveRecord::Schema.define(version: 20150227112531) do
     t.string   "youtube_id"
     t.string   "soundcloud_id"
     t.boolean  "thinking",                   default: false
+    t.string   "username"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   add_index "users", ["slug"], name: "index_users_on_slug", unique: true
+  add_index "users", ["username"], name: "index_users_on_username", unique: true
 
 end

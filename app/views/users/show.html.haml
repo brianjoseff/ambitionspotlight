@@ -29,6 +29,7 @@
         //preview = $('#preview_upload')
         preview = $(this).parent().next('#preview_upload');
         console.log("FUCKING PREVIEW", preview);
+        
         reader.onload = function(event) {
           preview.removeClass('hidden');
           preview.empty();

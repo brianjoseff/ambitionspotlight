@@ -10,49 +10,19 @@
 / 
 
 .container
-  / #myCarousel.carousel.slide{"data-ride" => "carousel"}
-  /   / Wrapper for slides
-  /   .carousel-inner              
-  /     / FLopez
-  /     .item.active.leaderimg
-  /       /-if @users.first.spotlight
-  /       =link_to image_tag(@users.first.spotlight.image.url(:original), :alt => @users.first.name, class: "circle-image"), user_path(@users.first)
-  /       / -else
-  /       /   .profile-pic
-  /       /     .round-border
-  /       /       .round.round-center          
-  /       /         =link_to image_tag(@users.first.assets.empty?  ? '/assets/user-placeholder.png': @users.first.assets.first.image.url(:medium), :alt => @users.first.name, class: "circle-image"), user_path(@users.first)
-  /       .carousel-caption
-  /         .carousel-details
-  /           =link_to @users.first.name, user_path(@users.first), class: 'carousel-name'
-  /           %p=@users.first.occupation
-  /           / %p=truncate(@users.first.bio,20)
-      
-  /     -@users[1..-1].each do |user|
-  /       .item.leaderimg
-  /         =link_to image_tag(user.spotlight.image.url(:original), :alt => user.name, class: "circle-image"), user_path(user)
-  /         .carousel-caption
-  /           .carousel-details
-  /             =link_to user.name, user_path(user), class: 'carousel-name'
-  /             /%p=truncate(user.bio,20)
-  /             %p=user.occupation
- 
-    
-  /   %ul.list-group.col-sm-4
-  /     %li.list-group-item.active{"data-slide-to" => "0", "data-target" => "#myCarousel"}
-  /       %h4=@users.first.name
-  /     -@users[1..-1].each_with_index do |user, index|
-  /       %li.list-group-item{"data-slide-to" => index+1, "data-target" => "#myCarousel"}
-  /         %h4=user.name
-          
- 
+  .row
+    .col-lg-2
+    .col-lg-8
+      #feed
+        #post_field
+          =form_for @post, html:{remote: true} do |f|
+            =text_field_tag :query, params[:query], id: "post_goals", class: 'form-control', placeholder: 'Goal', name:"post[content]"
+            #hidden_fields
+            /search--if found, log tag_id. if NOT found, create new tag, log new_tag_id
+            /on post submission, create tagging and create post
+            = button_tag "Post", class: 'btn btn-default'
 
-  /   / Controls
-  /   .carousel-controls
-  /     %a.left.carousel-control{"data-slide" => "prev", :href => "#myCarousel"}
-  /       %span.glyphicon.glyphicon-chevron-left
-  /     %a.right.carousel-control{"data-slide" => "next", :href => "#myCarousel"}
-  /       %span.glyphicon.glyphicon-chevron-right
-  / End Carousel
-  %br/
-  %br/
+
+
+        #posts  
+          =render partial: "posts/post", collection: @posts
