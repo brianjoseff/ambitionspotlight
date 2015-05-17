@@ -6,11 +6,11 @@ class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :slug_candidates, use: [:slugged, :history]
   def slug_candidates
-      [
-        :name,
-        [:name, :id],
-      ]
-    end
+    [
+      :name,
+      [:name, :id],
+    ]
+  end
   
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -35,22 +35,28 @@ class User < ActiveRecord::Base
 
 
   has_many :assets, as: :imageable, :dependent => :destroy
+
   has_many :followships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed
-  has_many :reverse_followships, foreign_key: "followed_id",
-                                   class_name:  "Followship",
-                                   dependent:   :destroy
+  has_many :reverse_followships, foreign_key: "followed_id", class_name: "Followship", dependent: :destroy
   has_many :followers, through: :reverse_followships, source: :follower
-  
+
   has_many :task_submissions
   has_many :tasks
   has_many :albums
   has_many :documents
-  has_one :spotlight
   has_many :activities
   has_many :story_elements
   has_many :goals
+  has_one  :spotlight
   has_many :posts
+
+  has_many :user_taggings
+  has_many :tags, through: :user_taggings
+  has_many :user_bang_bangings
+  has_many :bangbangs, through: :user_bang_bangings
+
+
   
   accepts_nested_attributes_for :assets
   

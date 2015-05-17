@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150421040826) do
+ActiveRecord::Schema.define(version: 20150517045707) do
 
   create_table "activities", force: true do |t|
     t.integer  "user_id"
@@ -233,6 +233,20 @@ ActiveRecord::Schema.define(version: 20150421040826) do
   create_table "tasks", force: true do |t|
     t.text     "description"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_bang_bangings", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "bangbang_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_taggings", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "tag_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

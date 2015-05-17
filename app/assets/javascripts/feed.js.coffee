@@ -1,14 +1,16 @@
 # type in hashtag
 ## activate autocomplete
 # on selecting something from dropdown--set up data for association -> hashtag_id
-# if no matches from autocomplete--return
-# create tag and create association in rails controller
+#- if no matches from autocomplete--return and:
+#-- create tag and create association to post via tagging
+#-- and user via user_tagging (so we can keep track of tags users use)
 
 # type in !!
 ## activate autocomplete
 # on selecting something from dropdown--set up data for association -> bangbang_id
-# if no matches from autocomplete--return
-# create tag and create association in rails controller
+#- if no matches from autocomplete--return and:
+#-- create bangbang and create association to post via bangbanging
+#-- and user via user_bang_banging (so we can keep track of bangbangs users use)
 
 # type space
 ## close autocomplete
@@ -24,7 +26,9 @@ $(document).ready ->
         return
       when 35 # hashtag      
         # do same thing
+        # I guess this is for mobile? or if user somehow types hashtag directly
         console.log "hey"
+        ready("tag")
       when 49 #1
         if e.shiftKey
           bangCounter += 1
@@ -41,11 +45,11 @@ $(document).ready ->
             return
         return
       when 33 #!
-        #do same thing
+        #TO DO: do same thing for bangbang. this is for mobile?
         console.log "hello"
-      when 50 #2 # at sign
+      when 50 #2 # @/at sign
         if e.shiftKey
-          ready()
+          ready("at")
         return
     return
   #TO DO: add support for touch/mobile
@@ -54,7 +58,7 @@ split = (val) ->
   val.split(" ")
 
 extractLast = (term) ->
-  console.log "before: ", term
+  # console.log "before: ", term
   return split(term).pop()
 
 stripHashTag = (lastTerm) ->
@@ -82,21 +86,24 @@ ready = (obj_type) ->
       if term.charAt(0) is "#" || "!"
         # if data doesn't have # prefix
         #strippedTerm = term.slice(1)
-        
-        # console.log "1. -------------"
-        # console.log "request", request
-        # console.log "should be your tag: ", extractLast(request.term)
-        $.getJSON '/posts/autocomplete_' + obj_type + 's.json', { term: term }, response
-        # console.log "response: ", response
-        # console.log "/1. -------------"
-      else
-        $( "#post_goals" ).blur().focus()
-        if lastKeyDown is 32
+        if lastKeyDown is 32 #spacebar
           req_a = split(request.term)          
           penultimate_element = req_a[req_a.length - 2]
-          # console.log "source--we believe it's a space"
-          # console.log "and the term is: '", req_a, "'"
-          # console.log "and here's the split term: '",penultimate_element , "'"
+          $('<input>',
+            name: "post[new_" + obj_type + "_titles][]"
+            value: penultimate_element
+            type: "hidden"
+            multiple: "multiple"
+            id: "new_post_" + obj_type + "_titles"
+            ).appendTo("#hidden_fields")
+          return
+
+        $.getJSON '/posts/autocomplete_' + obj_type + 's.json', { term: term }, response
+      else
+        $( "#post_goals" ).blur().focus()
+        if lastKeyDown is 32 #spacebar
+          req_a = split(request.term)          
+          penultimate_element = req_a[req_a.length - 2]
           $('<input>',
             name: "post[new_" + obj_type + "_titles][]"
             value: penultimate_element
@@ -111,19 +118,14 @@ ready = (obj_type) ->
       false
 
     select: (event, ui) ->
-      #console.log "2. -------------"
-      #console.log "ui: ", ui
       terms = split @value
-      #console.log "terms: ", terms
       terms.pop()
       
       #if data doesn't have # prepended
       #terms.push "#"+ ui.item.title
       
       terms.push ui.item.title
-      #console.log "updated terms: ", terms
       terms.push("")
-      #console.log "updated terms 2: ", terms
       @value = terms.join(" ")
 
       # $('#post_goals').val ui.item.title
@@ -140,17 +142,12 @@ ready = (obj_type) ->
         ).appendTo("#hidden_fields")
 
       event.preventDefault()
-      #console.log "/2. -------------"
       return
 
     response: (event, ui) ->
-      console.log "response ui:", ui
       if ui.content.length is 0
-        # console.log "LAST KEY DOWN: ", lastKeyDown
         # $("#post_goals").autocomplete("disable")
-        # console.log "response event: ", event
         if lastKeyDown is 32 #spacebar
-          console.log "actually a motherfuckin spacebar!!!"
           return false
         #create new tag
         #add to normalization div

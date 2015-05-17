@@ -66,7 +66,9 @@
             .navbar-brand
               / .logo
               /   =image_tag "as-logo2-white.png", id: "logo"
-              =link_to image_tag("AS-Logo.png") , root_path, class: "masthead"
+              .masthead
+                =link_to image_tag("AS-Logo.png", class: "masthead-img") , root_path, class: "masthead-link"
+                .masthead-spotlight
         
         
           / Collect the nav links, forms, and other content for toggling

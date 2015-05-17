@@ -6,24 +6,51 @@ class PostsController < ApplicationController
 
   def create
     content = linkify_mentions_hashtags_bangbangs(post_params[:content])
+
+    @user = current_user
     @post = Post.new(content: content)
     
+    # add existing tags
     unless post_params[:tag_ids].nil?
       post_params[:tag_ids].each do |tid|
-        @post.tags << Tag.find(tid)
+        tag = Tag.find(tid)
+        @post.tags << tag
+        @user.tags << tag
       end
     end
 
+    # create new tag and add
     unless post_params[:new_tag_titles].nil?
       post_params[:new_tag_titles].each do |tt|
         tag = Tag.create!(title: tt)
         @post.tags << tag
+        @user.tags << tag
       end
     end
 
+    # add existing bangbangs
+    unless post_params[:bangbang_ids].nil?
+      post_params[:bangbang_ids].each do |bb|
+        bangbang = Bangbang.find(bb)
+        @post.bangbangs << bangbang
+        @user.bangbangs << bangbang
+      end
+    end
+
+    # create new bangbang and add
+    unless post_params[:new_bangbang_titles].nil?
+      post_params[:new_bangbang_titles].each do |bt|
+        bangbang = Bangbang.create!(title: bt)
+        @post.bangbangs << bangbang
+        @user.bangbangs << bangbang
+      end
+    end
+
+
+
+
     # create new tags for "post[new_goal_titles][]"
     # create taggings for "post[new_goal_titles][]"
-
     
     respond_to do |format|
       if @post.save
@@ -53,6 +80,18 @@ class PostsController < ApplicationController
       }
     end
   end
+
+  def autocomplete_ats
+    @ats = At.order(:title).where("title LIKE ?", "%#{params[:term]}%")
+    respond_to do |format|
+      format.html
+      format.json { 
+        render json: @ats.map{|at| {id: at.id, title: at.title}}
+        # render json: @goals.map(&:title)
+      }
+    end
+  end
+
 
   def mention_autocomplete
     @users = User.order(:username).where("username LIKE ?", "%#{params[:term]}%")
