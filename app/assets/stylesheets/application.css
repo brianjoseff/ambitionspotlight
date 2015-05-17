@@ -58,19 +58,10 @@ overflow-y:scroll;
 box-shadow: inset 0 0 300px #000;
 }
 
-.background{
-	width:100%;
-	height: 100%;
-	background: url("Landing-AS.jpg") center center;
-	/*opacity: .75;*/
-	background-attachment:fixed;
-	background-size: cover;
-/*	position:absolute;
-	top:0;
-	left:0;*/
-	/*z-index:-5;*/
-	/*box-shadow: inset 0 0 400px rgba(0, 0, 0, 1);*/
+body{
+	background-color: #333;
 }
+
 .background-cloak{
 	width:100%;
 	height: 100%;
