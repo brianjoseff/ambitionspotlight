@@ -16,7 +16,7 @@
  *= require_self
  */
 
-h1, h2, h3, p, label, input, textarea{
+h1, h2, h3, p, label, input, textarea, button[type=submit], a{
 /*	color: #ebebeb;*/
 	font-weight: 300;
 	letter-spacing: 1px;
@@ -28,14 +28,13 @@ h1{
 }
 
 $default-font-size: 120%;
-p{
-	font-size: $default-font-size;
-}
-button[type=submit]{
-	font-size: 120%;
+$font-size: 120%;
+
+p, button[type=submit], input, textarea{
+	font-size: $font-size !important;
 }
 
-$font-size: 120%;
+
 
 ::-webkit-input-placeholder {
     font-size: $font-size;
