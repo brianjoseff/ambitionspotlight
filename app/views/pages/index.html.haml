@@ -16,11 +16,11 @@
       #feed
         #post_field
           =form_for @post, html:{remote: true} do |f|
-            =text_field_tag :query, params[:query], id: "post_goals", class: 'form-control', placeholder: 'Goal', name:"post[content]"
+            =text_area_tag :query, params[:query], id: "post_goals", class: 'form-control action-input', placeholder: 'What actions did you take today?', name:"post[content]", rows: 3
             #hidden_fields
             /search--if found, log tag_id. if NOT found, create new tag, log new_tag_id
             /on post submission, create tagging and create post
-            = button_tag "Post", class: 'btn btn-default'
+            = button_tag "Stay Up", class: 'btn btn-default'
 
 
 

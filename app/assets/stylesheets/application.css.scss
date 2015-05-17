@@ -27,9 +27,32 @@ h1{
 	
 }
 
+$default-font-size: 120%;
 p{
+	font-size: $default-font-size;
+}
+button[type=submit]{
 	font-size: 120%;
 }
+
+$font-size: 120%;
+
+::-webkit-input-placeholder {
+    font-size: $font-size;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+    font-size: $font-size;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+    font-size: $font-size;
+}
+
+:-ms-input-placeholder {  
+   font-size: $font-size;
+}
+
 
 input.form-control-big{
   font-size: 120%;
