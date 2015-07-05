@@ -96,10 +96,6 @@
               -else
                 
                 =image_tag(@user.assets.empty?  ? '/assets/user-placeholder.png': @user.assets.first.image.url(:medium), :alt => @user.name, class: "circle-image")
-              
-              
-        / .occupation-follow
-        /   %p.occupation=@user.occupation 
            
         /.fb-share-button{"data-href" => "http://www.ambitionspotlight.com/#{user_path(@user)}", "data-width" => "100"}
         -if current_user && current_user == @user
