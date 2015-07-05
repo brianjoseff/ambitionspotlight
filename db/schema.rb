@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150517045707) do
+ActiveRecord::Schema.define(version: 20150705214231) do
 
   create_table "activities", force: true do |t|
     t.integer  "user_id"
@@ -198,14 +198,6 @@ ActiveRecord::Schema.define(version: 20150517045707) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.boolean  "active"
-  end
-
-  create_table "story_elements", force: true do |t|
-    t.text     "achievement"
-    t.text     "improvement"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "taggings", force: true do |t|
