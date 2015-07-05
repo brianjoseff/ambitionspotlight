@@ -167,24 +167,7 @@
           #goals
             #goal
               =render partial: 'users/goals/goal', locals: {user: @user}
-              / -if current_user
-              /   -if @goal.nil? || @goal.completed?
-              /     =link_to "Create Goal", new_goal_path
-              /     / =link_to "Add Goal", add_goal_path, remote:true
-              /   -else
-              /     .goal-header
-              /       %h1=@goal.title
-              /       %h3=@goal_category.name
-                  
-              /     =render partial: 'daily_accomplishments', locals: {goal: @goal, daily_accomplishments: @daily_accomplishments}
 
-                
-
-              / -else
-              /   %p=@goal.title
-              /   =@big_daily_accomplishments.each do |bda|
-
-          / #timeline
 
       
       .user-card
