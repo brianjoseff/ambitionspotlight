@@ -104,20 +104,6 @@ class UsersController < ApplicationController
       end
     end
   end
-
-  # def add_story_element
-  #   @user = User.find(current_user.id)
-  #   @story_element = @user.story_elements.create(story_element_params)
-  #   # @temp_id = params[:temp_id]
-  #   respond_to do |format|
-  #     if @story_element.save
-  #       format.js {}
-  #       format.json { render @user}
-  #     else
-  #       format.json { render json: @story_element.errors.full_messages, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
   
   def delete_activity
     @user = User.find(current_user.id)
@@ -196,50 +182,6 @@ class UsersController < ApplicationController
       end
     end
   end
-
-
-
-
-
-
-
-
-
-  
-  def add_story_element
-    @user = User.find(current_user.id)
-    @story_element = @user.story_elements.create(story_element_params)
-    # @temp_id = params[:temp_id]
-    respond_to do |format|
-      if @story_element.save
-        format.js {}
-        format.json { render @user }
-      else
-        format.json { render json: @story_element.errors.full_messages, status: :unprocessable_entity }
-      end
-    end
-  end
-  
-  def edit_story_element
-    @user = current_user
-    respond_to do |format|
-      format.js {@user}
-    end
-  end
-  
-  def update_story_element
-    @user = current_user
-    
-    respond_to do |format|
-      if @user.update(story_element_params)
-        format.js {}
-        format.json { render @user }
-      else
-        format.json { render json: @activity.errors.full_messages, status: :unprocessable_entity }
-      end
-    end
-  end
-  
   
   def destroy
     @user = User.friendly.find(params[:id])
@@ -362,9 +304,6 @@ private
   end
   def bio_params
     params.require(:bio_pieces).permit(:a, :b,:c, :d, :e, :f, :g)
-  end
-  def story_element_params
-    params.require(:story_element).permit(:id, :user_id, :improvement, :achievement, achievement_pieces: [:a, :b, :c, :d, :e, :f, :g], improvement_pieces: [:a, :b, :c, :d, :e, :f, :g])
   end
   
 end
