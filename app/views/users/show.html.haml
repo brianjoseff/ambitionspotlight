@@ -121,11 +121,6 @@
             .story-text#ambition
               =render partial: 'ambition', locals: {user: @user}
 
-            
-              
-              
-              / -if @user.leader?
-              /   =link_to "Your Dashboard", leader_dashboard_path, style:"font-size:50%"
               
             =render partial: 'shared/follow', locals: {user: @user}
             - content_for :head do
@@ -136,33 +131,26 @@
               %meta{:content => "#{@user.profile_photo_file_name.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium)}", :property => "og:image"} 
               %meta{property: "og:type", content:"article"} 
             
-
             .share.text-center
               %a{class: "fb-share-link btn btn-large make-button follow-button", "data-name"=> "#{@user.name}", "data-link"=> "http://www.ambitionspotlight.com#{user_path(@user)}", "data-image" => "#{@user.profile_photo.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium)}", "data-description"=>"#{@user.ambition}"}
                 %i.fa.fa-facebook.fb-icon
                 | Share My Story
           
-
-
           #bio.story
             .story-header
               %p
                 WHO I AM
             .story#bio
               =render partial: 'bio', locals: {user: @user}
-            
-
-          
-          /GOAL
-          /List them
-          /Highlight 1
+                
+      /GOAL
+      /List them
+      /Highlight 1
       .user-card
         .text-center
           #goals
             #goal
               =render partial: 'users/goals/goal', locals: {user: @user}
-
-
       
       .user-card
         .text-center    
