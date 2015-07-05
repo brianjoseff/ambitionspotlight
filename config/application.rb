@@ -7,7 +7,7 @@ require 'devise'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Ambitionspotlight
+module BangBang
   class Application < Rails::Application
     config.serve_static_assets = true
     config.assets.compile = true
