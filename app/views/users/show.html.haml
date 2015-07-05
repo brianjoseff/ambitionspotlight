@@ -50,10 +50,8 @@
     .col-lg-8
       .user-card
         /add top 3 activities right now
-        
 
         ///CARD 1
-
         -if current_user && current_user == @user
           -if @no_activities || @no_ambition || @no_photo
             .next-profile-actions
@@ -89,12 +87,9 @@
           .round-border
             .round.round-center
               -if @user.profile_photo_file_name
-                
-                =image_tag(@user.profile_photo.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium), :alt => @user.name, class: "circle-image")
-                
-
-              -else
-                
+                =image_tag(@user.profile_photo.nil?  ? '/assets/user-placeholder.png': @user.profile_photo.url(:medium), :alt => @user.name, class: "circle-image")                
+              
+              -else                
                 =image_tag(@user.assets.empty?  ? '/assets/user-placeholder.png': @user.assets.first.image.url(:medium), :alt => @user.name, class: "circle-image")
            
         /.fb-share-button{"data-href" => "http://www.ambitionspotlight.com/#{user_path(@user)}", "data-width" => "100"}
@@ -117,7 +112,6 @@
             .story-text#ambition
               =render partial: 'ambition', locals: {user: @user}
 
-              
             =render partial: 'shared/follow', locals: {user: @user}
             - content_for :head do
               %meta{:content => "Ambition Spotlight | #{@user.name}", :property => "og:title"}
