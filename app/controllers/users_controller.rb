@@ -3,13 +3,11 @@ class UsersController < ApplicationController
   def show   
     @user = User.friendly.find(params[:id])
     if @user == current_user
-      @story_element = @user.story_elements.build
+      # @story_element = @user.story_elements.build
       unless @user.profile_photo_file_name
         @no_photo = true
       end
-      # unless @user.activities.first && current_user.activities.count == 3
-      #   @no_activities = true
-      # end
+
       unless @user.goals.first
         @no_goals = true
       end
@@ -47,8 +45,6 @@ class UsersController < ApplicationController
     if @followers
       @followers_groups_of_three = @followers.each_slice(3)
     end
-
-    @activity = @user.activities.build
   end
 
 
