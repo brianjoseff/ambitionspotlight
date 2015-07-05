@@ -104,41 +104,7 @@ class UsersController < ApplicationController
       end
     end
   end
-  
-  def delete_activity
-    @user = User.find(current_user.id)
-    @activity = Activity.find(params[:activity_id])
-    
-  end
-  
-  def add_activity
-    @user = User.find(current_user.id)
-    @activity = @user.activities.create(activity_params)
-    @temp_id = params[:temp_id]
-    respond_to do |format|
-      if @activity.save
-        format.js {}
-        format.json { render :add_activity }
-      else
-        format.json { render json: @activity.errors.full_messages, status: :unprocessable_entity }
-      end
-    end
-  end
-  
-  
-  # def add_ambition
-  #   @user = User.find(current_user.id)
-  #   @activity = @user.activities.create(activity_params)
-  #   
-  #   respond_to do |format|
-  #     if @activity.save
-  #       format.js {}
-  #       format.json { render :add_activity }
-  #     else
-  #       format.json { render json: @activity.errors.full_messages, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
+
   
   def edit_ambition
     @user = current_user
@@ -296,9 +262,6 @@ class UsersController < ApplicationController
 
 
 private
-  def activity_params
-    params.require(:activity).permit(:user_id, :title)
-  end
   def user_params
     params.require(:user).permit(:id, :ambition, :name, :bio,:youtube_id,:soundcloud_id, :rating, :profile_photo, bio_pieces: [:a, :b, :c, :d, :e, :f, :g])
   end
