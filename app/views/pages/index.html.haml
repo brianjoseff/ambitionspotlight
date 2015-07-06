@@ -1,22 +1,54 @@
 .container
   .row
     .col-lg-3.lists-sidebar
+      .trending.card
+        %h1 Trending Actions
+        %ul
+          %li
+            %a.pretty-link.bangbang-pretty-link
+              %span !!
+              ReadCh10
+              //%span.list //EloquentJavascript
+
+          %li
+            %a.pretty-link.bangbang-pretty-link
+              %span !!
+              Duolingo2000pts
+          %li
+            %a.pretty-link.bangbang-pretty-link
+              %span !!
+              Run5Miles      
       /Lists
       /render top 5 lists
       .lists.card
         %h1 Lists
         %ul
-          %li // BuildAWebsite
-          %li // LearnSpanish
-          %li // RunAMarathon
+          %li
+            %a.list-pretty-link
+              %span //
+              BuildAWebsite
+          %li
+            %a.list-pretty-link
+              %span //
+              LearnSpanish
+          %li
+            %a.list-pretty-link
+              %span //
+              RunAMarathon
           %li
             %a + Create a List
-      .trending.card
-        %h1 Trending Actions
+      /Leaders
+      /render top 5 lists
+      .leaders.card
+        %h1 Local Leaders
         %ul
-          %li !! EloquentJavascript-ReadCh10
-          %li !! Duolingo2000pts
-          %li !! Run5Miles
+          %li
+            %a.list-pretty-link Juan Torres
+          %li
+            %a.list-pretty-link Malik Ali
+          %li
+            %a.list-pretty-link Brock Johnson
+
     .col-lg-8
       #feed
         #post_field
