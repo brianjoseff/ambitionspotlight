@@ -1,17 +1,22 @@
-/ .row
-/ 
-/   %h1.spotlight.text-center Spotlight
-/   
-/   -@users.each do |user|
-/     .col-lg-3.text-center
-/       
-/       =link_to image_tag(user.assets.empty?  ? '/assets/user-placeholder.png': user.assets.first.image.url(:medium), :alt => user.name, class: ""), user_path(user)
-/       %h3=link_to user.name, user_path(user)
-/ 
-
 .container
   .row
-    .col-lg-2
+    .col-lg-3.lists-sidebar
+      /Lists
+      /render top 5 lists
+      .lists.card
+        %h1 Lists
+        %ul
+          %li // BuildAWebsite
+          %li // LearnSpanish
+          %li // RunAMarathon
+          %li
+            %a + Create a List
+      .trending.card
+        %h1 Trending Actions
+        %ul
+          %li !! EloquentJavascript-ReadCh10
+          %li !! Duolingo2000pts
+          %li !! Run5Miles
     .col-lg-8
       #feed
         #post_field
@@ -21,7 +26,6 @@
             /search--if found, log tag_id. if NOT found, create new tag, log new_tag_id
             /on post submission, create tagging and create post
             = button_tag "Stay Up", class: 'btn btn-default'
-
 
 
         #posts  
