@@ -267,6 +267,8 @@ ActiveRecord::Schema.define(version: 20150705214510) do
     t.string   "soundcloud_id"
     t.boolean  "thinking",                   default: false
     t.string   "username"
+    t.string   "authentication_token"
+    t.datetime "authentication_token_created_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

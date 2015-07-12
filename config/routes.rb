@@ -88,6 +88,12 @@ Rails.application.routes.draw do
   # match '/landing', to: 'pages#landing', via: :get
   resources :users, :only => [:show, :edit, :update]
   resources :followships, only: [:create, :destroy]
+
+  api_version(:module => "V1", :path => {:value => "v1"}) do
+    resources :registrations, only: :create
+    # resources :bars
+  end
+
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

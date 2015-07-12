@@ -26,6 +26,8 @@ gem "haml-rails"
 
 gem 'intercom-rails'
 
+gem 'versionist'
+
 gem 'pg'
 gem 'heroku'
 gem 'rails_12factor', group: :production

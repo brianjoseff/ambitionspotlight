@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
   
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  # Module responsible for generating API auth tokens
+  include Tokenable
   
   after_create :notify_admins
   
