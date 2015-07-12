@@ -91,7 +91,8 @@ Rails.application.routes.draw do
 
   api_version(:module => "V1", :path => {:value => "v1"}) do
     resources :registrations, only: :create
-    # resources :bars
+    delete 'sessions' => 'sessions#destroy'
+    resources :sessions, only: [:create]
   end
 
   

@@ -22,8 +22,4 @@ class V1::RegistrationsController < V1::BaseController
 	def registration_params
 		params.require(:user).permit(:email, :password, :name)
 	end
-
-	def secret_params
-		params.require(:secret).permit(:token)
-	end
 end
