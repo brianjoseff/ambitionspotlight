@@ -26,5 +26,6 @@
             = button_tag "Stay Up", class: 'btn btn-default'
 
 
-        #posts  
-          =render partial: "posts/post", collection: @posts
+        #action.text-center
+          %h1
+            =@action.title
