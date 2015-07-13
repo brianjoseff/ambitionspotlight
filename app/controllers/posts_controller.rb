@@ -29,20 +29,20 @@ class PostsController < ApplicationController
     end
 
     # add existing bangbangs
-    unless post_params[:bangbang_ids].nil?
-      post_params[:bangbang_ids].each do |bb|
-        bangbang = Bangbang.find(bb)
-        @post.bangbangs << bangbang
-        @user.bangbangs << bangbang
+    unless post_params[:action_ids].nil?
+      post_params[:action_ids].each do |bb|
+        action = Action.find(bb)
+        @post.actions << action
+        @user.actions << action
       end
     end
 
     # create new bangbang and add
-    unless post_params[:new_bangbang_titles].nil?
-      post_params[:new_bangbang_titles].each do |bt|
-        bangbang = Bangbang.create!(title: bt)
-        @post.bangbangs << bangbang
-        @user.bangbangs << bangbang
+    unless post_params[:new_action_titles].nil?
+      post_params[:new_action_titles].each do |bt|
+        action = Action.create!(title: bt)
+        @post.actions << action
+        @user.actions << action
       end
     end
 
@@ -71,11 +71,11 @@ class PostsController < ApplicationController
   end
 
   def autocomplete_bangbangs
-    @bangbangs = Bangbang.order(:title).where("title LIKE ?", "%#{params[:term]}%")
+    @actions = Action.order(:title).where("title LIKE ?", "%#{params[:term]}%")
     respond_to do |format|
       format.html
       format.json { 
-        render json: @bangbangs.map{|bangbang| {id: bangbang.id, title: bangbang.title}}
+        render json: @actions.map{|action| {id: action.id, title: action.title}}
         # render json: @goals.map(&:title)
       }
     end

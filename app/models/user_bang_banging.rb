@@ -1,4 +1,4 @@
 class UserBangBanging < ActiveRecord::Base
   belongs_to :user
-  belongs_to :bangbang
+  belongs_to :action
 end

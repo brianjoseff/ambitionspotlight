@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150705214510) do
+ActiveRecord::Schema.define(version: 20150713064448) do
+
+  create_table "actions", force: true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "albums", force: true do |t|
     t.string   "name"
@@ -31,6 +37,13 @@ ActiveRecord::Schema.define(version: 20150705214510) do
     t.datetime "image_updated_at"
   end
 
+  create_table "assignments", force: true do |t|
+    t.integer  "list_id"
+    t.integer  "action_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "badges_sashes", force: true do |t|
     t.integer  "badge_id"
     t.integer  "sash_id"
@@ -44,13 +57,7 @@ ActiveRecord::Schema.define(version: 20150705214510) do
 
   create_table "bangbangings", force: true do |t|
     t.integer  "post_id"
-    t.integer  "bangbang_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "bangbangs", force: true do |t|
-    t.string   "title"
+    t.integer  "action_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -135,6 +142,13 @@ ActiveRecord::Schema.define(version: 20150705214510) do
     t.datetime "updated_at"
     t.boolean  "completed"
     t.integer  "user_id"
+  end
+
+  create_table "lists", force: true do |t|
+    t.integer  "user_id"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "merit_actions", force: true do |t|
@@ -223,7 +237,7 @@ ActiveRecord::Schema.define(version: 20150705214510) do
 
   create_table "user_bang_bangings", force: true do |t|
     t.integer  "user_id"
-    t.integer  "bangbang_id"
+    t.integer  "action_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

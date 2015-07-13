@@ -50,11 +50,12 @@ class User < ActiveRecord::Base
   has_many :goals
   has_one  :spotlight
   has_many :posts
+  has_many :lists
 
   has_many :user_taggings
   has_many :tags, through: :user_taggings
   has_many :user_bang_bangings
-  has_many :bangbangs, through: :user_bang_bangings
+  has_many :actions, through: :user_bang_bangings
 
 
   

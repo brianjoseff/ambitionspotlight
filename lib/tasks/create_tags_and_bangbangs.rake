@@ -4,8 +4,8 @@ namespace :db do
 
     Tag.delete_all
     Tag.reset_pk_sequence
-    Bangbang.delete_all
-    Bangbang.reset_pk_sequence
+    Action.delete_all
+    Action.reset_pk_sequence
     
 
 
@@ -17,13 +17,13 @@ namespace :db do
     Tag.create!(title: "#NikkoJacksonMMAFightJune15", :id => 6)
     Tag.create!(title: "#TakeSATs", :id => 7)
 
-    Bangbang.create!(title: "!!Did10Pushups", :id => 1)
-    Bangbang.create!(title: "!!Read50Pages", :id => 2)
-    Bangbang.create!(title: "!!ShowedUp", :id => 3)
-    Bangbang.create!(title: "!!WentToSCA", :id => 4)
-    Bangbang.create!(title: "!!WentToClass", :id => 5)
-    Bangbang.create!(title: "!!BoughtABike", :id => 6)
-    Bangbang.create!(title: "!!Rode20Miles", :id => 7)
+    Action.create!(title: "!!Did10Pushups", :id => 1)
+    Action.create!(title: "!!Read50Pages", :id => 2)
+    Action.create!(title: "!!ShowedUp", :id => 3)
+    Action.create!(title: "!!WentToSCA", :id => 4)
+    Action.create!(title: "!!WentToClass", :id => 5)
+    Action.create!(title: "!!BoughtABike", :id => 6)
+    Action.create!(title: "!!Rode20Miles", :id => 7)
 
   end
 end
