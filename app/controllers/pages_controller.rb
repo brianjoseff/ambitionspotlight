@@ -6,6 +6,7 @@ class PagesController < ApplicationController
 
     @post = current_user.posts.new
     @posts = Post.order('created_at DESC')
+    @list = List.first
   end
   
   def landing

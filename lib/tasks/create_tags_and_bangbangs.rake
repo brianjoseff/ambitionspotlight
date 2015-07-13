@@ -6,8 +6,11 @@ namespace :db do
     Tag.reset_pk_sequence
     Action.delete_all
     Action.reset_pk_sequence
-    
+    List.delete_all
+    List.reset_pk_sequence
 
+
+    l = List.create!(title: "//HowToWin", id: 1)
 
     Tag.create!(title: "#LearnRails", :id => 1)
     Tag.create!(title: "#RailsTutorial", :id => 2)
@@ -25,5 +28,8 @@ namespace :db do
     Action.create!(title: "!!BoughtABike", :id => 6)
     Action.create!(title: "!!Rode20Miles", :id => 7)
 
+    Action.all.each do |a|
+      l.actions << a
+    end
   end
 end

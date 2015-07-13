@@ -1,9 +1,8 @@
 %h3 Lists
 %ul
   %li
-    %a.list-pretty-link
-      %span //
-      BuildAWebsite
+    =link_to @list.title, list_path(@list), class: "list-pretty-link"
+
   %li
     %a.list-pretty-link
       %span //
