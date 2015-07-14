@@ -10,6 +10,11 @@ class ListsController < ApplicationController
   # GET /lists/1
   # GET /lists/1.json
   def show
+    @users = User.all
+    @post = current_user.posts.new
+    @posts = Post.order('created_at DESC')
+    @list = List.find(params[:id])
+    
   end
 
   # GET /lists/new
