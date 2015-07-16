@@ -19,7 +19,8 @@ class ListsController < ApplicationController
 
   # GET /lists/new
   def new
-    @list = List.new
+    @user = current_user
+    @list = @user.lists.new
   end
 
   # GET /lists/1/edit

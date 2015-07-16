@@ -1,5 +1,20 @@
-%h1 New list
 
-= render 'form'
-
-= link_to 'Back', lists_path
+.container
+  .row
+    .col-lg-3.sidebar
+      /Trending Actions
+      .trending.card
+        =render 'pages/trending_actions'
+      
+      /Lists
+      /render top 3 lists
+      .lists.card
+        =render 'pages/trending_lists'
+      
+      /Leaders
+      /render top 3 local leaders
+      .leaders.card
+        =render 'pages/local_leaders'
+    .col-lg-8
+      .card
+        = render 'form'

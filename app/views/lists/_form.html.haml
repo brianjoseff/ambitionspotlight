@@ -1,16 +1,28 @@
-= form_for @list do |f|
-  - if @list.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@list.errors.count, "error")} prohibited this list from being saved:"
-      %ul
-        - @list.errors.full_messages.each do |msg|
-          %li= msg
+#new_list
+  = form_for @list do |f|
+    - if @list.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@list.errors.count, "error")} prohibited this list from being saved:"
+        %ul
+          - @list.errors.full_messages.each do |msg|
+            %li= msg
+    .field
+      .list-form-header
+        .list-title
+          %span //
+          = f.text_field :title, placeholder: "TitleOfList"
+        .description-block  
+          %a.list-description-link + description
+          .description{style:"display:none;"}
+            = f.text_area :description, placeholder: "enter a brief description of your list"
+        
 
-  .field
-    = f.label :user_id
-    = f.number_field :user_id
-  .field
-    = f.label :description
-    = f.text_area :description
-  .actions
-    = f.submit 'Save'
+    .field
+      %ul
+        %li
+          %span !!
+          =text_field_tag 'action', nil, placeholder: 'DoABarrelRoll'
+        %li.add-action
+          %a.add-action + action
+    .actions
+      = f.submit 'Save'

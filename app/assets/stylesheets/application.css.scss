@@ -30,27 +30,27 @@ h1{
 $default-font-size: 120%;
 $font-size: 120%;
 
-p, button[type=submit], input, textarea{
-	font-size: $font-size !important;
-}
+// p, button[type=submit], input, textarea{
+// 	font-size: $font-size;
+// }
 
 
 
-::-webkit-input-placeholder {
-    font-size: $font-size;
-}
+// ::-webkit-input-placeholder {
+//     font-size: $font-size;
+// }
 
-:-moz-placeholder { /* Firefox 18- */
-    font-size: $font-size;
-}
+// :-moz-placeholder { /* Firefox 18- */
+//     font-size: $font-size;
+// }
 
-::-moz-placeholder {  /* Firefox 19+ */
-    font-size: $font-size;
-}
+// ::-moz-placeholder {  /* Firefox 19+ */
+//     font-size: $font-size;
+// }
 
-:-ms-input-placeholder {  
-   font-size: $font-size;
-}
+// :-ms-input-placeholder {  
+//    font-size: $font-size;
+// }
 
 
 input.form-control-big{

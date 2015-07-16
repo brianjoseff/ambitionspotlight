@@ -59,7 +59,8 @@
         ';path=/;expires='+new Date(0);i=d.indexOf('.');if(i<0)break;d=d.slice(i+1)}}
       })(window,document,'FS','script','user'); 
 
-  %body{ class: "controller-specific-style-#{action_name}"}
+  %body{ class: "controller-specific-style-#{action_name} controller-specific-style-#{controller_name}"}
+
     /.background-cloak
     /#{ current_user && current_page?(user_path(current_user)) ? '' : 'background' }
     / #holder

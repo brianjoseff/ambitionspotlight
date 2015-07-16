@@ -1,7 +1,7 @@
 %h3 Lists
 %ul
   %li
-    =link_to @list.title, list_path(@list), class: "list-pretty-link"
+    =link_to @trending_list.title, list_path(@trending_list), class: "list-pretty-link"
 
   %li
     %a.list-pretty-link
@@ -12,4 +12,4 @@
       %span //
       RunAMarathon
   %li
-    %a + Create a List
+    =link_to "+ Create a List", new_list_path

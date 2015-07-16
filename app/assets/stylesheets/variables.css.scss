@@ -1,4 +1,13 @@
+$lightGrey: #e6e6e6;
+$superLightGrey: #f0f0f0;
+$grey: #696969;
+$black: #666;
+$blue: #5988D8;
+$white: #fff;
 
+$borderRadius:      2px;
+$topBorderRadius:     $borderRadius $borderRadius 0px 0px;
+$bottomBorderRadius:  0px 0px $borderRadius $borderRadius;
 
 // to abstract into variables soon:
 // h3{

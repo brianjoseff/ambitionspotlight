@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_filter :configure_permitted_parameters, if: :devise_controller?
-  
+  before_filter :populate_sidebar
   
   
   def configure_permitted_parameters
@@ -12,4 +12,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:name,:username,:occupation, :bio, :email, :password, :password_confirmation,:facebook_url, :twitter_url, :current_activities, :ambition, :current_password, :youtube_id, :thinking, :rating, :profile_photo, assets_attributes: [:image]) }
   end
   
+  def populate_sidebar
+    @trending_list = List.first
+  end
 end
