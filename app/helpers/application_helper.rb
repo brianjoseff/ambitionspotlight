@@ -20,5 +20,21 @@ module ApplicationHelper
     link_to_function(name, "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")")
   end
   
+
+  def link_to_add_nested_fields(name, parent_form_builder, association, opts={}, &block)
+    opts[:link_attributes]||={}
+    new_object = parent_form_builder.object.send(association).klass.new
+    id = new_object.object_id
+    fields = parent_form_builder.fields_for(association, new_object, child_index: id) do |builder|
+      render(association.to_s.singularize + "_fields", builder: builder)
+    end
+    link_params = {class: "add-fields #{opts[:class]}", data: {id: id, fields: fields.gsub("\n", "")}}.merge(opts[:link_attributes])
+    if name.blank?
+      link_to('#', link_params, &block)
+    else
+      link_to(name, link_params, &block)
+    end
+  end
+  
   
 end

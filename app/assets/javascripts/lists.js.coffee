@@ -7,3 +7,14 @@ $ ->
     console.log "hello"
 
     $(".description").toggle()
+
+  $('body').on 'click touch', 'a.add-nested-action', (event) ->
+    event.preventDefault()
+    time = (new Date).getTime()
+    regexp = new RegExp($(this).data('id'), 'g')
+    $('.action-container').append $(this).data('fields').replace(regexp, time)
+    #var currentValue = $("input[name='flow[rows_attributes][0][name]']").val();
+    # $("input[name='flow[rows_attributes]["+time+"][name]']").val(currentValue);
+    # $("input[name='flow[rows_attributes][0][name]']").val('');
+    # $(".add-nested-row").removeClass("hover");
+    return

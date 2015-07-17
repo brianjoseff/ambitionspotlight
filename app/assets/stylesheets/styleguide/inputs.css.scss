@@ -24,14 +24,14 @@ input[type="color"],, textarea{
   padding: 6px;
   vertical-align: top;
   &:hover{
-    border-bottom: 1px solid $blue;
+    border-bottom: 2px solid $blue;
     outline: 0;
   }
 }
 
 input:focus, textarea:focus, input:active, textarea:active{
     background: $superLightGrey;
-    border-bottom: 2px solid $blue;
+    border-bottom: 1px solid $blue;
     outline: none;
 }
 
