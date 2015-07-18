@@ -9,7 +9,9 @@ $ ->
     $(".description").toggle()
 
   $('body').on 'click touch', 'a.add-nested-action', (event) ->
+    console.log "efore evanet default"
     event.preventDefault()
+    console.log "clicked add action"
     time = (new Date).getTime()
     regexp = new RegExp($(this).data('id'), 'g')
     $('.action-container').append $(this).data('fields').replace(regexp, time)
@@ -18,3 +20,6 @@ $ ->
     # $("input[name='flow[rows_attributes][0][name]']").val('');
     # $(".add-nested-row").removeClass("hover");
     return
+
+  # $('#create_list').on 'click touch', (e) ->
+  #   e.preventDefault()

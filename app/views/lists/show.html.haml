@@ -27,12 +27,15 @@
 
 
         #list
+
           %h1
+            / %span // 
             =@list.title
           %ul
-            %li
-              %a.pretty-link.bangbang-pretty-link{href:"/bangbang/1"}
-                %span !!
-                ReadCh10
-              %p Text describing this action. should probably limit to like 140 char or something liek taht
+            -@list.actions.each do |a|
+              %li
+                %a.pretty-link.bangbang-pretty-link{href:"/bangbang/1"}
+                  %span !!
+                  =a.title
+                %p Text describing this action. should probably limit to like 140 char or something liek taht
               

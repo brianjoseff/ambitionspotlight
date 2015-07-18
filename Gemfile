@@ -36,6 +36,8 @@ gem 'friendly_id'
 gem 'devise'
 gem "html2haml"
 
+gem 'cocoon'
+
 gem 'remotipart', '~> 1.2'
 
 gem 'aws-sdk'

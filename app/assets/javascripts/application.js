@@ -21,6 +21,7 @@
 //= require json2
 //= require judge
 //= require validations.js
+//= require cocoon
 //= require_tree .
 
 

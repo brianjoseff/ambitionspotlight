@@ -20,7 +20,7 @@ class ListsController < ApplicationController
   # GET /lists/new
   def new
     @user = current_user
-    @list = @user.lists.new
+    @list = @user.lists.create!(title: "NameYourList")
   end
 
   # GET /lists/1/edit
@@ -75,6 +75,6 @@ class ListsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def list_params
-      params.require(:list).permit(:user_id, :description)
+      params.require(:list).permit(:user_id, :title,:description, actions_attributes: [:id, :title, :_destroy])
     end
 end
