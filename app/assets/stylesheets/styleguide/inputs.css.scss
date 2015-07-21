@@ -12,7 +12,7 @@ input[type="email"],
 input[type="url"],
 input[type="search"],
 input[type="tel"],
-input[type="color"],, textarea{
+input[type="color"]{
   background: $white ;
   border: none;
   box-shadow: none;
@@ -29,7 +29,7 @@ input[type="color"],, textarea{
   }
 }
 
-input:focus, textarea:focus, input:active, textarea:active{
+input:focus, input:active{
     background: $superLightGrey;
     border-bottom: 1px solid $blue;
     outline: none;

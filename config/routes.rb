@@ -2,12 +2,13 @@ Rails.application.routes.draw do
 
 
   resources :lists
+  resources :actions
 
   resources :daily_accomplishments
 
   resources :goals
 
-  get '/bangbang/:id', to: 'actions#show', as: :action
+  get '/bangbang/:id', to: 'actions#show'
 
   mount Judge::Engine => '/judge'
   

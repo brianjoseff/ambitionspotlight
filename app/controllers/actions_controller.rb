@@ -8,4 +8,8 @@ class ActionsController < ApplicationController
     @posts = Post.order('created_at DESC')
     @list = List.first
   end
+
+  def index
+    @actions = Action.all
+  end
 end

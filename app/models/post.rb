@@ -6,4 +6,6 @@ class Post < ActiveRecord::Base
   has_many :bangbangings
   has_many :actions, through: :bangbangings
 
+  belongs_to :user
+
 end
