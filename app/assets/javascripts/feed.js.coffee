@@ -163,3 +163,48 @@ ready = (obj_type) ->
 # $(document).ready ready
 # $(document).on 'page:load', ready
 
+bindings = ->
+  $('[id^=edit_da_]').click ->
+    da_id = $(this).attr('id').split('_')[2]
+    $('#da_' + da_id).hide()
+    $('#edit_form_' + da_id).removeClass 'hidden'
+    return
+  $('[id^=da_]').hover ->
+    console.log $(this).next('div.button-hover')
+    $(this).children().next('.button-hover').toggle()
+    return
+  $('.upload').change ->
+    $input = undefined
+    e = undefined
+    inputFile = undefined
+    inputFiles = undefined
+    reader = undefined
+    try
+      $input = $(this)
+      inputFiles = @files
+      if inputFiles == undefined or inputFiles.length == 0
+        return
+      inputFile = inputFiles[0]
+      reader = new FileReader
+      #preview = $('#preview_upload')
+      preview = $(this).parent().next('#preview_upload')
+      console.log 'FUCKING PREVIEW', preview
+
+      reader.onload = (event) ->
+        preview.removeClass 'hidden'
+        preview.empty()
+        preview.attr 'src', event.target.result
+        return
+
+      reader.onerror = (event) ->
+
+      reader.readAsDataURL inputFile
+    catch _error
+      e = _error
+      console.log e
+    return
+  return
+
+$(document).ready ->
+  bindings()
+  return

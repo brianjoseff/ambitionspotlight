@@ -8,7 +8,8 @@ class PostsController < ApplicationController
     content = linkify_mentions_hashtags_bangbangs(post_params[:content])
 
     @user = current_user
-    @post = current_user.posts.new(content: content)
+    @post = current_user.posts.new(post_params)
+    @post.content = content
     
     # add existing tags
     unless post_params[:tag_ids].nil?
@@ -114,6 +115,6 @@ class PostsController < ApplicationController
   end  
 
   def post_params
-    params.require(:post).permit(:content,tag_ids: [], new_tag_titles: [])
+    params.require(:post).permit(:content, assets_attributes: [:image], tag_ids: [], new_tag_titles: [])
   end
 end

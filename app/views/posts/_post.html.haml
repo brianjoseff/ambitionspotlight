@@ -2,3 +2,5 @@
   %span.small-avatar{style: "background:url( #{post.user.assets.empty?  ? '/assets/user-placeholder.png': post.user.assets.first.image.url(:medium)}); background-size: cover;"}
   %p
     #{post.content.html_safe}
+  -unless post.assets.empty?
+    =image_tag(post.assets.empty?  ? '/assets/user-placeholder.png': post.assets.first.image.url(:medium))    
