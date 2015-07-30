@@ -1,19 +1,7 @@
 .container
   .row
     .col-lg-3.sidebar
-      /Trending Actions
-      .trending.card
-        =render 'trending_actions'
-      
-      /Lists
-      /render top 3 lists
-      .lists.card
-        =render 'trending_lists'
-      
-      /Leaders
-      /render top 3 local leaders
-      .leaders.card
-        =render 'local_leaders'
+      =render 'layouts/sidebar'
 
     .col-lg-8
       #feed

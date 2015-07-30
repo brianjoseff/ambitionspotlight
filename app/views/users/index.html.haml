@@ -1,6 +1,10 @@
 .row
   .col-lg-2
   .col-lg-8
-    =render @users
-    .users-cta.landing-buttons.landing-first.text-center
-      =link_to "Get Your Profile Now", new_user_registration_path, class: "btn btn-large btn-primary make-button landing-button"
+    .hero
+      %h1 Ambition Spotlight
+      /new logo
+    .users
+      =render @users
+      .users-cta.landing-buttons.landing-first.text-center
+        =link_to "Get Your Profile Now", new_user_registration_path, class: "btn btn-large btn-primary make-button landing-button"
