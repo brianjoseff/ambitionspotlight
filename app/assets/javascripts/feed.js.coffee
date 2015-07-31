@@ -1,3 +1,15 @@
+
+$ ->
+  btn = $('.open-fileUpload').parent()
+  dropzone = $('#fileUpload')
+  btn.click (event) ->
+    console.log dropzone
+    dropzone.slideToggle()
+    return
+  return
+
+
+
 # type in hashtag
 ## activate autocomplete
 # on selecting something from dropdown--set up data for association -> hashtag_id
@@ -14,6 +26,8 @@
 
 # type space
 ## close autocomplete
+
+
 
 $(document).ready ->
   bangCounter = 0

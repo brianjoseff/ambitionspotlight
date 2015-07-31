@@ -2,7 +2,8 @@
   =form_for post, html:{remote: true} do |f|
     =text_area_tag :query, params[:query], id: "post_goals", class: 'form-control action-input', placeholder: 'What actions did you take today?', name:"post[content]", rows: 3
     -post.assets.build unless post.assets.first
-    .fileUpload.btn
+
+    #fileUpload.fileUpload.btn{style: "display:none;"}
       %span Drag File Here Or Click
       = f.fields_for :assets do |images_form|
         = images_form.file_field :image, type:"file", class: "upload"
@@ -11,3 +12,5 @@
     /search--if found, log tag_id. if NOT found, create new tag, log new_tag_id
     /on post submission, create tagging and create post
     = button_tag "Post", class: 'btn btn-default'
+    %a{href:"#"}
+      %span.glyphicon.glyphicon-picture.open-fileUpload
