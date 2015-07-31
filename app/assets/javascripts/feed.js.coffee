@@ -2,11 +2,10 @@
 $ ->
   btn = $('.open-fileUpload').parent()
   dropzone = $('#fileUpload')
-  btn.click (event) ->
+  btn.click (e) ->
+    e.preventDefault()
     console.log dropzone
     dropzone.slideToggle()
-    return
-  return
 
 
 
