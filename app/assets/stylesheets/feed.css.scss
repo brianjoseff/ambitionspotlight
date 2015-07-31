@@ -2,7 +2,7 @@
 .controller-specific-style-index, .controller-specific-style-show, .controller-specific-style-lists {
   .container{    
   }
-  background-color: #ffffff;
+  background-color: $lightGrey;
   .sidebar{
     h3{
       font-size: 14px;
@@ -41,6 +41,7 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
   border-radius: 6px;
   padding: 15px;
+  background-color: $white;
 }
 #feed{
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);

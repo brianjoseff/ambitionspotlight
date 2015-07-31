@@ -16,6 +16,13 @@
  *= require_self
  */
 
+@import "variables";
+
+
+body{
+  background-color: $lightGrey;
+}
+
 h1, h2, h3, p, label, input, textarea, button[type=submit], a{
 /*	color: #ebebeb;*/
 	font-weight: 300;
