@@ -1,15 +1,18 @@
 %h3 Lists
 %ul
   %li
-    =link_to @trending_list.title, list_path(@trending_list), class: "list-pretty-link"
+    
+    %a.list-pretty-link{href:"#{list_path(@trending_list)}"}
+      %span ~
+      =@trending_list.title 
 
   %li
     %a.list-pretty-link
-      %span //
+      %span ~
       LearnSpanish
   %li
     %a.list-pretty-link
-      %span //
+      %span ~
       RunAMarathon
   %li
     =link_to "+ Create a List", new_list_path, id: "create_list"
