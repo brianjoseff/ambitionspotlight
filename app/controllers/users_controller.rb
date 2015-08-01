@@ -3,13 +3,11 @@ class UsersController < ApplicationController
   def show   
     @user = User.friendly.find(params[:id])
     if @user == current_user
-      @story_element = @user.story_elements.build
+      # @story_element = @user.story_elements.build
       unless @user.profile_photo_file_name
         @no_photo = true
       end
-      # unless @user.activities.first && current_user.activities.count == 3
-      #   @no_activities = true
-      # end
+
       unless @user.goals.first
         @no_goals = true
       end
@@ -47,8 +45,6 @@ class UsersController < ApplicationController
     if @followers
       @followers_groups_of_three = @followers.each_slice(3)
     end
-
-    @activity = @user.activities.build
   end
 
 
@@ -109,54 +105,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # def add_story_element
-  #   @user = User.find(current_user.id)
-  #   @story_element = @user.story_elements.create(story_element_params)
-  #   # @temp_id = params[:temp_id]
-  #   respond_to do |format|
-  #     if @story_element.save
-  #       format.js {}
-  #       format.json { render @user}
-  #     else
-  #       format.json { render json: @story_element.errors.full_messages, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
-  
-  def delete_activity
-    @user = User.find(current_user.id)
-    @activity = Activity.find(params[:activity_id])
-    
-  end
-  
-  def add_activity
-    @user = User.find(current_user.id)
-    @activity = @user.activities.create(activity_params)
-    @temp_id = params[:temp_id]
-    respond_to do |format|
-      if @activity.save
-        format.js {}
-        format.json { render :add_activity }
-      else
-        format.json { render json: @activity.errors.full_messages, status: :unprocessable_entity }
-      end
-    end
-  end
-  
-  
-  # def add_ambition
-  #   @user = User.find(current_user.id)
-  #   @activity = @user.activities.create(activity_params)
-  #   
-  #   respond_to do |format|
-  #     if @activity.save
-  #       format.js {}
-  #       format.json { render :add_activity }
-  #     else
-  #       format.json { render json: @activity.errors.full_messages, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
   
   def edit_ambition
     @user = current_user
@@ -200,50 +148,6 @@ class UsersController < ApplicationController
       end
     end
   end
-
-
-
-
-
-
-
-
-
-  
-  def add_story_element
-    @user = User.find(current_user.id)
-    @story_element = @user.story_elements.create(story_element_params)
-    # @temp_id = params[:temp_id]
-    respond_to do |format|
-      if @story_element.save
-        format.js {}
-        format.json { render @user }
-      else
-        format.json { render json: @story_element.errors.full_messages, status: :unprocessable_entity }
-      end
-    end
-  end
-  
-  def edit_story_element
-    @user = current_user
-    respond_to do |format|
-      format.js {@user}
-    end
-  end
-  
-  def update_story_element
-    @user = current_user
-    
-    respond_to do |format|
-      if @user.update(story_element_params)
-        format.js {}
-        format.json { render @user }
-      else
-        format.json { render json: @activity.errors.full_messages, status: :unprocessable_entity }
-      end
-    end
-  end
-  
   
   def destroy
     @user = User.friendly.find(params[:id])
@@ -358,17 +262,11 @@ class UsersController < ApplicationController
 
 
 private
-  def activity_params
-    params.require(:activity).permit(:user_id, :title)
-  end
   def user_params
     params.require(:user).permit(:id, :ambition, :name, :bio,:youtube_id,:soundcloud_id, :rating, :profile_photo, bio_pieces: [:a, :b, :c, :d, :e, :f, :g])
   end
   def bio_params
     params.require(:bio_pieces).permit(:a, :b,:c, :d, :e, :f, :g)
-  end
-  def story_element_params
-    params.require(:story_element).permit(:id, :user_id, :improvement, :achievement, achievement_pieces: [:a, :b, :c, :d, :e, :f, :g], improvement_pieces: [:a, :b, :c, :d, :e, :f, :g])
   end
   
 end

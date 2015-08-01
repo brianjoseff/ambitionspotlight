@@ -59,7 +59,8 @@
         ';path=/;expires='+new Date(0);i=d.indexOf('.');if(i<0)break;d=d.slice(i+1)}}
       })(window,document,'FS','script','user'); 
 
-  %body{ class:"#{current_page?('/about') ? 'about-background' : 'background' }"}
+  %body{ class: "controller-specific-style-#{action_name} controller-specific-style-#{controller_name}"}
+
     /.background-cloak
     /#{ current_user && current_page?(user_path(current_user)) ? '' : 'background' }
     / #holder
@@ -67,7 +68,7 @@
     .overlay
       .wrapper
         .container
-          = render 'layouts/header'    
+        = render 'layouts/header'    
         .container
           .content
             %p.notice.text-center= notice

@@ -3,6 +3,9 @@ class PagesController < ApplicationController
   def index
     # @users = User.spotlit_users
     @users = User.all
+
+    @post = current_user.posts.new
+    @posts = Post.order('created_at DESC')
   end
   
   def landing

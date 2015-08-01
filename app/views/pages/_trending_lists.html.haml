@@ -1,0 +1,18 @@
+%h3 Lists
+%ul
+  %li
+    
+    %a.list-pretty-link{href:"#{list_path(@trending_list)}"}
+      %span ~
+      =@trending_list.title 
+
+  %li
+    %a.list-pretty-link
+      %span ~
+      LearnSpanish
+  %li
+    %a.list-pretty-link
+      %span ~
+      RunAMarathon
+  %li
+    =link_to "+ Create a List", new_list_path, id: "create_list"

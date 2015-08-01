@@ -1,120 +1,69 @@
-/ %nav.navbar.nav-area.navbar-default.navbar-fixed-top#ambitionspotlight_nav{role: "navigation"}
-/   .container
-/     
-/     / Brand and toggle get grouped for better mobile display
-/     .navbar-header
-/       %button.navbar-toggle{ type: "button", "data-toggle" => "collapse", "data-target" => "#readthis_nav"}
-/         / %span.sr-only Toggle navigation
-/         %span.icon-bar
-/         %span.icon-bar
-/         %span.icon-bar
-/       .header-logo
-/         %h3.pull-left #{link_to "Ambition Spotlight", root_path, :class => "header-title"}  
-/     / Collect the nav links, forms, and other content for toggling
-/     .collapse.navbar-collapse
-/       %ul.nav.navbar-nav 
-/         / %ul#nav_pill_section.nav.nav-pills.navbar-right.colored-pills 
-/         /%li{:class => "#{'active' if current_page?(root_path)} smoothScroll"}=link_to "Home", root_path
-/         %li{:class => "#{'active' if current_page?(about_path)}"}=link_to "ABOUT", about_path
-/ 
-/         
-/         -if user_signed_in?
-/ 
-/           %li{:class => "#{'active' if current_page?(user_path(current_user))} dropdown"}
-/             %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}        
-/               /=image_tag "user_icon.png", class: "user-icon"
-/               .user-icon.pull-left
-/               %b.caret
-/             %ul.dropdown-menu
-/               %p.nav-you YOU
-/               %li
-/                 =link_to current_user.name, user_path(current_user)
-/               / %li
-/               /   =link_to "Settings", user_settings_path
-/               / %li
-/               /   = link_to "Sign Up", new_user_registration_path
-/               %li
-/                 =link_to 'Edit Profile', edit_user_registration_path(current_user)
-/               %li
-/                 =link_to "Sign out", destroy_user_session_path, :method => :delete
-/                     
-/           / %li
-/           /   =link_to "SIGN OUT", destroy_user_session_path, :method => :delete
-/         -else
-/           %li
-/             =link_to "SIGN UP", new_user_registration_path
-/           / %li
-/           /   = link_to "Sign Up", new_user_registration_path
-/           %li
-/             =link_to "SIGN IN", new_user_session_path
-/ 
-%nav.navbar.nav-area.navbar-default.navbar-fixed-top{:role => "navigation"}
-  .container
-  
-  
+%nav.navbar{:role => "navigation"}
+  .nav-container
     / Brand and toggle get grouped for better mobile display
     .row
-      .col-lg-2
-      .col-lg-8
-        .nav-center
-          .navbar-header
-            %button.navbar-toggle.collapsed{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
-              %span.sr-only Toggle navigation
-              %span.icon-bar
-              %span.icon-bar
-              %span.icon-bar
-            .navbar-brand
-              / .logo
-              /   =image_tag "as-logo2-white.png", id: "logo"
-              =link_to image_tag("AS-Logo.png") , root_path, class: "masthead"
-        
-        
-          / Collect the nav links, forms, and other content for toggling
-          #bs-example-navbar-collapse-1.collapse.navbar-collapse
-            %ul.nav.navbar-nav.pull-right
-              %li{:class => "#{'active' if current_page?(about_path)} underline-glow"}=link_to "ABOUT", about_path
-              %li{:class => "#{'active' if current_page?(users_path)} underline-glow"}=link_to "USERS", users_path
-        
-              /SEARCH
+      .nav-center
+        .navbar-header
+          %button.navbar-toggle.collapsed{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          .navbar-brand
+            / .logo
+            /   =image_tag "as-logo2-white.png", id: "logo"
+            .masthead
+              =link_to '!!bangbang', root_path, class: "masthead-link"
+              /=link_to image_tag("AS-Logo.png", class: "masthead-img") , root_path, class: "masthead-link"
+              .masthead-spotlight
+      
+      
+        / Collect the nav links, forms, and other content for toggling
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          %ul.nav.navbar-nav.pull-right              
+            %li{:class => "#{'active' if current_page?(about_path)} underline-glow"}=link_to "ABOUT", about_path
+            %li{:class => "#{'active' if current_page?(users_path)} underline-glow"}=link_to "SPOTLIGHT", users_path
+      
+            /SEARCH
+            / %li
+            /   %a{:href => "#"} Users
+            / %form.navbar-form.navbar-left{:role => "search"}
+            /   .form-group
+            /     %input.form-control{:placeholder => "Search", :type => "text"}
+            /   %button.btn.btn-default{:type => "submit"}
+            /     =link_to "", "#"
+            /     %span.glyphicon.glyphicon-large.glyphicon-search
+            /   %i.icon-large.icon-search
+
+            -if user_signed_in?
+
+              %li{:class => "#{'active' if current_page?(user_path(current_user))} dropdown user-icon"}
+                
+                %a.glyphicon.glyphicon-user.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}        
+                  /=image_tag "user_icon.png", class: "user-icon"
+                  /.user-icon.pull-left
+                  /%b.caret
+                %ul.dropdown-menu
+                  %p.nav-you YOU
+                  %li
+                    =link_to current_user.name, user_path(current_user)
+                  / %li
+                  /   =link_to "Settings", user_settings_path
+                  / %li
+                  /   = link_to "Sign Up", new_user_registration_path
+                  %li
+                    =link_to 'Settings', edit_user_registration_path(current_user)
+                    
+                  %li
+                    =link_to "Sign out", destroy_user_session_path, :method => :delete
+                
+                
               / %li
-              /   %a{:href => "#"} Users
-              / %form.navbar-form.navbar-left{:role => "search"}
-              /   .form-group
-              /     %input.form-control{:placeholder => "Search", :type => "text"}
-              /   %button.btn.btn-default{:type => "submit"}
-              /     =link_to "", "#"
-              /     %span.glyphicon.glyphicon-large.glyphicon-search
-              /   %i.icon-large.icon-search
-
-              -if user_signed_in?
-
-                %li{:class => "#{'active' if current_page?(user_path(current_user))} dropdown user-icon"}
-                  
-                  %a.glyphicon.glyphicon-user.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}        
-                    /=image_tag "user_icon.png", class: "user-icon"
-                    /.user-icon.pull-left
-                    /%b.caret
-                  %ul.dropdown-menu
-                    %p.nav-you YOU
-                    %li
-                      =link_to current_user.name, user_path(current_user)
-                    / %li
-                    /   =link_to "Settings", user_settings_path
-                    / %li
-                    /   = link_to "Sign Up", new_user_registration_path
-                    %li
-                      =link_to 'Settings', edit_user_registration_path(current_user)
-                      
-                    %li
-                      =link_to "Sign out", destroy_user_session_path, :method => :delete
-                  
-                  
-                / %li
-                /   =link_to "SIGN OUT", destroy_user_session_path, :method => :delete
-              -else
-                %li.underline-glow
-                  =link_to "SIGN UP", new_user_registration_path
-                / %li
-                /   = link_to "Sign Up", new_user_registration_path
-                %li.underline-glow
-                  =link_to "SIGN IN", new_user_session_path
+              /   =link_to "SIGN OUT", destroy_user_session_path, :method => :delete
+            -else
+              %li.underline-glow
+                =link_to "SIGN UP", new_user_registration_path
+              / %li
+              /   = link_to "Sign Up", new_user_registration_path
+              %li.underline-glow
+                =link_to "SIGN IN", new_user_session_path

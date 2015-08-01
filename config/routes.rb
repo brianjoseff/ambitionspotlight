@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
 
 
+  resources :lists
+  resources :actions
+
   resources :daily_accomplishments
 
   resources :goals
+
+  get '/bangbang/:id', to: 'actions#show'
 
   mount Judge::Engine => '/judge'
   
@@ -19,16 +24,29 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :posts do
+    collection do
+      get 'autocomplete_tags'
+      get 'autocomplete_mentions'
+      get 'autocomplete_bangbangs'
+    end
+  end
+
   resources :tasks
-  resources :documents
-  resources :spotlights
-  # devise_for :users
-  devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions'}
+
   resources :activities do
     member do
       get :deactivate
     end
   end
+
+  resources :documents
+
+  resources :spotlights
+
+  # devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions'}
+  
   resources :users do
     member do
       get :admin_edit
@@ -58,18 +76,11 @@ Rails.application.routes.draw do
   
   match '/add_story_element', to: "users#add_story_element", via: :post
   match '/add_activity', to: "users#add_activity", via: :post
-  # resources :users do
-  #   member do
-  #     put :add_activity
-  #   end
-  # end
-  
-  
-  # match 'user/:name' => 'user#profile'
   match '/icons', to: "pages#icons", via: :get
   match '/about', to: "pages#about", via: :get
   match '/leader_dashboard', to: "users#leader_dashboard", via: :get
   match '/admin', to: "pages#admin", via: :get
+  
   authenticated :user do
     root to: "pages#index", as: :authenticated_root
   end

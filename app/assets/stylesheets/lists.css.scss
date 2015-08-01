@@ -1,0 +1,92 @@
+// Place all the styles related to the Lists controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "variables";
+@import "styleguide/import";
+#list{
+  h1{
+    text-align: center;
+    span{
+      position:relative;
+
+    }
+  }
+  ul{
+    list-style-type: none;
+    padding-left: 20px;
+    margin-bottom: 0;
+    text-align:left;
+    li{
+      padding-top: 5px;
+      font-size: 120%;
+      p{
+        color: #696969;
+        font-size: 80% !important;
+      }
+    }
+
+  }
+}
+
+#new_list{
+  .list-form-header{
+    border-bottom: 1px dotted #b6b6b6;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    .list-title{
+      span, input[type="text"]{
+        font-size: 30px;      
+      }
+      span{
+        position:relative;
+        top: 6px;
+      }
+      input[type="text"]{
+        padding-bottom: 4px;
+      }
+      ::-webkit-input-placeholder {
+          font-size: 30px;
+      }
+
+      :-moz-placeholder { /* Firefox 18- */
+          font-size: 30px;
+      }
+
+      ::-moz-placeholder {  /* Firefox 19+ */
+          font-size: 30px;
+      }
+
+      :-ms-input-placeholder {  
+         font-size: 30px;
+      }      
+      margin-bottom: 5px;
+    }
+
+    .description-block{
+      padding-left: 19px;
+      a.list-description-link{
+        font-size: 80%;
+      }      
+      textarea{
+        font-size: 80%;
+        width: 100%;
+      }
+    }
+  }
+  .new-nested-action{
+    padding-left: 0px;
+    list-style: none;
+    span{
+      position:relative;
+      top: 6px;
+    }
+    .add-action{
+      margin-top: 15px;
+      input{
+        padding-left: 0px;
+      }
+    }
+  }
+
+}

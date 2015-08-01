@@ -1,0 +1,71 @@
+@import "../variables";
+
+
+// --------------------------------------------------
+// Headers
+// --------------------------------------------------
+h1 {
+  font-size: 36px;
+  font-weight: 300;
+  margin: .5em 0;
+}
+h2 {
+  font-size: 26px;
+  font-weight: 300;
+  margin: .5em 0;
+}
+h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: .5em 0;
+}
+h4 {
+  font-size: 14px;
+  font-weight: 700;
+  margin: .5em 0;
+}
+h5 {
+  color: #777;
+  font-size: 14px;
+  font-weight: 600;
+  margin: .5em 0;
+}
+h6 {
+  font-size: 12px;
+  font-weight: 700;
+  margin: .5em 0;
+  text-transform: uppercase;
+}
+
+// --------------------------------------------------
+// Body And Paragraph
+// --------------------------------------------------
+$baseFontSize: 18px;
+
+p, a, span {
+  //font-size: 14px;
+  font-size: $baseFontSize;
+  margin: .5em 0;
+}
+
+p, button[type=submit], input, textarea{
+ font-size: $baseFontSize;
+}
+
+
+
+::-webkit-input-placeholder {
+    font-size: $baseFontSize;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+    font-size: $baseFontSize;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+    font-size: $baseFontSize;
+}
+
+:-ms-input-placeholder {  
+   font-size: $baseFontSize;
+}

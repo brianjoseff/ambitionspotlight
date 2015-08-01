@@ -1,9 +1,0 @@
-
-/=image_tag se.image
-%p.timeline-header Achieved
-%p=story_element.achievement
-%p.timeline-header Need to improve
-%p=story_element.improvement
--if current_user && current_user === @user && !story_element.new_record?
-  =link_to 'edit', edit_user_story_element_path(@user.id, story_element), remote: true
-  /=link_to 'edit', edit_user_story_element_path(@user.id, story_element)

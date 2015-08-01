@@ -1,0 +1,20 @@
+@import "../variables";
+
+input[type="submit"]{
+  background-color: $lightGrey; 
+  position: relative;
+  padding: 8px 22px;
+  border: 0;
+  margin: 10px 1px;
+  cursor: pointer;
+  border-radius: $borderRadius;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: $black;
+  outline: none !important;
+  transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover{
+    background-color: $black - #111;
+    color: #fff;
+  }
+}

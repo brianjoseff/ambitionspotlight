@@ -11,5 +11,12 @@
     = f.text_field :title
   .field
     = f.collection_select(:goal_category_id, GoalCategory.all, :id, :name, {:prompt => 'Goal Category'},:class => "form-control")
+  .field
+    .fileUpload.btn
+      %span Drag File Here Or Click
+      =f.file_field :image, class: "upload"
+    %img#preview_upload.hidden.row        
+/    .fileUploadWithImage.btn{ :style => "background: url(#{d.image.url(:large)}) no-repeat;" }
+/      =f.file_field :image, class: "upload"    
   .actions
     = f.submit 'Save'

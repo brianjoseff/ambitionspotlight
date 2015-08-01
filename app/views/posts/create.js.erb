@@ -1,0 +1,2 @@
+$("#posts").prepend("<%= escape_javascript(render partial: 'posts/post', locals:{post:@post}) %>")
+//$("#posts").html("<%= escape_javascript(render partial: 'posts/post', collection: @posts) %>");

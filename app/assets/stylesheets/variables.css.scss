@@ -1,0 +1,29 @@
+$lightGrey: #e6e6e6;
+$superLightGrey: #f0f0f0;
+$grey: #696969;
+$black: #666;
+$blue: #5988D8;
+$white: #fff;
+
+$borderRadius:      2px;
+$topBorderRadius:     $borderRadius $borderRadius 0px 0px;
+$bottomBorderRadius:  0px 0px $borderRadius $borderRadius;
+
+// to abstract into variables soon:
+// h3{
+//   font-size: 14px;
+//   font-weight: 100;
+//   letter-spacing: .1em;
+//   text-transform: uppercase;
+//   margin-top: 0;
+//   margin-bottom: 0;
+// }
+// ul{
+//   list-style-type: none;
+//   padding-left: 0;
+//   margin-bottom: 0;
+//   li{
+//     padding-top: 5px;
+//     font-size: 120%;
+//   }
+// }

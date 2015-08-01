@@ -13,12 +13,15 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.remotipart
+//= require jquery.tokeninput
+//= require jquery-ui
 
 //= require turbolinks
 //= require underscore
 //= require json2
 //= require judge
 //= require validations.js
+//= require cocoon
 //= require_tree .
 
 
@@ -32,3 +35,11 @@ function add_fields(link, association, content) {
   var regexp = new RegExp("new_" + association, "g")
   $(link).parent().after(content.replace(regexp, new_id));
 }
+
+
+
+
+
+
+
+
