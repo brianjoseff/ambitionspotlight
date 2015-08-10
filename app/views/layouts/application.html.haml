@@ -60,12 +60,15 @@
       })(window,document,'FS','script','user'); 
 
   %body{ class: "controller-specific-style-#{action_name} controller-specific-style-#{controller_name}"}
+    .overlay
+      %video#video_wrapper{"?wmode" => "transparent", :autoplay => "", :loop => ""}
+        %source{src:"EPA-skateboarding.mp4", type:"video/mp4"}
 
     /.background-cloak
     /#{ current_user && current_page?(user_path(current_user)) ? '' : 'background' }
     / #holder
     /   #body
-    .overlay
+    .overlayx
       .wrapper
         .container
         = render 'layouts/header'    
