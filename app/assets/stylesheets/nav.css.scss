@@ -16,6 +16,11 @@ nav{
     color: $grey;
   }
 }
+.navbar-toggle{
+  .icon-bar{
+    background-color: #333;
+  }
+}
 .masthead-link{
   font-size: 30px;
   color: $black;
