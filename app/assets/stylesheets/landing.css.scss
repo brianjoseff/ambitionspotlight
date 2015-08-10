@@ -5,8 +5,7 @@ body.controller-specific-style-landing{
     // /*opacity: .75;*/
     // background-attachment:fixed;
     // background-size: cover;
-}
-.overlay{
+    .overlay{
     position: fixed;
     left: 0px;
     top: 0px;
@@ -29,6 +28,8 @@ body.controller-specific-style-landing{
     margin:0;
     padding:0;
 }
+}
+
 .intro-header {
     padding-top: 0px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
     padding-bottom: 10px;
