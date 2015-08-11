@@ -9,6 +9,7 @@ class PagesController < ApplicationController
   end
   
   def landing
+    @landing_page = true
   end
   
   def icons
