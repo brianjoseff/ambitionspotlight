@@ -1,4 +1,4 @@
-%nav.navbar{:role => "navigation"}
+%nav{role: "navigation", class: "#{current_page?(controller: 'pages', action: 'landing') ? 'navbar-negative' : 'navbar'}" }
   .nav-container
     / Brand and toggle get grouped for better mobile display
     .row

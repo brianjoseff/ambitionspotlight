@@ -14,5 +14,6 @@ class ApplicationController < ActionController::Base
   
   def populate_sidebar
     @trending_list = List.first
+    @trending_lists = List.last(3)
   end
 end

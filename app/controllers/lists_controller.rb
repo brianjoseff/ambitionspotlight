@@ -11,7 +11,8 @@ class ListsController < ApplicationController
   # GET /lists/1.json
   def show
     @users = User.all
-    @post = current_user.posts.new
+
+    @post = current_user ? current_user.posts.new : Post.new
     @posts = Post.order('created_at DESC')
     @list = List.find(params[:id])
     
