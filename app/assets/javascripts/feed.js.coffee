@@ -33,7 +33,7 @@ $(document).ready ->
   $('#post_goals').on 'keydown', (e) ->
 
     # Make sure that bangCounter is reset unless there are consecutive bangs
-    if e.which != 49
+    if e.which != 49 and e.which != 16
       bangCounter = 0
     else if e.which == 49 and !e.shiftKey
       bangCounter = 0
