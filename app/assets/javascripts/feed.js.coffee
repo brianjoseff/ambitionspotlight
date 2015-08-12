@@ -30,7 +30,14 @@ $ ->
 
 $(document).ready ->
   bangCounter = 0
-  $('#post_goals').on 'keydown', (e) ->      
+  $('#post_goals').on 'keydown', (e) ->
+
+    # Make sure that bangCounter is reset unless there are consecutive bangs
+    if e.which != 49
+      bangCounter = 0
+    else if e.which == 49 and !e.shiftKey
+      bangCounter = 0
+
     switch e.which
       when 51 #3 
         if e.shiftKey #3 key down while shift is held
