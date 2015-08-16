@@ -14,7 +14,11 @@ input[type="search"],
 input[type="tel"],
 input[type="color"]{
   background: $white ;
-  border: none;
+  box-sizing: border-box;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px solid transparent;
   box-shadow: none;
   border-radius: 0;
   // border-bottom: 1px solid $grey;
@@ -26,6 +30,7 @@ input[type="color"]{
   &:hover{
     border-bottom: 2px solid $blue;
     outline: 0;
+    box-sizing: border-box;
   }
 }
 
