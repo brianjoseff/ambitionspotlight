@@ -16,14 +16,14 @@
         =render 'pages/local_leaders'
 
     .col-lg-8
-      #feed
-        #post_field
-          =form_for @post, html:{remote: true} do |f|
-            =text_area_tag :query, params[:query], id: "post_goals", class: 'form-control action-input', placeholder: 'What actions did you take today?', name:"post[content]", rows: 3
-            #hidden_fields
-            /search--if found, log tag_id. if NOT found, create new tag, log new_tag_id
-            /on post submission, create tagging and create post
-            = button_tag "Stay Up", class: 'btn btn-default'
+      .card
+        / #post_field
+        /   =form_for @post, html:{remote: true} do |f|
+        /     =text_area_tag :query, params[:query], id: "post_goals", class: 'form-control action-input', placeholder: 'What actions did you take today?', name:"post[content]", rows: 3
+        /     #hidden_fields
+        /     /search--if found, log tag_id. if NOT found, create new tag, log new_tag_id
+        /     /on post submission, create tagging and create post
+        /     = button_tag "Stay Up", class: 'btn btn-default'
 
 
         #list
@@ -31,6 +31,10 @@
           %h1
             / %span // 
             =@list.title
+          .list-progress-bar
+            .percent-complete
+            .number-complete
+              1 of 10 completed
           %ul
             -@list.actions.each do |a|
               %li

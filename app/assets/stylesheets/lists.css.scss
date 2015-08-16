@@ -29,6 +29,28 @@
   }
 }
 
+.list-progress-bar{
+  height: 20px;
+  margin-left: -15px;
+  margin-right: -15px;
+  margin-bottom: 20px;
+  background-color: #CDEFFA;
+  .percent-complete{
+    float:left;
+    height: 100%;
+    background-color: #87E1FF;
+    width: 60px;
+  }
+  .number-complete{
+    float: left;
+    padding-top: 3px;
+    padding-left: 3px;
+    color: #b3b3b3;
+    font-size: 10px;
+    font-style: italic;
+  }
+}
+
 #new_list{
   .list-form-header{
     border-bottom: 1px dotted #b6b6b6;

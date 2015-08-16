@@ -1,23 +1,40 @@
-%h1 Listing lists
+.container
+  .row
+    .col-lg-3.sidebar
+      /Trending Actions
+      .trending.card
+        =render 'pages/trending_actions'
+      
+      /Lists
+      /render top 3 lists
+      .lists.card
+        =render 'pages/trending_lists'
+      
+      /Leaders
+      /render top 3 local leaders
+      .leaders.card
+        =render 'pages/local_leaders'
+    .col-lg-8
+      %h1 Listing lists
 
-%table
-  %tr
-    %th User
-    %th Title
-    %th Description
-    %th
-    %th
-    %th
+      %table
+        %tr
+          %th User
+          %th Title
+          %th Description
+          %th
+          %th
+          %th
 
-  - @lists.each do |list|
-    %tr
-      %td= list.user_id
-      %td= list.title
-      %td= list.description
-      %td= link_to 'Show', list
-      %td= link_to 'Edit', edit_list_path(list)
-      %td= link_to 'Destroy', list, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        - @lists.each do |list|
+          %tr
+            %td= list.user_id
+            %td= list.title
+            %td= list.description
+            %td= link_to 'Show', list
+            %td= link_to 'Edit', edit_list_path(list)
+            %td= link_to 'Destroy', list, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-%br
+      %br
 
-= link_to 'New List', new_list_path
+      = link_to 'New List', new_list_path

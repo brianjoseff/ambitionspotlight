@@ -36,6 +36,7 @@
             /   %i.icon-large.icon-search
 
             -if user_signed_in?
+              %li{:class => "#{'active' if current_page?(lists_path)} underline-glow"}=link_to "LISTS", lists_path
 
               %li{:class => "#{'active' if current_page?(user_path(current_user))} dropdown user-icon"}
                 
