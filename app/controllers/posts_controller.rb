@@ -61,7 +61,7 @@ class PostsController < ApplicationController
   end
 
   def suggestions
-    suggestions =  User.order(:name).where("name LIKE ?", "%#{params[:query]}%").map{|user| {id: user.id, type: "name", item: "@#{user.name}"}}
+    suggestions =  User.order(:username).where("username LIKE ?", "%#{params[:query]}%").map{|user| {id: user.id, type: "username", item: "@#{user.username}"}}
     p "USERS"
     p suggestions
     suggestions << Tag.order(:title).where("title LIKE ?", "%#{params[:query]}%").map{|tag| {id: tag.id, type: "tag", item: "##{tag.title}"}}
