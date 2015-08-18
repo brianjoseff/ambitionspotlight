@@ -60,6 +60,25 @@ class PostsController < ApplicationController
     end
   end
 
+  def suggestions
+    suggestions =  User.order(:name).where("name LIKE ?", "%#{params[:query]}%").map{|user| {id: user.id, type: "name", item: "@#{user.name}"}}
+    p "USERS"
+    p suggestions
+    suggestions << Tag.order(:title).where("title LIKE ?", "%#{params[:query]}%").map{|tag| {id: tag.id, type: "tag", item: "##{tag.title}"}}
+    suggestions << Action.order(:title).where("title LIKE ?", "%#{params[:query]}%").map{|action| {id: action.id, type: "action", item: "!!#{action.title}"}}
+    suggestions << List.order(:title).where("title LIKE ?", "%#{params[:query]}%").map{|list| {id: list.id, type: "list", item: "//#{list.title}"}}
+    suggestions.flatten!
+    suggestions.uniq!
+    p "END"
+    p suggestions
+    respond_to do |format|
+      format.html
+      format.json { 
+        render json: suggestions
+      }
+    end
+  end
+
   def autocomplete_tags
     @tags = Tag.order(:title).where("title LIKE ?", "%#{params[:term]}%")
     respond_to do |format|

@@ -1,6 +1,7 @@
 #post_field
   =form_for post, html:{remote: true} do |f|
     =text_area_tag :query, params[:query], id: "post_goals", class: 'form-control action-input', placeholder: 'What actions did you take today?', name:"post[content]", rows: 3
+    #post_div{:contenteditable => "", class: 'form-control action-input'}
     -post.assets.build unless post.assets.first
 
     #fileUpload.fileUpload.btn{style: "display:none;"}
@@ -14,3 +15,164 @@
     = button_tag "Post", class: 'btn btn-default'
     %a{href:"#"}
       %span.glyphicon.glyphicon-picture.open-fileUpload
+
+:css
+    #post_div {
+      overflow: scroll;
+      border: 1px solid #ccc;
+      width: 710px;
+      height: 74px;
+    }
+
+    #post_div span {
+      font-size: 14px;
+    }
+
+    .typeahead.dropdown-menu {
+      width: 710px;
+    }
+
+:javascript
+    
+    var types = {};
+    var labels = []; 
+
+    $(function(){
+      $('#post_div').on('input', function(e) {
+          parse_post();
+      }).trigger('input');
+
+      $('div#post_div').tagautocomplete({
+        source: function (query, process) {
+          var min_term_length = 2;
+          var position = getCaretPosition(this.$element[0]);
+          var term = query.substring(0, position);
+          var regex = new RegExp("(^|\\s)((" + this.options.character + ")[\\w-]*)$");
+          var result = regex.exec(term);
+          if(result && result[2] && result[2].length > min_term_length)
+              query = result[2].trim().toLowerCase().replace(/^(@|#|!!|\/\/)/,'');
+          else
+              return false;
+          return $.get('/posts/suggestions', { query: query}, function (data) {
+            // reset containers
+            types = {};
+            labels = [];
+
+            $(data).each(function(ind, val){
+              types[val['item']] = {'type':val['type'], 'id':val['id']}
+              labels.push(val['item'])
+            })
+
+            return process(labels); 
+          }, 'JSON');
+        },
+        minLength: 2,
+        items: 5,
+        updater: function(item){
+          
+          //var formatted_item = '<span style="color: blue" data-id="'+types[item]['id']+'" data-type="'+types[item]['type']+'">'+item+'</span>';
+          //$('#post_div').append(formatted_item);
+          
+          //add_hidden_field(item, types[item]['id'], types[item]['type']);
+          
+          //setTimeout(function(){
+          //  add_existing(item, types[item]['id'], types[item]['type']);
+          //}, 1000);
+
+          return item+' ';
+        },
+        character: '@|#|//|!!', //accept both @ and #
+        after: function () {
+          parse_post();
+        } //to run after selection  
+      });
+    })
+
+    function parse_post(){
+      if($('#post_div').html() != ""){
+        var post = stripped_post($('#post_div').html());
+        var hash_matches = post.match(/#\w+\s*/g);
+        if(hash_matches != null){
+          hash_matches = unique(hash_matches);
+          $(hash_matches).each(function(ind,val){
+            var regexp = new RegExp(val, 'g');
+            post = post.replace(regexp, '<span style="color: blue">'+val.trim()+'</span>');
+          })
+          $('#post_div').html(post);
+        }
+        var bang_matches = post.match(/!!\w+\s*/g);
+        if(bang_matches != null){
+          bang_matches = unique(bang_matches);
+          $(bang_matches).each(function(ind,val){
+            var regexp = new RegExp(val, 'g');
+            post = post.replace(regexp, '<span style="color: blue">'+val.trim()+'</span>');
+          })
+          $('#post_div').html(post);
+        }
+        var at_matches = post.match(/@\w+\s*/g);
+        if(at_matches != null){
+          at_matches = unique(at_matches);
+          $(at_matches).each(function(ind,val){
+            var regexp = new RegExp(val, 'g');
+            post = post.replace(regexp, '<span style="color: blue">'+val.trim()+'</span>');
+          })
+          $('#post_div').html(post);
+        }
+        var list_matches = post.match(/\/\/\w+\s*/g);
+        if(list_matches != null){
+          list_matches = unique(list_matches);
+          $(list_matches).each(function(ind,val){
+            var regexp = new RegExp(val, 'g');
+            post = post.replace(regexp, '<span style="color: blue">'+val.trim()+'</span>');
+          })
+          $('#post_div').html(post);
+        }
+        placeCaretAtEnd( document.getElementById('post_div') );
+      }
+    }
+
+    function stripped_post(current){
+      var regexp = new RegExp('<span style="color: blue">', 'g');
+      var stripped = current.replace(regexp, '');
+      var regexp = new RegExp('</span>', 'g');
+      stripped     = stripped.replace(regexp, '');
+      return stripped;
+    }
+
+    function placeCaretAtEnd(el) {
+      el.focus();
+      if (typeof window.getSelection != "undefined"
+              && typeof document.createRange != "undefined") {
+          var range = document.createRange();
+          range.selectNodeContents(el);
+          range.collapse(false);
+          var sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+      } else if (typeof document.body.createTextRange != "undefined") {
+          var textRange = document.body.createTextRange();
+          textRange.moveToElementText(el);
+          textRange.collapse(false);
+          textRange.select();
+      }
+    }
+
+    function unique(array) {
+       return $.grep(array, function(el, index) {
+           return index === $.inArray(el, array);
+       });
+    }
+
+    //function add_existing(item, id, type){
+    //  var formatted_item = '<span style="color: blue" data-id="'+id+'" data-type="'+type+'">'+item+'</span>';
+    //}
+
+    // function add_hidden_field(item, id, type){
+    //   $('<input>', {
+    //     name: "post[new_" + obj_type + "_titles][]",
+    //     value: penultimate_element,
+    //     type: "hidden",
+    //     multiple: "multiple",
+    //     id: "new_post_" + obj_type + "_titles"
+    //   }).appendTo("#hidden_fields");
+    // }

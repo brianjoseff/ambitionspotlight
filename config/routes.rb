@@ -26,9 +26,10 @@ Rails.application.routes.draw do
 
   resources :posts do
     collection do
-      get 'autocomplete_tags'
-      get 'autocomplete_mentions'
-      get 'autocomplete_bangbangs'
+      get 'suggestions'
+      # get 'autocomplete_tags'
+      # get 'autocomplete_mentions'
+      # get 'autocomplete_bangbangs'
     end
   end
 
