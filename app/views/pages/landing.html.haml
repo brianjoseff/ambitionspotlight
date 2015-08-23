@@ -1,39 +1,18 @@
-.container.intro-header
+.container.landing
   .row
-    .col-lg-12
-      .intro-message
-        %h1 Take Action.
-        %h2 Find your path here and get going
-        
-        / .row
-        /   .col-sm-3
-        /   .col-sm-5
-        /     .landing-buttons
-        /       =link_to "Get Your Page Now", new_user_registration_path, class: "btn btn-large btn-primary make-button landing-button"
-        /       =link_to "View Leaders", leaders_path, class: "btn btn-large btn-primary make-button landing-button"
-        
-        /%hr.intro-divider
-        / .row
-        /   .col-lg-3
-        /   .col-lg-3.landing-buttons
-        /     =link_to "Get Your Page Now", new_user_registration_path, class: "btn btn-large btn-primary make-button landing-button"
-        /   .col-lg-3.landing-buttons
-        /     %a{href:"leaders", class: "btn btn-large btn-primary make-button landing-button"}
-        /       
-        /       %i.glyphicon.glyphicon-user
-        /       View Leaders
-        %ul.list-inline.cta
-          %li.landing-buttons.landing-first
-            =link_to "Yes, I Want To Start Now!", new_user_registration_path, class: "btn btn-large btn-primary make-button landing-button"
-      
-          / %li.landing-buttons.landing-second
-          /   /=link_to "View Leaders", leaders_path, class: "btn btn-large btn-primary make-button landing-button"
-          /   %a{href:"leaders", class: "btn btn-large btn-primary make-button landing-button"}
-          /     
-          /     %i.glyphicon.glyphicon-user
-          /     View Leaders
+    .col-lg-8
+      .split-landing-hero-text.pull-left
+        %h1 TAKE ACTION
+        %h2 Stop talking the talk, and start walking the walk
+    .col-lg-4
 
+      / .intro-message
+      /   %h1 Take Action.
+      /   %h2 Find your path here and get going
+      .sign-up-in.text-center
+        =render 'sign_up_landing_form'
 
-  
-  .text-center.footer-social
-    %p Follow us on #{link_to 'Facebook', "https://www.facebook.com/ambitionspotlight"} and #{link_to 'Twitter', "https://twitter.com/dreamers2doers"}
+        
+
+    / .text-center.footer-social
+    /   %p Follow us on #{link_to 'Facebook', "https://www.facebook.com/ambitionspotlight"} and #{link_to 'Twitter', "https://twitter.com/dreamers2doers"}

@@ -16,24 +16,24 @@ body.controller-specific-style-landing{
         background-color: #000;
         opacity: 0.4;
     }
-#video_wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    border: 0;
-    z-index: -2; /* <-- this plays a key roll for it to work */
-    width: 100% !important; /* <-- this plays a key roll for it to work */
-    // height: 100%;
-    margin:0;
-    padding:0;
-}
+    #video_wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        border: 0;
+        z-index: -2; /* <-- this plays a key roll for it to work */
+        width: 100% !important; /* <-- this plays a key roll for it to work */
+        // height: 100%;
+        margin:0;
+        padding:0;
+    }
 }
 
 .intro-header {
     padding-top: 0px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
     padding-bottom: 10px;
     text-align: center;
-    color: #f8f8f8;
+    
 /*    background: url(http://www.traemcneely.com/wp-content/uploads/2011/10/wpid-000035241.jpg) no-repeat center center;*/
     
     
@@ -43,13 +43,26 @@ body.controller-specific-style-landing{
     position: relative;
     padding-top: 20%;
    padding-bottom: 20%;
-}
-
-.intro-message > h1 {
-    margin: 0;
+   h1{
+        margin: 0;
     text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
     font-size: 5em;
+   }
 }
+.landing{
+    margin-top: 100px;
+}
+
+.split-landing-hero-text{
+    color: #f8f8f8;
+    h1{
+
+        margin: 0;
+        text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+        font-size: 5em;
+    }
+}
+
 
 .intro-divider {
     width: 400px;
