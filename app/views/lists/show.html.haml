@@ -16,26 +16,23 @@
         =render 'pages/local_leaders'
 
     .col-lg-8
-      #feed
-        #post_field
-          =form_for @post, html:{remote: true} do |f|
-            =text_area_tag :query, params[:query], id: "post_form", class: 'form-control action-input', placeholder: 'What actions did you take today?', name:"post[content]", rows: 3
-            #hidden_fields
-            /search--if found, log tag_id. if NOT found, create new tag, log new_tag_id
-            /on post submission, create tagging and create post
-            = button_tag "Stay Up", class: 'btn btn-default'
+      #search_bar
+        /=render partial: 'search/search'
 
+      #list.card
 
-        #list
-
-          %h1
-            / %span // 
-            =@list.title
-          %ul
-            -@list.actions.each do |a|
-              %li
-                %a.pretty-link.bangbang-pretty-link{href:"/bangbang/1"}
-                  %span !!
-                  =a.title
-                %p Text describing this action. should probably limit to like 140 char or something liek taht
-              
+        %h1
+          / %span //
+          =@list.title
+        %h4.text-center
+          by
+          #{link_to @list.user.name, user_path(@list.user)}
+        %ul
+          -@list.actions.each do |a|
+            %li
+              %a.pretty-link.bangbang-pretty-link{href:"/bangbang/1"}
+                %span !!
+                =a.title
+              %p Text describing this action. should probably limit to like 140 char or something liek taht
+      #stream.card
+        =render @items

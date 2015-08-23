@@ -14,7 +14,10 @@ class ListsController < ApplicationController
 
     @post = current_user ? current_user.posts.new : Post.new
     @posts = Post.order('created_at DESC')
+
     @list = List.find(params[:id])
+    # @items = @list.posts.order('created_at DESC')
+    @items = Post.all.order('created_at DESC')
     
   end
 
