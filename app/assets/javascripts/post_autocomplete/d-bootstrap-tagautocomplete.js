@@ -44,9 +44,17 @@
       var offset = updated_val.length - this.length_of_query;
       var position = getCaretPosition(this.$element[0]) + offset;
 
-      var text = this.$element.text();
-      text = text.slice(0, position - offset - this.length_of_query) + updated_val.substring(0, updated_val.length) + text.substring(position - offset, text.length);
-      this.$element.text(text);
+      var text = this.$element.html();
+      console.log('text',text);
+
+      var n = text.lastIndexOf("<span ");
+      console.log('text', text.substring(0,n));
+      text = text.substring(0,n) + updated_val.substring(0, updated_val.length);
+
+      // text = text.slice(0, position - offset - this.length_of_query) + updated_val.substring(0, updated_val.length) + text.substring(position - offset, text.length);
+      console.log('text',text);
+      console.log('element',this.$element);
+      this.$element.html(text);
 
       this.$element.change();
       this.after();

@@ -70,7 +70,7 @@
         items: 5,
         updater: function(item){
           
-          //var formatted_item = '<span style="color: blue" data-id="'+types[item]['id']+'" data-type="'+types[item]['type']+'">'+item+'</span>';
+          var formatted_item = '<a href="javascript:void;" class="post-anchor" style="color: blue" data-id="'+types[item]['id']+'" data-type="'+types[item]['type']+'">'+item+'</a>';
           //$('#post_div').append(formatted_item);
           
           //add_hidden_field(item, types[item]['id'], types[item]['type']);
@@ -79,7 +79,8 @@
           //  add_existing(item, types[item]['id'], types[item]['type']);
           //}, 1000);
 
-          return item+' ';
+          //return item+' ';
+          return formatted_item;
         },
         character: '@|#|//|!!', //accept both @ and #
         after: function () {
@@ -91,7 +92,8 @@
     function parse_post(){
       if($('#post_div').html() != ""){
         var post = stripped_post($('#post_div').html());
-        var hash_matches = post.match(/#\w+\s*/g);
+        var matching_post = strip_anchors(post);
+        var hash_matches = matching_post.match(/#\w+\s*/g);
         if(hash_matches != null){
           hash_matches = unique(hash_matches);
           $(hash_matches).each(function(ind,val){
@@ -100,7 +102,7 @@
           })
           $('#post_div').html(post);
         }
-        var bang_matches = post.match(/!!\w+\s*/g);
+        var bang_matches = matching_post.match(/!!\w+\s*/g);
         if(bang_matches != null){
           bang_matches = unique(bang_matches);
           $(bang_matches).each(function(ind,val){
@@ -109,7 +111,7 @@
           })
           $('#post_div').html(post);
         }
-        var at_matches = post.match(/@\w+\s*/g);
+        var at_matches = matching_post.match(/@\w+\s*/g);
         if(at_matches != null){
           at_matches = unique(at_matches);
           $(at_matches).each(function(ind,val){
@@ -118,7 +120,7 @@
           })
           $('#post_div').html(post);
         }
-        var list_matches = post.match(/\/\/\w+\s*/g);
+        var list_matches = matching_post.match(/\/\/\w+\s*/g);
         if(list_matches != null){
           list_matches = unique(list_matches);
           $(list_matches).each(function(ind,val){
@@ -136,6 +138,12 @@
       var stripped = current.replace(regexp, '');
       var regexp = new RegExp('</span>', 'g');
       stripped     = stripped.replace(regexp, '');
+      return stripped;
+    }
+
+    function strip_anchors(current){
+      var regexp = new RegExp('<a(.*)a>', 'g');
+      var stripped = current.replace(regexp, '');
       return stripped;
     }
 
