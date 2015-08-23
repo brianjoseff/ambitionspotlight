@@ -15,6 +15,9 @@ class UsersController < ApplicationController
         @no_ambition = true
       end
 
+      @items = @user.actions + @user.lists
+      # @items = @items.order_by_created_at('DESC')
+
     end
 
     @goal = @user.goals.last

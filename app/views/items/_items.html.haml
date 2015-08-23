@@ -1,0 +1,5 @@
+-items.each do |item|
+  -if item.class == 'Action'
+    =render partial: 'items/action', locals:{ action: item}
+  -else
+    =render partial: 'items/list', locals:{ list: item}
