@@ -1,0 +1,31 @@
+
+= form_for(resource, as: resource_name, url: registration_path(resource_name), :builder => Judge::FormBuilder, html: {multipart: true, class: ""}) do |f|
+  = devise_error_messages!
+  -resource.assets.build unless resource.assets.first
+  
+  =f.hidden_field :remember_me, :value => true
+  
+  /NAME
+  .form-group
+    / =f.label :name, :class => 'control-label'
+    .controls
+      =f.text_field :name, type: "text", class: "form-control text-center", :placeholder => "Your Name", :validate => true
+
+  / .form-group
+  /   =f.label :username, :class => 'control-label'
+  /   .controls
+  /     =f.text_field :username, type: "text", class: "form-control text-center", :placeholder => "juansmith", :validate => true
+
+  .form-group
+    / =f.label :email, :class => 'control-label'
+    .controls
+      =f.text_field :email, type: "text", :class => "form-control text-center .form-control-big", :placeholder => "hello@mom.com", :validate => true
+  .form-group
+    / =f.label :password, :class => 'control-label'
+    .controls
+      =f.password_field :password, type: "password", :class => "form-control text-center .form-control-big", :placeholder => "Password"
+
+
+
+    .spotlight-button.text-center
+      =f.submit "Sign up", class: "btn btn-large make-button landing-button"

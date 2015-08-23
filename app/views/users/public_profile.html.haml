@@ -56,16 +56,6 @@
 
           .story#bio
             =render partial: 'bio', locals: {user: @user}
-
-        .story
-          .story-header
-            %p
-              GOAL
-              / -if current_user && current_user == @user
-              /   %span=link_to "Edit Details", edit_user_registration_path(current_user)
-          .story#activities
-            %p @goal.title
-            =@big_daily_accomplishments.each do |bda|
               /render bda
 
         #timeline

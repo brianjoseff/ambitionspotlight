@@ -30,7 +30,7 @@ $ ->
 
 $(document).ready ->
   bangCounter = 0
-  $('#post_goals').on 'keydown', (e) ->
+  $('#post_form').on 'keydown', (e) ->
 
     # Make sure that bangCounter is reset unless there are consecutive bangs
     if e.which != 49 and e.which != 16
@@ -94,7 +94,7 @@ ready = (obj_type) ->
   console.log "called autocomplete"
   normalized = {}
   lastKeyDown = 0
-  $('#post_goals').bind( 'keydown', (event) ->
+  $('#post_form').bind( 'keydown', (event) ->
       lastKeyDown = event.keyCode
       # if event.keyCode is 32 #spacebar
       #   console.log "x"
@@ -120,7 +120,7 @@ ready = (obj_type) ->
 
         $.getJSON '/posts/autocomplete_' + obj_type + 's.json', { term: term }, response
       else
-        $( "#post_goals" ).blur().focus()
+        $( "#post_form" ).blur().focus()
         if lastKeyDown is 32 #spacebar
           req_a = split(request.term)          
           penultimate_element = req_a[req_a.length - 2]
@@ -148,7 +148,7 @@ ready = (obj_type) ->
       terms.push("")
       @value = terms.join(" ")
 
-      # $('#post_goals').val ui.item.title
+      # $('#post_form').val ui.item.title
       # $('#post_goal_id').val ui.item.id
 
       # TO DO: allow deletion of tags from text box and reflect deltion in removal of this from DOM
@@ -166,7 +166,7 @@ ready = (obj_type) ->
 
     response: (event, ui) ->
       if ui.content.length is 0
-        # $("#post_goals").autocomplete("disable")
+        # $("#post_form").autocomplete("disable")
         if lastKeyDown is 32 #spacebar
           return false
         #create new tag

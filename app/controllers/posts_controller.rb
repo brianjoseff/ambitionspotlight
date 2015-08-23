@@ -4,6 +4,8 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
 
+  
+
   def create
     content = linkify_mentions_hashtags_bangbangs(post_params[:content])
 
@@ -47,9 +49,6 @@ class PostsController < ApplicationController
       end
     end
 
-
-
-
     # create new tags for "post[new_goal_titles][]"
     # create taggings for "post[new_goal_titles][]"
     
@@ -59,6 +58,9 @@ class PostsController < ApplicationController
       end
     end
   end
+
+
+
 
   def suggestions
     suggestions =  User.order(:username).where("username LIKE ?", "%#{params[:query]}%").map{|user| {id: user.id, type: "username", item: "@#{user.username}"}}

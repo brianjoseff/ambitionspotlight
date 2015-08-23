@@ -4,9 +4,6 @@ Rails.application.routes.draw do
   resources :lists
   resources :actions
 
-  resources :daily_accomplishments
-
-  resources :goals
 
   get '/bangbang/:id', to: 'actions#show'
 
@@ -56,8 +53,6 @@ Rails.application.routes.draw do
       get :edit_ambition
       patch :update_ambition
 
-      get :edit_goal
-      patch :update_goal
 
       get :edit_bio
       patch :update_bio

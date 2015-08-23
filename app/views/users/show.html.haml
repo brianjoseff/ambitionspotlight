@@ -69,9 +69,8 @@
                       =f.submit "Upload"
               
               -if @no_ambition
-                =link_to "Tell us your ambition", edit_user_registration_path(current_user, anchor: "ambition")
-              -if @no_goals
-                =link_to "Set a Goal", anchor: "goals"
+                / =link_to "Tell us your ambition", edit_user_registration_path(current_user, anchor: "ambition")
+                %a{href: "#ambition"} Tell us your ambition
               -if @no_activities
                 =link_to "What are 3 things you are doing",anchor: "doing"
               /=link_to "Tell us your ambition", edit_user_registration_path(current_user, anchor: "ambition")
@@ -133,44 +132,42 @@
                 WHO I AM
             .story#bio
               =render partial: 'bio', locals: {user: @user}
-                
-      /GOAL
-      /List them
-      /Highlight 1
-      / .user-card
-      /   .text-center
-      /     #goals
-      /       #goal
-      /         =render partial: 'users/goals/goal', locals: {user: @user}
+
       
       .user-card
-        .text-center    
+        .text-center
+          %ul
+            %li Actions
+            %li Lists
+            %li All
+          #your_items
+            =render partial: 'items/items', locals: {items: @items}
           #believers
-          /YOUR FOLLOWING
-          .story
-            .story-header
-              %p WHO BELIEVES IN ME
-              /have a "share profile" link or something to post on facebook
-            
-            - unless current_user == @user
-              .follow_form
-                - if current_user && current_user.following?(@user)
-                  = render 'unfollow'
-
-                - elsif current_user.nil?
-                  =link_to "I BELIEVE", new_user_registration_path, class: "btn btn-large make-button follow-button"
-                -else
-                  = form_for(current_user.followships.build(followed_id: @user.id), remote: true) do |f|
-                    %div
-                      = f.hidden_field :followed_id
-                    = f.submit "I BELIEVE", class: "btn btn-large follow-button"
-            %br/
-            
-            .following
-              -if current_user && current_user == @user
-                //invite people
+            /YOUR FOLLOWING
+            .story
+              .story-header
+                %p WHO BELIEVES IN ME
+                /have a "share profile" link or something to post on facebook
               
-              #followers
-                =render partial: 'followers', locals: {followers: @followers}
+              - unless current_user == @user
+                .follow_form
+                  - if current_user && current_user.following?(@user)
+                    = render 'unfollow'
+
+                  - elsif current_user.nil?
+                    =link_to "I BELIEVE", new_user_registration_path, class: "btn btn-large make-button follow-button"
+                  -else
+                    = form_for(current_user.followships.build(followed_id: @user.id), remote: true) do |f|
+                      %div
+                        = f.hidden_field :followed_id
+                      = f.submit "I BELIEVE", class: "btn btn-large follow-button"
+              %br/
+              
+              .following
+                -if current_user && current_user == @user
+                  //invite people
+                
+                #followers
+                  =render partial: 'followers', locals: {followers: @followers}
 
       
