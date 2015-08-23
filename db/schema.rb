@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150713065742) do
+ActiveRecord::Schema.define(version: 20150823070245) do
 
   create_table "actions", force: true do |t|
     t.string   "title"
@@ -60,17 +60,6 @@ ActiveRecord::Schema.define(version: 20150713065742) do
     t.integer  "action_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "daily_accomplishments", force: true do |t|
-    t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "goal_id"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
   end
 
   create_table "delayed_jobs", force: true do |t|

@@ -15,7 +15,7 @@ class UsersController < ApplicationController
         @no_ambition = true
       end
 
-      @items = @user.actions + @user.lists
+      @items = @user.user_bang_bangings
       # @items = @items.order_by_created_at('DESC')
 
     end
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
       if @goal.goal_category_id
         @goal_category = GoalCategory.find(@goal.goal_category_id)
       end
-      @daily_accomplishments = @goal.daily_accomplishments
+      
     else
       @goal = Goal.new
 
