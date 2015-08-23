@@ -69,7 +69,8 @@
                       =f.submit "Upload"
               
               -if @no_ambition
-                =link_to "Tell us your ambition", edit_user_registration_path(current_user, anchor: "ambition")
+                / =link_to "Tell us your ambition", edit_user_registration_path(current_user, anchor: "ambition")
+                %a{href: "#ambition"} Tell us your ambition
               -if @no_activities
                 =link_to "What are 3 things you are doing",anchor: "doing"
               /=link_to "Tell us your ambition", edit_user_registration_path(current_user, anchor: "ambition")
