@@ -70,8 +70,6 @@
               
               -if @no_ambition
                 =link_to "Tell us your ambition", edit_user_registration_path(current_user, anchor: "ambition")
-              -if @no_goals
-                =link_to "Set a Goal", anchor: "goals"
               -if @no_activities
                 =link_to "What are 3 things you are doing",anchor: "doing"
               /=link_to "Tell us your ambition", edit_user_registration_path(current_user, anchor: "ambition")
@@ -133,15 +131,7 @@
                 WHO I AM
             .story#bio
               =render partial: 'bio', locals: {user: @user}
-                
-      /GOAL
-      /List them
-      /Highlight 1
-      / .user-card
-      /   .text-center
-      /     #goals
-      /       #goal
-      /         =render partial: 'users/goals/goal', locals: {user: @user}
+
       
       .user-card
         .text-center

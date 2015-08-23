@@ -8,36 +8,13 @@ class UsersController < ApplicationController
         @no_photo = true
       end
 
-      unless @user.goals.first
-        @no_goals = true
-      end
       unless @user.ambition
         @no_ambition = true
       end
 
       @items = @user.user_bang_bangings
       # @items = @items.order_by_created_at('DESC')
-
     end
-
-    @goal = @user.goals.last
-    if @goal
-      if @goal.goal_category_id
-        @goal_category = GoalCategory.find(@goal.goal_category_id)
-      end
-      
-    else
-      @goal = Goal.new
-
-    end
-
-    # if !@goal.nil? && !@goal.completed?
-    #   @edit_da = @goal.daily_accomplishments.where(["created_at < ?", 1.days.ago]).first
-    #   @daily_accomplishments = @goal.daily_accomplishments
-    #   unless @edit_da
-    #     @da = @goal.daily_accomplishments.new
-    #   end
-    # end
     
     if @user.leader?
       
@@ -52,26 +29,8 @@ class UsersController < ApplicationController
 
 
 
-  def add_goal
-    @user = User.find(current_user.id)
-    @goal = @user.goals.create(goal_params)
-    @temp_id = params[:temp_id]
-    respond_to do |format|
-      if @activity.save
-        format.js {}
-        format.json { render :add_activity }
-      else
-        format.json { render json: @activity.errors.full_messages, status: :unprocessable_entity }
-      end
-    end
-  end
-
-
-
-
   def public_profile
     @user = User.friendly.find(params[:id])
-    @goal = @user.goals.last
   end
   
   def add_profile_photo
@@ -117,29 +76,6 @@ class UsersController < ApplicationController
   end
   
   def update_ambition
-    # @user = User.find(current_user.id)
-    @user = current_user
-    respond_to do |format|
-      if @user.update(user_params)
-        format.js {}
-        format.json { render @user }
-      else
-        format.json { render json: @activity.errors.full_messages, status: :unprocessable_entity }
-      end
-    end
-  end
-
-
-
-
-  def edit_goal
-    @user = current_user
-    respond_to do |format|
-      format.js {@user}
-    end
-  end
-  
-  def update_goal
     # @user = User.find(current_user.id)
     @user = current_user
     respond_to do |format|

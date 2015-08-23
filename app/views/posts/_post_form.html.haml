@@ -1,6 +1,6 @@
 #post_field
   =form_for post, html:{remote: true} do |f|
-    =text_area_tag :query, params[:query], id: "post_goals", class: 'form-control action-input', placeholder: 'What actions did you take today?', name:"post[content]", rows: 3
+    =text_area_tag :query, params[:query], id: "post_form", class: 'form-control action-input', placeholder: 'What actions did you take today?', name:"post[content]", rows: 3
     #post_div{:contenteditable => "", class: 'form-control action-input'}
     -post.assets.build unless post.assets.first
 
