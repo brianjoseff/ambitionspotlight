@@ -8,8 +8,9 @@
       %span Drag File Here Or Click
       = f.fields_for :assets do |images_form|
         = images_form.file_field :image, type:"file", class: "upload"
-    %img#preview_upload.hidden.row    
-    #hidden_fields
+    %img#preview_upload.hidden.row
+    #temp_elements.hidden
+    #hidden_fields.hidden
     /search--if found, log tag_id. if NOT found, create new tag, log new_tag_id
     /on post submission, create tagging and create post
     = button_tag "Post", class: 'btn btn-default'
@@ -28,6 +29,10 @@
     #post_div a {
       font-size: 14px;
       font-weight: normal;
+    }
+
+    .post_actionable {
+      color: #d1ab2b;
     }
 
     .typeahead.dropdown-menu {
@@ -72,7 +77,7 @@
         items: 5,
         updater: function(item){
           
-          var formatted_item = '<a href="javascript:void;" class="post-anchor" style="color: blue" data-id="'+types[item]['id']+'" data-type="'+types[item]['type']+'">'+item+'</a>';
+          var formatted_item = '<a href="javascript:void;" class="post-anchor post_actionable" data-id="'+types[item]['id']+'" data-type="'+types[item]['type']+'">'+item+'</a>';
           //$('#post_div').append(formatted_item);
           
           //add_hidden_field(item, types[item]['id'], types[item]['type']);
@@ -89,6 +94,49 @@
           parse_post();
         } //to run after selection  
       });
+
+      $('#new_post').submit(function() {
+
+        var html = $('#post_div').html();
+//        $('#temp_elements').append(html);
+//
+//        var knowns = $('#temp_elements').find('a');
+//        var known_array = [];
+//        $(knowns).each(function(ind, el){
+//          var known_id = $(el).attr('data-id');
+//          var known_type = $(el).attr('data-type');
+//          var known_val = $(el).text();
+//
+//          var known_json = {'id': known_id, 'type': known_type, 'val': known_val};
+//          known_array.push(known_json);
+//        })
+//
+//        var $known_hidden = $("<input type='hidden' name='known'/>");
+//        $known_hidden.val(JSON.stringify({'known_array':known_array}));
+//        $('#hidden_fields').append($known_hidden);
+//
+//        var unknowns = $('#temp_elements').find('span');
+//        var unknown_array = [];
+//        $(unknowns).each(function(ind, el){
+//          var unknown_type = $(el).attr('data-type');
+//          var unknown_val = $(el).text();
+//
+//          var unknown_json = {'type': unknown_type, 'val': unknown_val};
+//          unknown_array.push(unknown_json);
+//        })
+//
+//        var $unknown_hidden = $("<input type='hidden' name='unknown'/>");
+//        $unknown_hidden.val(JSON.stringify({'unknown_array':unknown_array}));
+//        $('#hidden_fields').append($unknown_hidden);
+
+        var $formatted_post = $("<input type='hidden' name='formatted_post'/>");
+        $formatted_post.val(html);
+        $('#hidden_fields').append($formatted_post);
+
+        //$('#temp_elements').empty();
+
+        return true;
+      });
     })
 
     function parse_post(){
@@ -100,7 +148,7 @@
           hash_matches = unique(hash_matches);
           $(hash_matches).each(function(ind,val){
             var regexp = new RegExp(val, 'g');
-            post = post.replace(regexp, '<span style="color: blue">'+val.trim()+'</span>');
+            post = post.replace(regexp, '<span class="post_actionable" data-type="tag">'+val.trim()+'</span>');
           })
           $('#post_div').html(post);
         }
@@ -109,7 +157,7 @@
           bang_matches = unique(bang_matches);
           $(bang_matches).each(function(ind,val){
             var regexp = new RegExp(val, 'g');
-            post = post.replace(regexp, '<span style="color: blue">'+val.trim()+'</span>');
+            post = post.replace(regexp, '<span class="post_actionable" data-type="action">'+val.trim()+'</span>');
           })
           $('#post_div').html(post);
         }
@@ -118,7 +166,7 @@
           at_matches = unique(at_matches);
           $(at_matches).each(function(ind,val){
             var regexp = new RegExp(val, 'g');
-            post = post.replace(regexp, '<span style="color: blue">'+val.trim()+'</span>');
+            post = post.replace(regexp, '<span class="post_actionable" data-type="username">'+val.trim()+'</span>');
           })
           $('#post_div').html(post);
         }
@@ -127,7 +175,7 @@
           list_matches = unique(list_matches);
           $(list_matches).each(function(ind,val){
             var regexp = new RegExp(val, 'g');
-            post = post.replace(regexp, '<span style="color: blue">'+val.trim()+'</span>');
+            post = post.replace(regexp, '<span class="post_actionable" data-type="list">'+val.trim()+'</span>');
           })
           $('#post_div').html(post);
         }
@@ -136,9 +184,9 @@
     }
 
     function stripped_post(current){
-      var regexp = new RegExp('<span style="color: blue">', 'g');
+      var regexp   = new RegExp('<span class="post_actionable" data-type="tag">|<span class="post_actionable" data-type="action">|<span class="post_actionable" data-type="username">|<span class="post_actionable" data-type="list">', 'g');
       var stripped = current.replace(regexp, '');
-      var regexp = new RegExp('</span>', 'g');
+      var regexp   = new RegExp('</span>', 'g');
       stripped     = stripped.replace(regexp, '');
       return stripped;
     }
@@ -174,7 +222,7 @@
     }
 
     //function add_existing(item, id, type){
-    //  var formatted_item = '<span style="color: blue" data-id="'+id+'" data-type="'+type+'">'+item+'</span>';
+    //  var formatted_item = '<span class="post_actionable" data-id="'+id+'" data-type="'+type+'">'+item+'</span>';
     //}
 
     // function add_hidden_field(item, id, type){
