@@ -3,13 +3,14 @@
 %table
   %tr
     %th Title
-    %th
+    %th Description
     %th
     %th
 
   - @actions.each do |action|
     %tr
       %td= action.title
+      %td= action.description
       %td= link_to 'Show', action
       %td= link_to 'Edit', edit_action_path(action)
       %td= link_to 'Destroy', action, :method => :delete, :data => { :confirm => 'Are you sure?' }

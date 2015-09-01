@@ -14,7 +14,7 @@
 /       = f.submit 'Save'
 
 #new_list
-  = form_for @list, method: 'PUT', html: {id: ''} do |f|
+  = form_for @list, html: {id: ''} do |f|
     - if @list.errors.any?
       #error_explanation
         %h2= "#{pluralize(@list.errors.count, "error")} prohibited this list from being saved:"
@@ -37,7 +37,7 @@
     = f.fields_for :actions, @list.actions.build do |action|
       = render 'action_fields', :f => action
     .links
-      = link_to_add_association '+ action', f, :actions    
+      = link_to_add_association '+ action', f, :actions
     / = f.fields_for :actions, @list.actions.build do |primary_action_form|
     /   .action-container
     /     .action-block
