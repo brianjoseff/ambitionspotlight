@@ -33,11 +33,20 @@ gem 'rails_tokeninput'
 
 # TASKS
 gem 'forgery'
-gem 'faker'
 
 gem 'rails_12factor', group: :production
 
 group :development do
+  gem 'pry', require: true
   gem 'sdoc', '~> 0.4.0'
   gem 'spring'
+end
+
+group :test do
+  gem 'factory_girl'
+  gem 'rspec'
+end
+
+group :development, :test do
+  gem 'faker'
 end
