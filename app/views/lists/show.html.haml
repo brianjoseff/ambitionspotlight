@@ -4,12 +4,12 @@
       /Trending Actions
       .trending.card
         =render 'pages/trending_actions'
-      
+
       /Lists
       /render top 3 lists
       .lists.card
         =render 'pages/trending_lists'
-      
+
       /Leaders
       /render top 3 local leaders
       .leaders.card
@@ -29,14 +29,14 @@
         #list
 
           %h1
-            / %span // 
-            =@list.title
+            = @list.title
+          %p
+            = @list.description
           %ul
             -@list.actions.each do |a|
               %li
                 %a.pretty-link.bangbang-pretty-link{href:"/bangbang/1"}
                   %span !!
-                  =a.title
-                %p 
+                  = a.title
+                %p
                   = a.description
-              

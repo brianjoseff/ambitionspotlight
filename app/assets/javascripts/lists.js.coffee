@@ -3,10 +3,10 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
-  $(".list-description-link").click ->
-    console.log "hello"
+  $(".list-description-link").click (e) ->
+    e.preventDefault()
 
-    $(".description").toggle()
+    $(".description").slideToggle()
 
   $('body').on 'click touch', 'a.add-nested-action', (event) ->
     console.log "efore evanet default"

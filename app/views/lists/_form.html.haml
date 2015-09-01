@@ -1,18 +1,3 @@
-/ #new_list
-/   = form_for @list do |f|
-
-        
-
-/     .field
-/       %ul
-/         %li
-/           %span !!
-/           =text_field_tag 'action', nil, placeholder: 'DoABarrelRoll'
-/         %li.add-action
-/           %a.add-action + action
-/     .actions
-/       = f.submit 'Save'
-
 #new_list
   = form_for @list, html: {id: ''} do |f|
     - if @list.errors.any?
@@ -27,31 +12,13 @@
           %span //
           = f.text_field :title, placeholder: "TitleOfList"
         .description-block  
-          %a.list-description-link + description
+          %a.list-description-link.add-plus description
           .description{style:"display:none;"}
-            = f.text_area :description, placeholder: "enter a brief description of your list"    
-    / = flow_form.hidden_field :name
-    / = flow_form.hidden_field :organization_id
-    
-    // BLOCK /////////////////////////////////////
+            = f.text_area :description, placeholder: "Enter a brief description of your list"
+
     = f.fields_for :actions, @list.actions.build do |action|
-      = render 'action_fields', :f => action
+      = render 'action_fields', f: action
     .links
-      = link_to_add_association '+ action', f, :actions
-    / = f.fields_for :actions, @list.actions.build do |primary_action_form|
-    /   .action-container
-    /     .action-block
-    /       .new-nested-action
-    /         %span !!
-    /         = primary_action_form.text_field :title, placeholder: "DoABarrelRoll"
-            
-    /   // ADD ACTION BUTTON
-    /   = link_to_add_fields '+ action', f, :actions, html:{class: 'add-nested-action'}
-
-    / = link_to_add_nested_fields nil, f, :actions, class: 'add-nested-action', link_attributes: {tabindex: -1} do
-    /   + action
-
+      = link_to_add_association 'action', f, :actions, class: 'add-plus'
     .submit
       = f.submit 'Save'
-      / %a{"data-list-id" => @list.id, :href => "#", :role => "button"}
-      /   Populate

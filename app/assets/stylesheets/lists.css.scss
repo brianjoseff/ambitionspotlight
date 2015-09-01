@@ -66,8 +66,12 @@
     .description-block{
       padding-left: 19px;
       a.list-description-link{
+        cursor: pointer;
+        display: block-inline;
         font-size: 80%;
-      }      
+        vertical-align: middle;
+        &:hover { text-decoration: underline }
+      }
       textarea{
         font-size: 80%;
         width: 100%;
@@ -89,4 +93,11 @@
     }
   }
 
+}
+
+.add-plus {
+  &:before {
+    content: ' + ';
+    display: block-inline;
+  }
 }
