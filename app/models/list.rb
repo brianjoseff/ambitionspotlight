@@ -4,4 +4,6 @@ class List < ActiveRecord::Base
   belongs_to :user
 
   accepts_nested_attributes_for :actions, reject_if: :all_blank, allow_destroy: true
+
+  validates :title, presence: true
 end

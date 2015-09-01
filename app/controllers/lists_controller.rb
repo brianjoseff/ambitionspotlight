@@ -15,7 +15,7 @@ class ListsController < ApplicationController
 
   def new
     @user = current_user
-    @list = @user.lists.build(title: "NameYourList")
+    @list = @user.lists.build
   end
 
   def edit
