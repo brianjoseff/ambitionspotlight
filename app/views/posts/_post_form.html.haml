@@ -41,15 +41,14 @@
 
 :javascript
     
-    var types = {};
-    var labels = []; 
-
     $(function(){
-      $('#post_div').on('input', function(e) {
-          parse_post();
-      }).trigger('input');
+      //$('#post_div').on('input', function(e) {
+      //    parse_post();
+      //}).trigger('input');
 
       $('div#post_div').tagautocomplete({
+        types: {},
+        labels: [],
         source: function (query, process) {
           var min_term_length = 2;
           var position = getCaretPosition(this.$element[0]);
@@ -60,33 +59,26 @@
               query = result[2].trim().toLowerCase().replace(/^(@|#|!!|\/\/)/,'');
           else
               return false;
-          return $.get('/posts/suggestions', { query: query}, function (data) {
-            // reset containers
-            types = {};
-            labels = [];
-
+          return $.ajax({
+          url: '/posts/suggestions.json',
+          data: { query: query }, 
+          context: this,
+          success: function(data){
+            this.types = {};
+            this.labels = [];
+            var self = this;
             $(data).each(function(ind, val){
-              types[val['item']] = {'type':val['type'], 'id':val['id']}
-              labels.push(val['item'])
-            })
-
-            return process(labels); 
-          }, 'JSON');
+              self.types[val['item']] = {'type':val['type'], 'id':val['id']}
+              self.labels.push(val['item'])
+            });
+           return process(this.labels); 
+          }
+          });
         },
         minLength: 2,
         items: 5,
         updater: function(item){
-          
-          var formatted_item = '<a href="javascript:void;" class="post-anchor post_actionable" data-id="'+types[item]['id']+'" data-type="'+types[item]['type']+'">'+item+'</a>';
-          //$('#post_div').append(formatted_item);
-          
-          //add_hidden_field(item, types[item]['id'], types[item]['type']);
-          
-          //setTimeout(function(){
-          //  add_existing(item, types[item]['id'], types[item]['type']);
-          //}, 1000);
-
-          //return item+' ';
+          var formatted_item = '<a href="javascript:void;" class="post-anchor post_actionable" data-id="'+this.types[item]['id']+'" data-type="'+this.types[item]['type']+'">'+item+'</a>';
           return formatted_item;
         },
         character: '@|#|//|!!', //accept both @ and #
@@ -98,43 +90,10 @@
       $('#new_post').submit(function() {
 
         var html = $('#post_div').html();
-//        $('#temp_elements').append(html);
-//
-//        var knowns = $('#temp_elements').find('a');
-//        var known_array = [];
-//        $(knowns).each(function(ind, el){
-//          var known_id = $(el).attr('data-id');
-//          var known_type = $(el).attr('data-type');
-//          var known_val = $(el).text();
-//
-//          var known_json = {'id': known_id, 'type': known_type, 'val': known_val};
-//          known_array.push(known_json);
-//        })
-//
-//        var $known_hidden = $("<input type='hidden' name='known'/>");
-//        $known_hidden.val(JSON.stringify({'known_array':known_array}));
-//        $('#hidden_fields').append($known_hidden);
-//
-//        var unknowns = $('#temp_elements').find('span');
-//        var unknown_array = [];
-//        $(unknowns).each(function(ind, el){
-//          var unknown_type = $(el).attr('data-type');
-//          var unknown_val = $(el).text();
-//
-//          var unknown_json = {'type': unknown_type, 'val': unknown_val};
-//          unknown_array.push(unknown_json);
-//        })
-//
-//        var $unknown_hidden = $("<input type='hidden' name='unknown'/>");
-//        $unknown_hidden.val(JSON.stringify({'unknown_array':unknown_array}));
-//        $('#hidden_fields').append($unknown_hidden);
 
         var $formatted_post = $("<input type='hidden' name='formatted_post'/>");
         $formatted_post.val(html);
         $('#hidden_fields').append($formatted_post);
-
-        //$('#temp_elements').empty();
-
         return true;
       });
     })
@@ -220,17 +179,3 @@
            return index === $.inArray(el, array);
        });
     }
-
-    //function add_existing(item, id, type){
-    //  var formatted_item = '<span class="post_actionable" data-id="'+id+'" data-type="'+type+'">'+item+'</span>';
-    //}
-
-    // function add_hidden_field(item, id, type){
-    //   $('<input>', {
-    //     name: "post[new_" + obj_type + "_titles][]",
-    //     value: penultimate_element,
-    //     type: "hidden",
-    //     multiple: "multiple",
-    //     id: "new_post_" + obj_type + "_titles"
-    //   }).appendTo("#hidden_fields");
-    // }

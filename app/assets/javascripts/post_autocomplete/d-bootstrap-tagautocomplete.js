@@ -29,6 +29,8 @@
     $.fn.typeahead.Constructor.call(this, element, options)
     this.after = this.options.after || this.after
     this.show = this.options.show || this.show
+    this.types = this.options.types || this.types
+    this.labels = this.options.labels || this.labels
   }
 
   /* NOTE: TAGAUTOCOMPLETE EXTENDS BOOTSTRAP-TYPEAHEAD.js
