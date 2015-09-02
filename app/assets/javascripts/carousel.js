@@ -1,13 +1,11 @@
-var ready;
-
-ready = function() {
+$(document).ready(function() {
   var clickEvent = false;
   $('#myCarousel').carousel({
     interval:   4000
   }).on('click', '.list-group li', function() {
-      clickEvent = true;
-      $('.list-group li').removeClass('active');
-      $(this).addClass('active');
+    clickEvent = true;
+    $('.list-group li').removeClass('active');
+    $(this).addClass('active');
   }).on('slid.bs.carousel', function(e) {
     if(!clickEvent) {
       var count = $('.list-group').children().length -1;
@@ -21,19 +19,13 @@ ready = function() {
     clickEvent = false;
   });
 
-};
+});
 
-$(document).ready(ready);
-$(document).on('page:load', ready);
 
-var window_func;
-window = function() {
-    var boxheight = $('#myCarousel .carousel-inner').innerHeight();
-    var itemlength = $('#myCarousel .item').length;
-    var triggerheight = Math.round(boxheight/itemlength+1);
+$(window).load(function() {
+  var boxheight = $('#myCarousel .carousel-inner').innerHeight();
+  var itemlength = $('#myCarousel .item').length;
+  var triggerheight = Math.round(boxheight/itemlength+1);
   $('#myCarousel .list-group-item').outerHeight(triggerheight);
-};
-
-$(window).load(window_func);
-$(window).on('page:load', window_func);
+});
 

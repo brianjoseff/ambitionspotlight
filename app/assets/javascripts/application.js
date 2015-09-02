@@ -16,7 +16,6 @@
 //= require jquery.tokeninput
 //= require jquery-ui
 
-//= require turbolinks
 //= require underscore
 //= require json2
 //= require judge
