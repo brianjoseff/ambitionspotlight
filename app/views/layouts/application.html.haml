@@ -8,56 +8,8 @@
     %link{:href => "http://fonts.googleapis.com/css?family=Lato:300,400,700", :rel => "stylesheet", :type => "text/css"}
     %link{:href => "//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css", :rel => "stylesheet"}/
     %meta{content: "width=device-width, initial-scale=1", name: "viewport"}
-    = content_for?(:head) ? yield(:head) : ''
-    %script{:src => "//use.fonticons.com/7c33fe1c.js"}
-    / %script{:src => "//intercom.js"}
-    :javascript
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-54764266-1']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-      
-      function carousel(){
-            var boxheight = $('#myCarousel .carousel-inner').innerHeight();
-            var itemlength = $('#myCarousel .item').length;
-            var triggerheight = Math.round(boxheight/itemlength+1);
-          $('#myCarousel .list-group-item').outerHeight(triggerheight);
-      };
-    
-    :javascript
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '284714538404819',
-          xfbml      : true,
-          version    : 'v2.1'
-        });
-      };
-
-      (function(d, s, id){
-         var js, fjs = d.getElementsByTagName(s)[0];
-         if (d.getElementById(id)) {return;}
-         js = d.createElement(s); js.id = id;
-         js.src = "//connect.facebook.net/en_US/sdk.js";
-         fjs.parentNode.insertBefore(js, fjs);
-       }(document, 'script', 'facebook-jssdk'));
-    
-    :javascript
-      window['_fs_debug'] = false;
-      window['_fs_host'] = 'www.fullstory.com';
-      window['_fs_org'] = 'PI0';
-      (function(m,n,e,t,l,o,g,y){
-        g=m[e]=function(a,b){g.q?g.q.push([a,b]):g._api(a,b);};g.q=[];
-        o=n.createElement(t);o.async=1;o.src='https://'+_fs_host+'/s/fs.js';
-        y=n.getElementsByTagName(t)[0];y.parentNode.insertBefore(o,y);
-        g.identify=function(i,v){g(l,{uid:i});if(v)g(l,v)};g.setUserVars=function(v){FS(l,v)};
-        g.clearUserCookie=function(d,i){d=n.domain;while(1){n.cookie='fs_uid=;domain='+d+
-        ';path=/;expires='+new Date(0);i=d.indexOf('.');if(i<0)break;d=d.slice(i+1)}}
-      })(window,document,'FS','script','user'); 
+    = yield :head
+    = yield :javascript
 
   %body{ class: "controller-specific-style-#{action_name} controller-specific-style-#{controller_name}"}
     -if @landing_page
@@ -65,24 +17,16 @@
         %video#video_wrapper{"?wmode" => "transparent", :autoplay => "", :loop => "", :muted => ""}
           %source{src:"EPA-landingpage.mp4", type:"video/mp4"}
 
-    /.background-cloak
-    /#{ current_user && current_page?(user_path(current_user)) ? '' : 'background' }
-    / #holder
-    /   #body
     .overlayx
       .wrapper
         .container
-        = render 'layouts/header'    
+        = render 'layouts/header'
         .container
           .content
             %p.notice.text-center= notice
             %p.alert= alert
             = yield
-    / .push
-    / 
-    / %footer
-    /   .footer
-    /     = render 'layouts/footer'
+
     - if current_user
       :javascript
         FS.identify("#{current_user.id}", {
