@@ -40,7 +40,7 @@
     }
 
 :javascript
-    
+
     $(function(){
       //$('#post_div').on('input', function(e) {
       //    parse_post();
@@ -61,7 +61,7 @@
               return false;
           return $.ajax({
           url: '/posts/suggestions.json',
-          data: { query: query }, 
+          data: { query: query },
           context: this,
           success: function(data){
             this.types = {};
@@ -71,7 +71,7 @@
               self.types[val['item']] = {'type':val['type'], 'id':val['id']}
               self.labels.push(val['item'])
             });
-           return process(this.labels); 
+           return process(this.labels);
           }
           });
         },
@@ -84,7 +84,7 @@
         character: '@|#|//|!!', //accept both @ and #
         after: function () {
           parse_post();
-        } //to run after selection  
+        } //to run after selection
       });
 
       $('#new_post').submit(function() {
